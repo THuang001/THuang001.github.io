@@ -88,10 +88,9 @@
 <meta property="og:description" content="1. 正则表达式匹配(Hard)给你一个字符串 s 和一个字符规律 p，请你来实现一个支持 ‘.’ 和 ‘*’ 的正则表达式匹配。 12&amp;apos;.&amp;apos; 匹配任意单个字符&amp;apos;*&amp;apos; 匹配零个或多个前面的那一个元素  所谓匹配，是要涵盖 整个 字符串 s的，而不是部分字符串。 说明:  s 可能为空，且只包含从 a-z 的小写字母。 p 可能为空，且只包含从 a-z 的小写">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://aliyun-lc-upload.oss-cn-hangzhou.aliyuncs.com/aliyun-lc-upload/uploads/2018/07/25/question_11.jpg">
-<meta property="og:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/original_images/17_telephone_keypad.png">
 <meta property="og:image" content="https://pic.leetcode-cn.com/b647cab7c3d2bd157cecae10917e0b9b671756b92c9cfcefec1a2bdae299c11c-file_1555694071243">
 <meta property="og:image" content="https://pic.leetcode-cn.com/8bb79902c99719a923d835b9265b2dea6f20fe7f067f313cddcf9dd2a8124c94-file_1555694229984">
-<meta property="og:updated_time" content="2019-06-20T07:51:22.064Z">
+<meta property="og:updated_time" content="2019-06-20T07:54:01.411Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="leetcode10-15">
 <meta name="twitter:description" content="1. 正则表达式匹配(Hard)给你一个字符串 s 和一个字符规律 p，请你来实现一个支持 ‘.’ 和 ‘*’ 的正则表达式匹配。 12&amp;apos;.&amp;apos; 匹配任意单个字符&amp;apos;*&amp;apos; 匹配零个或多个前面的那一个元素  所谓匹配，是要涵盖 整个 字符串 s的，而不是部分字符串。 说明:  s 可能为空，且只包含从 a-z 的小写字母。 p 可能为空，且只包含从 a-z 的小写">
@@ -363,6 +362,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/06/19/leetcode10-15/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/06/19/leetcode10-15/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -556,7 +565,6 @@
 <p>$LCP(S_1 \ldots S_n) = LCP(LCP(LCP(S_1, S_2),S_3),\ldots S_n)$</p>
 <p><strong>算法</strong></p>
 <p>为了运用这种思想，算法要依次遍历字符串 $[S_1 \ldots S_n]$，当遍历到第$i$个字符串的时候，找到最长公共前缀 $LCP(S_1 \ldots S_i)$。当 $LCP(S_1 \ldots S_i)$是一个空串的时候，算法就结束了。 否则，在执行了 $n$ 次遍历之后，算法就会返回最终答案 $LCP(S_1 \ldots S_n)$。</p>
-<p><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/original_images/17_telephone_keypad.png" alt="img"></p>
 <p><img src="https://pic.leetcode-cn.com/b647cab7c3d2bd157cecae10917e0b9b671756b92c9cfcefec1a2bdae299c11c-file_1555694071243" alt="æ¾å°æé¿å¬å±åç¼"></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">longestCommonPrefix</span><span class="params">(self, strs)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type strs: List[str]</span></span><br><span class="line"><span class="string">        :rtype: str</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> len(strs) == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">''</span></span><br><span class="line">        prefix = strs[<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,len(strs)):</span><br><span class="line">            <span class="keyword">while</span>(strs[i].find(prefix) != <span class="number">0</span>):</span><br><span class="line">                prefix = prefix[<span class="number">0</span>:len(prefix)<span class="number">-1</span>]</span><br><span class="line">                <span class="keyword">if</span> len(prefix) == <span class="number">0</span>:</span><br><span class="line">                    <span class="keyword">return</span> <span class="string">''</span></span><br><span class="line">        <span class="keyword">return</span> prefix</span><br></pre></td></tr></table></figure>
 
@@ -669,6 +677,9 @@
 
           
 
+  
+    <div class="comments" id="comments">
+    </div>
   
 
 
@@ -960,6 +971,28 @@
 
 
 
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'OeJKv8qaWR0TzBDVF3lfc6WT-gzGzoHsz',
+        appKey: 'aNWcwRdz3y1YDDLWc8KEwDdf',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
 
 
 
