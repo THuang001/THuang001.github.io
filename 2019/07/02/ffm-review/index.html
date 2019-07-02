@@ -99,7 +99,7 @@
 <meta property="og:image" content="https://www.hrwhisper.me/wp-content/uploads/2018/07/ffm-model-example.png">
 <meta property="og:image" content="https://www.hrwhisper.me/wp-content/uploads/2018/07/ffm-model-training.png">
 <meta property="og:image" content="https://awps-assets.meituan.net/mit-x/blog-images-bundle-2016/0ba057eb.png">
-<meta property="og:updated_time" content="2019-07-02T16:38:34.169Z">
+<meta property="og:updated_time" content="2019-07-02T16:44:40.419Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="FFM模型">
 <meta name="twitter:description" content="1. 背景FFM（Field-aware Factorization Machine）最初的概念来自Yu-Chin Juan（阮毓钦，毕业于中国台湾大学，现在美国Criteo工作）与其比赛队员，是他们借鉴了来自Michael Jahrer的论文[1]中的field概念提出了FM的升级版模型。通过引入field的概念，FFM把相同性质的特征归于同一个field。 2. FFM原理推导考虑下面的数据集">
@@ -467,7 +467,7 @@ $\underbrace{{\bf w}_{EPSN, A} \cdot {\bf w}_{Nike, P}}_{P \times A} + \underbra
 <p><img src="https://www.hrwhisper.me/wp-content/uploads/2018/07/ffm-model-example.png" alt="img"></p>
 </blockquote>
 <h2 id="3-FFM模型学习"><a href="#3-FFM模型学习" class="headerlink" title="3. FFM模型学习"></a>3. FFM模型学习</h2><h3 id="3-1-FFM-数学公式"><a href="#3-1-FFM-数学公式" class="headerlink" title="3.1 FFM 数学公式"></a>3.1 FFM 数学公式</h3><p>假设样本的 n 个特征属于 f 个field，那么FFM的二次项有 $nf$个隐向量。而在FM模型中，每一维特征的隐向量只有一个。FM可以看作FFM的特例，是把所有特征都归属到一个field时的FFM模型。根据FFM的field敏感特性，可以导出其模型方程。</p>
-<p>$y(x)=w_0+∑<em>{i=1}^nw_ix_i+∑</em>{i=1}^n∑<em>{j=i+1}^n⟨v</em>{i,fj},v_{j,f_i}⟩x_ix_j \tag{3-0}$</p>
+<p>$y(\mathbf{x}) = w_0 + \sum_{i=1}^d w_i x_i + \sum_{i=1}^d \sum_{j=i+1}^d (w_{i, f_j} \cdot w_{j, f_i}) x_i x_j  \tag{3-0}$</p>
 <p>其中，$f_j$是第j个特征所属的field。如果隐向量的长度为k，那么FFM的二次参数有$nfk$个，远多于FM模型的nk个。此外，由于隐向量与field相关，FFM二次项并不能够化简，其复杂度为$O(kn^2)$。</p>
 <h3 id="3-2-FFM-模型学习"><a href="#3-2-FFM-模型学习" class="headerlink" title="3.2 FFM 模型学习"></a>3.2 FFM 模型学习</h3><p>为了方便推导，这里省略FFM的一次项和常数项，公式为：</p>
 <p>$\phi(\mathbf{w}, \mathbf{x}) =\sum_{a=1}^d \sum_{b=a+1}^d ( w_{a, f_b} \cdot w_{b, f_a}) x_a x_b\tag{3-1}$</p>
@@ -476,20 +476,45 @@ $\underbrace{{\bf w}_{EPSN, A} \cdot {\bf w}_{Nike, P}}_{P \times A} + \underbra
 <p>采用随机梯度下降来（SGD）来优化损失函数，因此，损失函数只采用单个样本的损失：</p>
 <p>$\mathcal{L} =\log\left(1 + \exp(-y_i\phi({\bf w}, {\bf x}))\right) + \frac{\lambda}{2} |!|{\bf w}|!|^2 \tag{3-3}$</p>
 <p>对于每次迭代，选取一条数据(<strong>𝐱</strong>,𝑦)，然后让L对<strong>𝐰</strong>𝑎,𝑓𝑏和<strong>𝐰</strong>𝑏,𝑓𝑎求偏导（注意，采用SGD上面的求和项就去掉了，只采用单个样本的损失），得：</p>
-<p>$\begin{align}  g_{a,f_b} \equiv \frac{\partial \mathcal{L}}{\partial w_{a,f_b}} = \kappa\cdot w_{b, f_a} x_a x_b + \lambda w_{a,f_b}^2 \tag{3-4} \  g_{b,f_a} \equiv \frac{\partial \mathcal{L}}{\partial w_{b,f_a}} = \kappa\cdot w_{a, f_b} x_a x_b + \lambda w_{b,f_a}^2 \tag{3-5}\  其中, \kappa = \frac{-y}{1+\exp(y\phi({\bf w,x}))}  \tag{3-6}\end{align}$</p>
+
+
+$\begin{align}  g_{a,f_b} \equiv \frac{\partial \mathcal{L}}{\partial w_{a,f_b}} = \kappa\cdot w_{b, f_a} x_a x_b + \lambda w_{a,f_b}^2 \tag{3-4} \\  g_{b,f_a} \equiv \frac{\partial \mathcal{L}}{\partial w_{b,f_a}} = \kappa\cdot w_{a, f_b} x_a x_b + \lambda w_{b,f_a}^2 \tag{3-5}\\  其中, \kappa = \frac{-y}{1+\exp(y\phi({\bf w,x}))}  \tag{3-6}\end{align}$
+
+
+
 <p>在具体的实现中，这里有两个trick，</p>
 <p>第一个trick是梯度的分步计算。</p>
-<p>$\mathcal{L} = \mathcal{L} <em>{err} + \mathcal{L} _{reg} = \log\left(1 + \exp(-y_i\phi({\bf w}, {\bf x}))\right) + \frac{\lambda}{2} |!|{\bf w}|!|^2\  \frac{\partial\mathcal{L}}{\partial\mathbf{w}} = \frac{\partial\mathcal{L}</em>{err}}{\partial\phi}\cdot \frac{\partial\phi}{\partial\mathbf{w}} + \frac{\partial\mathcal{L}_{reg}}{\partial\mathbf{w}}\tag{3-7}$</p>
+
+
+$\mathcal{L} = \mathcal{L} _{err} + \mathcal{L} _{reg} = \log\left(1 + \exp(-y_i\phi({\bf w}, {\bf x}))\right) + \frac{\lambda}{2} |\!|{\bf w}|\!|^2\\  \frac{\partial\mathcal{L}}{\partial\mathbf{w}} = \frac{\partial\mathcal{L}_{err}}{\partial\phi}\cdot \frac{\partial\phi}{\partial\mathbf{w}} + \frac{\partial\mathcal{L}_{reg}}{\partial\mathbf{w}}\tag{3-7}$
+
+
+
 <p>注意到$\frac{\partial\mathcal{L}_{err}}{\partial\phi}$和参数无关，每次更新模型时，只需要计算一次，之后直接调用结果即可。对于总共有𝑑𝑓𝑘个模型参数的计算来说，使用这种方式能极大提升运算效率。</p>
 <p>第二个trick是FFM的学习率是随迭代次数变化的，具体的是采用<a href="https://en.wikipedia.org/wiki/Stochastic_gradient_descent#AdaGrad" target="_blank" rel="noopener">AdaGrad</a>算法，这里进行简单的介绍。</p>
 <p>Adagrad算法能够在训练中自动的调整学习率，<strong>对于稀疏的参数增加学习率，而稠密的参数则降低学习率。因此，Adagrad非常适合处理稀疏数据。</strong></p>
 <p>设𝑔𝑡,𝑗为第t轮第j个参数的梯度，则SGD和采用Adagrad的参数更新公式分别如下：</p>
-<p>$\begin{align<em>}  SGD: \ &amp; w_{t+1,j} = w_{t,j} -\eta \cdot g_{t,j} \tag{3-8}\  Adagrad: \ &amp; w_{t+1,j} = w_{t,j} – \frac{\eta}{\sqrt{G_{t,jj}+ \epsilon}} \cdot g_{t,j}  \tag{3-9}\end{align</em>}$</p>
+
+
+$\begin{align*}  SGD: \ & w_{t+1,j} = w_{t,j} -\eta \cdot g_{t,j} \tag{3-8}\\  Adagrad: \ & w_{t+1,j} = w_{t,j} – \frac{\eta}{\sqrt{G_{t,jj}+ \epsilon}} \cdot g_{t,j}  \tag{3-9}\end{align*}$
+
+
+
 <p>可以看出，Adagrad在学习率𝜂上还除以一项$\sqrt{G_{t,jj}+ \epsilon}$，这是什么意思呢？𝜖为平滑项，防止分母为0，$G_{t,jj} = \sum_{\iota=1}^tg_{\iota, jj}^2$即𝐺𝑡,𝑗𝑗为对角矩阵，每个对角线位置𝑗,𝑗的值为参数𝑤𝑗每一轮的平方和，可以看出，随着迭代的进行，每个参数的历史梯度累加到一起，使得每个参数的学习率逐渐减小。</p>
 <p>因此，用3-4、3-5计算完梯度后，下一步就是更新分母的对角矩阵。</p>
-<p>$\begin{align}  G_{a,f_b} \leftarrow G_{a,f_b} + (g_{a,f_b})^2 \tag{3-10}\  G_{b,f_a} \leftarrow G_{b,f_a} + (g_{b,f_a})^2 \tag{3-11}  \end{align}$</p>
+
+
+$\begin{align}  G_{a,f_b} \leftarrow G_{a,f_b} + (g_{a,f_b})^2 \tag{3-10}\\  G_{b,f_a} \leftarrow G_{b,f_a} + (g_{b,f_a})^2 \tag{3-11}  \end{align}$
+
+
+
 <p>最后，更新模型参数：</p>
-<p>$\begin{align}  w_{a,f_b} &amp;\leftarrow w_{a,f_b} – \frac{\eta}{\sqrt{G_{a,f_b}+ 1}}g_{a,f_b} \tag{3-12}\  w_{b,f_a} &amp;\leftarrow w_{b,f_a} – \frac{\eta}{\sqrt{G_{b,f_a}+ 1}}g_{b,f_a} \tag{3-13}  \end{align}$</p>
+
+
+$\begin{align}  w_{a,f_b} &\leftarrow w_{a,f_b} – \frac{\eta}{\sqrt{G_{a,f_b}+ 1}}g_{a,f_b} \tag{3-12}\\  w_{b,f_a} &\leftarrow w_{b,f_a} – \frac{\eta}{\sqrt{G_{b,f_a}+ 1}}g_{b,f_a} \tag{3-13}  \end{align}$
+
+
+
 <p>这就是论文中算法1描述的过程：</p>
 <p><img src="https://www.hrwhisper.me/wp-content/uploads/2018/07/ffm-model-training.png" alt="img"></p>
 <p><img src="https://awps-assets.meituan.net/mit-x/blog-images-bundle-2016/0ba057eb.png" alt="img"></p>
