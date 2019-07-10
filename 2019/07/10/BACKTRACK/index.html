@@ -94,16 +94,16 @@
 <meta property="og:site_name" content="晨曦微光">
 <meta property="og:description" content="一、综述回溯是一种通过穷举所有可能情况来找到所有解的算法。如果一个候选解最后被发现并不是可行解，回溯算法会舍弃它，并在前面的一些步骤做出一些修改，并重新尝试找到可行解。 二、回溯算法思路所谓Backtracking都是这样的思路： 在当前局面下，你有若干种选择。 那么尝试每一种选择。 如果已经发现某种选择肯定不行（因为违反了某些限定条件），就返回； 如果某种选择试到最后发现是正确解，就将其加入解集">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2019/07/10/images/17_telephone_keypad.png">
+<meta property="og:image" content="http://yoursite.com/images/17_telephone_keypad.png">
 <meta property="og:image" content="http://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Sudoku-by-L2G-20050714.svg/250px-Sudoku-by-L2G-20050714.svg.png">
 <meta property="og:image" content="http://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Sudoku-by-L2G-20050714_solution.svg/250px-Sudoku-by-L2G-20050714_solution.svg.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/10/images/8-queens.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/10/images/8-queens.png">
-<meta property="og:updated_time" content="2019-07-10T15:00:05.046Z">
+<meta property="og:image" content="http://yoursite.com/images/8-queens.png">
+<meta property="og:image" content="http://yoursite.com/images/8-queens.png">
+<meta property="og:updated_time" content="2019-07-10T15:01:46.226Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="回溯算法类题目">
 <meta name="twitter:description" content="一、综述回溯是一种通过穷举所有可能情况来找到所有解的算法。如果一个候选解最后被发现并不是可行解，回溯算法会舍弃它，并在前面的一些步骤做出一些修改，并重新尝试找到可行解。 二、回溯算法思路所谓Backtracking都是这样的思路： 在当前局面下，你有若干种选择。 那么尝试每一种选择。 如果已经发现某种选择肯定不行（因为违反了某些限定条件），就返回； 如果某种选择试到最后发现是正确解，就将其加入解集">
-<meta name="twitter:image" content="http://yoursite.com/2019/07/10/images/17_telephone_keypad.png">
+<meta name="twitter:image" content="http://yoursite.com/images/17_telephone_keypad.png">
 
 
 
@@ -444,7 +444,7 @@
 限制和结束条件中有“用完”和“一样多”字样，因此你需要知道左右括号的数目。<br>当然你还需要知道当前局面sublist和解集res。</p>
 <h1 id="三、例题"><a href="#三、例题" class="headerlink" title="三、例题"></a>三、例题</h1><h2 id="1-电话号码的组合"><a href="#1-电话号码的组合" class="headerlink" title="1. 电话号码的组合"></a>1. 电话号码的组合</h2><p>给定一个仅包含数字 <code>2-9</code> 的字符串，返回所有它能表示的字母组合。</p>
 <p>给出数字到字母的映射如下（与电话按键相同）。注意 1 不对应任何字母。</p>
-<p><img src="../images/17_telephone_keypad.png" alt="img"></p>
+<p><img src="/images/17_telephone_keypad.png" alt="img"></p>
 <p><strong>示例:</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：&quot;23&quot;</span><br><span class="line">输出：[&quot;ad&quot;, &quot;ae&quot;, &quot;af&quot;, &quot;bd&quot;, &quot;be&quot;, &quot;bf&quot;, &quot;cd&quot;, &quot;ce&quot;, &quot;cf&quot;].</span><br></pre></td></tr></table></figure>
 
@@ -533,7 +533,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">permuteUnique</span><span class="params">(self, nums)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :rtype: List[List[int]]</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">if</span> len(nums) == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> []</span><br><span class="line">        <span class="keyword">if</span> len(nums) == <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> [nums]</span><br><span class="line">        </span><br><span class="line">        res = []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(nums)):</span><br><span class="line">            prefix = nums[i]</span><br><span class="line">            rest = nums[:i]+nums[i+<span class="number">1</span>:]</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> self.permuteUnique(rest):</span><br><span class="line">                <span class="keyword">if</span> [prefix] +j <span class="keyword">not</span> <span class="keyword">in</span> res:</span><br><span class="line">                    res.append([prefix] + j)</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
 
 <h2 id="8-N皇后"><a href="#8-N皇后" class="headerlink" title="8. N皇后"></a>8. N皇后</h2><p><em>n</em> 皇后问题研究的是如何将 <em>n</em> 个皇后放置在 <em>n</em>×<em>n</em> 的棋盘上，并且使皇后彼此之间不能相互攻击。</p>
-<p><img src="../images/8-queens.png" alt="img"></p>
+<p><img src="/images/8-queens.png" alt="img"></p>
 <p>上图为 8 皇后问题的一种解法。</p>
 <p>给定一个整数 <em>n</em>，返回所有不同的 <em>n</em> 皇后问题的解决方案。</p>
 <p>每一种解法包含一个明确的 <em>n</em> 皇后问题的棋子放置方案，该方案中 <code>&#39;Q&#39;</code> 和 <code>&#39;.&#39;</code> 分别代表了皇后和空位。</p>
@@ -544,7 +544,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">solveNQueens</span><span class="params">(self, n)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type n: int</span></span><br><span class="line"><span class="string">        :rtype: List[List[str]]</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        res = []</span><br><span class="line">        s = <span class="string">'.'</span> * n</span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">helper</span><span class="params">(i,tmp,col,z_dia,f_dia)</span>:</span></span><br><span class="line">            <span class="keyword">if</span> i  == n:</span><br><span class="line">                res.append(tmp)</span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(n):</span><br><span class="line">                <span class="keyword">if</span> j <span class="keyword">not</span> <span class="keyword">in</span> col <span class="keyword">and</span> (i+j) <span class="keyword">not</span> <span class="keyword">in</span> z_dia <span class="keyword">and</span> (i-j) <span class="keyword">not</span> <span class="keyword">in</span> f_dia:</span><br><span class="line">                    helper(i+<span class="number">1</span>,tmp+[s[:j]+<span class="string">'Q'</span>+s[j+<span class="number">1</span>:]],col | &#123;j&#125;,z_dia | &#123;i+j&#125;,f_dia | &#123;i-j&#125;)</span><br><span class="line">        helper(<span class="number">0</span>,[],set(),set(),set())</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
 
 <h2 id="9-N皇后2"><a href="#9-N皇后2" class="headerlink" title="9. N皇后2"></a>9. N皇后2</h2><p><em>n</em> 皇后问题研究的是如何将 <em>n</em> 个皇后放置在 <em>n</em>×<em>n</em> 的棋盘上，并且使皇后彼此之间不能相互攻击。</p>
-<p><img src="../images/8-queens.png" alt="img"></p>
+<p><img src="/images/8-queens.png" alt="img"></p>
 <p>上图为 8 皇后问题的一种解法。</p>
 <p>给定一个整数 <em>n</em>，返回 <em>n</em> 皇后不同的解决方案的数量。</p>
 <p><strong>示例:</strong></p>
