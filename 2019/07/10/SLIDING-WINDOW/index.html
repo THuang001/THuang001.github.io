@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="sliding window,">
 
 
 
@@ -87,15 +87,16 @@
 
 
 <meta name="description" content="一、综述这类题在leetcode上，绝大部分都是难题，然后核心在于双指针技巧。 本文讲的例题从第3题覆盖到第727题。 二、滑动窗口思路讲解在滑动窗口类型的问题中都会有两个指针。一个用于延伸现有窗口的 right指针，和一个用于收缩窗口的left 指针。在任意时刻，只有一个指针运动，而另一个保持静止。 本题的解法很符合直觉。我们通过移动right指针不断扩张窗口。当窗口包含全部所需的字符后，如果能">
+<meta name="keywords" content="sliding window">
 <meta property="og:type" content="article">
-<meta property="og:title" content="滑动窗口类题目">
+<meta property="og:title" content="滑动窗口类题目(本章最后一题有惊喜)">
 <meta property="og:url" content="http://yoursite.com/2019/07/10/SLIDING-WINDOW/index.html">
 <meta property="og:site_name" content="晨曦微光">
 <meta property="og:description" content="一、综述这类题在leetcode上，绝大部分都是难题，然后核心在于双指针技巧。 本文讲的例题从第3题覆盖到第727题。 二、滑动窗口思路讲解在滑动窗口类型的问题中都会有两个指针。一个用于延伸现有窗口的 right指针，和一个用于收缩窗口的left 指针。在任意时刻，只有一个指针运动，而另一个保持静止。 本题的解法很符合直觉。我们通过移动right指针不断扩张窗口。当窗口包含全部所需的字符后，如果能">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-10T08:44:23.203Z">
+<meta property="og:updated_time" content="2019-07-10T10:03:29.284Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="滑动窗口类题目">
+<meta name="twitter:title" content="滑动窗口类题目(本章最后一题有惊喜)">
 <meta name="twitter:description" content="一、综述这类题在leetcode上，绝大部分都是难题，然后核心在于双指针技巧。 本文讲的例题从第3题覆盖到第727题。 二、滑动窗口思路讲解在滑动窗口类型的问题中都会有两个指针。一个用于延伸现有窗口的 right指针，和一个用于收缩窗口的left 指针。在任意时刻，只有一个指针运动，而另一个保持静止。 本题的解法很符合直觉。我们通过移动right指针不断扩张窗口。当窗口包含全部所需的字符后，如果能">
 
 
@@ -132,7 +133,7 @@
 
 
 
-  <title>滑动窗口类题目 | 晨曦微光</title>
+  <title>滑动窗口类题目(本章最后一题有惊喜) | 晨曦微光</title>
   
 
 
@@ -318,7 +319,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">滑动窗口类题目</h1>
+          <h1 class="post-title" itemprop="name headline">滑动窗口类题目(本章最后一题有惊喜)</h1>
         
 
         <div class="post-meta">
@@ -341,6 +342,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -358,7 +381,7 @@
 
           
 	  
-   		<span id="/2019/07/10/SLIDING-WINDOW/" class="leancloud_visitors" data-flag-title="滑动窗口类题目">
+   		<span id="/2019/07/10/SLIDING-WINDOW/" class="leancloud_visitors" data-flag-title="滑动窗口类题目(本章最后一题有惊喜)">
    &nbsp; | &nbsp;
      <span class="post-meta-divider">阅读次数:</span>
      <span class="post-meta-item-icon">
@@ -479,6 +502,37 @@
 <p>你可以假设 <em>k</em> 总是有效的，1 ≤ k ≤ 输入数组的大小，且输入数组不为空。</p>
 <p><strong>进阶：</strong></p>
 <p>你能在线性时间复杂度内解决此题吗？</p>
+<h3 id="思路：-5"><a href="#思路：-5" class="headerlink" title="思路："></a>思路：</h3><p>也是滑动窗口。。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">maxSlidingWindow</span><span class="params">(self, nums, k)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :type k: int</span></span><br><span class="line"><span class="string">        :rtype: List[int]</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        start,end = <span class="number">0</span>,<span class="number">0</span></span><br><span class="line">        cnt = <span class="number">0</span></span><br><span class="line">        res,tmp = [],[]</span><br><span class="line">        <span class="keyword">while</span> end &lt; len(nums):</span><br><span class="line">            cnt += <span class="number">1</span></span><br><span class="line">            tmp.append(nums[end])</span><br><span class="line">            end += <span class="number">1</span></span><br><span class="line">            <span class="keyword">while</span> cnt &gt; k:</span><br><span class="line">                tmp.remove(nums[start])</span><br><span class="line">                start += <span class="number">1</span></span><br><span class="line">                cnt -= <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> cnt == k:</span><br><span class="line">                res.append(max(tmp))</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+
+<h2 id="7-长度最小的子数组"><a href="#7-长度最小的子数组" class="headerlink" title="7. 长度最小的子数组"></a>7. 长度最小的子数组</h2><p>给定一个含有 <strong>n</strong> 个正整数的数组和一个正整数 <strong>s ，</strong>找出该数组中满足其和 <strong>≥ s</strong> 的长度最小的连续子数组<strong>。</strong>如果不存在符合条件的连续子数组，返回 0。</p>
+<p><strong>示例:</strong> </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: s = 7, nums = [2,3,1,2,4,3]</span><br><span class="line">输出: 2</span><br><span class="line">解释: 子数组 [4,3] 是该条件下的长度最小的连续子数组。</span><br></pre></td></tr></table></figure>
+
+<p><strong>进阶:</strong></p>
+<p>如果你已经完成了<em>O</em>(<em>n</em>) 时间复杂度的解法, 请尝试 <em>O</em>(<em>n</em> log <em>n</em>) 时间复杂度的解法。</p>
+<h3 id="思路：-6"><a href="#思路：-6" class="headerlink" title="思路："></a>思路：</h3><p>就是标准的滑动窗口解法。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">minSubArrayLen</span><span class="params">(self, s, nums)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type s: int</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> nums <span class="keyword">or</span> len(nums) == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        start,end = <span class="number">0</span>,<span class="number">0</span></span><br><span class="line">        tmp_sum = <span class="number">0</span></span><br><span class="line">        res = float(<span class="string">'inf'</span>)</span><br><span class="line">        <span class="keyword">while</span> end &lt; len(nums):</span><br><span class="line">            tmp_sum += nums[end]</span><br><span class="line">            end += <span class="number">1</span></span><br><span class="line">            <span class="keyword">while</span> tmp_sum &gt;= s:</span><br><span class="line">                res = min(res,end-start)</span><br><span class="line">                tmp_sum -= nums[start]</span><br><span class="line">                start += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span> <span class="keyword">if</span> res == float(<span class="string">'inf'</span>) <span class="keyword">else</span> res</span><br></pre></td></tr></table></figure>
+
+<h2 id="8-最小窗口子序列"><a href="#8-最小窗口子序列" class="headerlink" title="8. 最小窗口子序列"></a>8. 最小窗口子序列</h2><p>给定字符串 <code>S</code> and <code>T</code>，找出 <code>S</code> 中最短的（连续）<strong>子串</strong> <code>W</code> ，使得 <code>T</code> 是 <code>W</code> 的 <strong>子序列</strong>。</p>
+<p>如果 <code>S</code> 中没有窗口可以包含 <code>T</code> 中的所有字符，返回空字符串 <code>&quot;&quot;</code>。如果有不止一个最短长度的窗口，返回开始位置最靠左的那个。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">输入：</span><br><span class="line">S = &quot;abcdebdde&quot;, T = &quot;bde&quot;</span><br><span class="line">输出：&quot;bcde&quot;</span><br><span class="line">解释：</span><br><span class="line">&quot;bcde&quot; 是答案，因为它在相同长度的字符串 &quot;bdde&quot; 出现之前。</span><br><span class="line">&quot;deb&quot; 不是一个更短的答案，因为在窗口中必须按顺序出现 T 中的元素。</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>注：</strong></p>
+<ul>
+<li>所有输入的字符串都只包含小写字母。All the strings in the input will only contain lowercase letters.</li>
+<li><code>S</code> 长度的范围为 <code>[1, 20000]</code>。</li>
+<li><code>T</code> 长度的范围为 <code>[1, 100]</code>。</li>
+</ul>
+<h3 id="思路：-7"><a href="#思路：-7" class="headerlink" title="思路："></a>思路：</h3><p>哈哈哈这个题尝试用滑动窗口不能解决，因为这是序列，不是子串，要考虑字符的前后顺序关系。所以下面的代码没有通过。得到的结果是’deb’</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">minWindow</span><span class="params">(self, S, T)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type S: str</span></span><br><span class="line"><span class="string">        :type T: str</span></span><br><span class="line"><span class="string">        :rtype: str</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">from</span> collections <span class="keyword">import</span> defaultdict</span><br><span class="line">        lookup = defaultdict(int)</span><br><span class="line">        <span class="keyword">for</span> c <span class="keyword">in</span> T:</span><br><span class="line">            lookup[c] += <span class="number">1</span></span><br><span class="line">        start,end = <span class="number">0</span>,<span class="number">0</span></span><br><span class="line">        count = len(T)</span><br><span class="line">        min_len = float(<span class="string">'inf'</span>)</span><br><span class="line">        res = <span class="string">''</span></span><br><span class="line">        <span class="keyword">while</span> end &lt; len(S):</span><br><span class="line">            <span class="keyword">if</span> lookup[S[end]] &gt; <span class="number">0</span>:</span><br><span class="line">                count -= <span class="number">1</span></span><br><span class="line">            lookup[S[end]] -= <span class="number">1</span></span><br><span class="line">            end += <span class="number">1</span></span><br><span class="line">            <span class="keyword">while</span> count == <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">if</span> min_len &gt; end - start:</span><br><span class="line">                    min_len = end-start</span><br><span class="line">                    res = S[start:end]</span><br><span class="line">                <span class="keyword">if</span> lookup[S[start]] == <span class="number">0</span>:</span><br><span class="line">                    count += <span class="number">1</span></span><br><span class="line">                lookup[S[start]] += <span class="number">1</span></span><br><span class="line">                start += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+
+<p>正确思路是动态规划。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">minWindow</span><span class="params">(self, S, T)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type S: str</span></span><br><span class="line"><span class="string">        :type T: str</span></span><br><span class="line"><span class="string">        :rtype: str</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        m = len(T)</span><br><span class="line">        n = len(S)</span><br><span class="line">        dp = [[<span class="number">0</span>] * (n+<span class="number">1</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> range(m+<span class="number">1</span>)]</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(n+<span class="number">1</span>):</span><br><span class="line">            dp[<span class="number">0</span>][j] = j + <span class="number">1</span></span><br><span class="line">            </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,m+<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">1</span>,n+<span class="number">1</span>):</span><br><span class="line">                <span class="keyword">if</span> T[i<span class="number">-1</span>] == S[j<span class="number">-1</span>]:</span><br><span class="line">                    dp[i][j] = dp[i<span class="number">-1</span>][j<span class="number">-1</span>]</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    dp[i][j] = dp[i][j<span class="number">-1</span>]</span><br><span class="line">        </span><br><span class="line">        start = <span class="number">0</span></span><br><span class="line">        l = n+<span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">1</span>,n+<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">if</span> dp[m][j] :</span><br><span class="line">                <span class="keyword">if</span> j - dp[m][j] + <span class="number">1</span> &lt; l:</span><br><span class="line">                    start = dp[m][j]<span class="number">-1</span></span><br><span class="line">                    l = j - dp[m][j] + <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">""</span> <span class="keyword">if</span> l == n+<span class="number">1</span> <span class="keyword">else</span> S[start:start+l]</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -493,6 +547,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/sliding-window/" rel="tag"># sliding window</a>
+          
+        </div>
       
 
       
@@ -619,7 +679,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -652,7 +712,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、综述"><span class="nav-number">1.</span> <span class="nav-text">一、综述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、滑动窗口思路讲解"><span class="nav-number">2.</span> <span class="nav-text">二、滑动窗口思路讲解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、例题讲解"><span class="nav-number">3.</span> <span class="nav-text">三、例题讲解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-无重复字符的最长子串"><span class="nav-number">3.1.</span> <span class="nav-text">1. 无重复字符的最长子串</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#思路："><span class="nav-number">3.1.1.</span> <span class="nav-text">思路：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-串联所有单词的子串"><span class="nav-number">3.2.</span> <span class="nav-text">2. 串联所有单词的子串</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#思路：-1"><span class="nav-number">3.2.1.</span> <span class="nav-text">思路：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-最小覆盖子串"><span class="nav-number">3.3.</span> <span class="nav-text">3. 最小覆盖子串</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#思路：-2"><span class="nav-number">3.3.1.</span> <span class="nav-text">思路：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-至多包含两个不同字符的最长子串"><span class="nav-number">3.4.</span> <span class="nav-text">4. 至多包含两个不同字符的最长子串</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#思路：-3"><span class="nav-number">3.4.1.</span> <span class="nav-text">思路：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-至多包含K个不同字符的最长子串"><span class="nav-number">3.5.</span> <span class="nav-text">5. 至多包含K个不同字符的最长子串</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#思路：-4"><span class="nav-number">3.5.1.</span> <span class="nav-text">思路：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-滑动窗口最大值"><span class="nav-number">3.6.</span> <span class="nav-text">6. 滑动窗口最大值</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、综述"><span class="nav-number">1.</span> <span class="nav-text">一、综述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、滑动窗口思路讲解"><span class="nav-number">2.</span> <span class="nav-text">二、滑动窗口思路讲解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、例题讲解"><span class="nav-number">3.</span> <span class="nav-text">三、例题讲解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-无重复字符的最长子串"><span class="nav-number">3.1.</span> <span class="nav-text">1. 无重复字符的最长子串</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#思路："><span class="nav-number">3.1.1.</span> <span class="nav-text">思路：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-串联所有单词的子串"><span class="nav-number">3.2.</span> <span class="nav-text">2. 串联所有单词的子串</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#思路：-1"><span class="nav-number">3.2.1.</span> <span class="nav-text">思路：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-最小覆盖子串"><span class="nav-number">3.3.</span> <span class="nav-text">3. 最小覆盖子串</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#思路：-2"><span class="nav-number">3.3.1.</span> <span class="nav-text">思路：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-至多包含两个不同字符的最长子串"><span class="nav-number">3.4.</span> <span class="nav-text">4. 至多包含两个不同字符的最长子串</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#思路：-3"><span class="nav-number">3.4.1.</span> <span class="nav-text">思路：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-至多包含K个不同字符的最长子串"><span class="nav-number">3.5.</span> <span class="nav-text">5. 至多包含K个不同字符的最长子串</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#思路：-4"><span class="nav-number">3.5.1.</span> <span class="nav-text">思路：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-滑动窗口最大值"><span class="nav-number">3.6.</span> <span class="nav-text">6. 滑动窗口最大值</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#思路：-5"><span class="nav-number">3.6.1.</span> <span class="nav-text">思路：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-长度最小的子数组"><span class="nav-number">3.7.</span> <span class="nav-text">7. 长度最小的子数组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#思路：-6"><span class="nav-number">3.7.1.</span> <span class="nav-text">思路：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-最小窗口子序列"><span class="nav-number">3.8.</span> <span class="nav-text">8. 最小窗口子序列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#思路：-7"><span class="nav-number">3.8.1.</span> <span class="nav-text">思路：</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
