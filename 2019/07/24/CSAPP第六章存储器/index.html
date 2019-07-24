@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="论文,">
+  <meta name="keywords" content="阅读,">
 
 
 
@@ -86,24 +86,29 @@
 
 
 
-<meta name="description" content="1. 背景FFM（Field-aware Factorization Machine）最初的概念来自Yu-Chin Juan（阮毓钦，毕业于中国台湾大学，现在美国Criteo工作）与其比赛队员，是他们借鉴了来自Michael Jahrer的论文[1]中的field概念提出了FM的升级版模型。通过引入field的概念，FFM把相同性质的特征归于同一个field。 2. FFM原理推导考虑下面的数据集">
-<meta name="keywords" content="论文">
+<meta name="description" content="1. 存储器层次化结构存储器有很多种类，我们常见的有内存、磁盘，还有平时看不到的集成在CPU内部的寄存器、高速缓存等。 存储器是分层次的，离CPU越近的存储器，速度越快，每字节的成本越高，同时容量也因此越小。寄存器速度最快，离CPU最近，成本最高，所以个数容量有限，其次是高速缓存（缓存也是分级，有L1，L2等缓存），再次是主存（普通内存），再次是本地磁盘。 寄存器的速度最快，可以在一个时钟周期内访">
+<meta name="keywords" content="阅读">
 <meta property="og:type" content="article">
-<meta property="og:title" content="FFM模型">
-<meta property="og:url" content="http://yoursite.com/2019/07/02/ffm-review/index.html">
+<meta property="og:title" content="CPU存储器&amp;随机读取&amp;顺序读取(CSAPP chapter6)">
+<meta property="og:url" content="http://yoursite.com/2019/07/24/CSAPP第六章存储器/index.html">
 <meta property="og:site_name" content="晨曦微光">
-<meta property="og:description" content="1. 背景FFM（Field-aware Factorization Machine）最初的概念来自Yu-Chin Juan（阮毓钦，毕业于中国台湾大学，现在美国Criteo工作）与其比赛队员，是他们借鉴了来自Michael Jahrer的论文[1]中的field概念提出了FM的升级版模型。通过引入field的概念，FFM把相同性质的特征归于同一个field。 2. FFM原理推导考虑下面的数据集">
+<meta property="og:description" content="1. 存储器层次化结构存储器有很多种类，我们常见的有内存、磁盘，还有平时看不到的集成在CPU内部的寄存器、高速缓存等。 存储器是分层次的，离CPU越近的存储器，速度越快，每字节的成本越高，同时容量也因此越小。寄存器速度最快，离CPU最近，成本最高，所以个数容量有限，其次是高速缓存（缓存也是分级，有L1，L2等缓存），再次是主存（普通内存），再次是本地磁盘。 寄存器的速度最快，可以在一个时钟周期内访">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://www.hrwhisper.me/wp-content/uploads/2018/07/poly2-model-example.png">
-<meta property="og:image" content="https://www.hrwhisper.me/wp-content/uploads/2018/07/fm-model-example.png">
-<meta property="og:image" content="https://www.hrwhisper.me/wp-content/uploads/2018/07/ffm-model-example.png">
-<meta property="og:image" content="https://www.hrwhisper.me/wp-content/uploads/2018/07/ffm-model-training.png">
-<meta property="og:image" content="https://awps-assets.meituan.net/mit-x/blog-images-bundle-2016/0ba057eb.png">
-<meta property="og:updated_time" content="2019-07-04T15:00:57.078Z">
+<meta property="og:image" content="https://kaito-blog-1253469779.cos.ap-beijing.myqcloud.com/1534925865.png?imageMogr2/thumbnail/!70p">
+<meta property="og:image" content="https://pic1.zhimg.com/80/v2-ce714e2a5ec81adbe545bc88152e6888_hd.jpg">
+<meta property="og:image" content="https://pic3.zhimg.com/80/v2-c72da734b1a9102a05a00f61f266dac6_hd.jpg">
+<meta property="og:image" content="https://pic3.zhimg.com/80/v2-ebd47393e3401d4d8fa811a0fc8d5762_hd.jpg">
+<meta property="og:image" content="https://kaito-blog-1253469779.cos.ap-beijing.myqcloud.com/1534995073.png?imageMogr2/thumbnail/!70p">
+<meta property="og:image" content="https://kaito-blog-1253469779.cos.ap-beijing.myqcloud.com/1535007716.png?imageMogr2/thumbnail/!70p">
+<meta property="og:image" content="https://kaito-blog-1253469779.cos.ap-beijing.myqcloud.com/1535008731.png?imageMogr2/thumbnail/!70p">
+<meta property="og:image" content="https://kaito-blog-1253469779.cos.ap-beijing.myqcloud.com/1535009099.png?imageMogr2/thumbnail/!70p">
+<meta property="og:image" content="https://kaito-blog-1253469779.cos.ap-beijing.myqcloud.com/1535015356.png?imageMogr2/thumbnail/!70p">
+<meta property="og:image" content="https://kaito-blog-1253469779.cos.ap-beijing.myqcloud.com/1535009827.png?imageMogr2/thumbnail/!70p">
+<meta property="og:updated_time" content="2019-07-24T15:31:20.754Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="FFM模型">
-<meta name="twitter:description" content="1. 背景FFM（Field-aware Factorization Machine）最初的概念来自Yu-Chin Juan（阮毓钦，毕业于中国台湾大学，现在美国Criteo工作）与其比赛队员，是他们借鉴了来自Michael Jahrer的论文[1]中的field概念提出了FM的升级版模型。通过引入field的概念，FFM把相同性质的特征归于同一个field。 2. FFM原理推导考虑下面的数据集">
-<meta name="twitter:image" content="https://www.hrwhisper.me/wp-content/uploads/2018/07/poly2-model-example.png">
+<meta name="twitter:title" content="CPU存储器&amp;随机读取&amp;顺序读取(CSAPP chapter6)">
+<meta name="twitter:description" content="1. 存储器层次化结构存储器有很多种类，我们常见的有内存、磁盘，还有平时看不到的集成在CPU内部的寄存器、高速缓存等。 存储器是分层次的，离CPU越近的存储器，速度越快，每字节的成本越高，同时容量也因此越小。寄存器速度最快，离CPU最近，成本最高，所以个数容量有限，其次是高速缓存（缓存也是分级，有L1，L2等缓存），再次是主存（普通内存），再次是本地磁盘。 寄存器的速度最快，可以在一个时钟周期内访">
+<meta name="twitter:image" content="https://kaito-blog-1253469779.cos.ap-beijing.myqcloud.com/1534925865.png?imageMogr2/thumbnail/!70p">
 
 
 
@@ -133,13 +138,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/07/02/ffm-review/">
+  <link rel="canonical" href="http://yoursite.com/2019/07/24/CSAPP第六章存储器/">
 
 
 
 
 
-  <title>FFM模型 | 晨曦微光</title>
+  <title>CPU存储器&随机读取&顺序读取(CSAPP chapter6) | 晨曦微光</title>
   
 
 
@@ -308,7 +313,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/02/ffm-review/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/24/CSAPP第六章存储器/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Aurora">
@@ -325,7 +330,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">FFM模型</h1>
+          <h1 class="post-title" itemprop="name headline">CPU存储器&随机读取&顺序读取(CSAPP chapter6)</h1>
         
 
         <div class="post-meta">
@@ -337,8 +342,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-02T23:35:58+08:00">
-                2019-07-02
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-24T21:53:46+08:00">
+                2019-07-24
               </time>
             
 
@@ -360,8 +365,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/模型/" itemprop="url" rel="index">
-                    <span itemprop="name">模型</span>
+                  <a href="/categories/存储/" itemprop="url" rel="index">
+                    <span itemprop="name">存储</span>
                   </a>
                 </span>
 
@@ -378,8 +383,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/07/02/ffm-review/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count gitment-comments-count" data-xid="/2019/07/02/ffm-review/" itemprop="commentsCount"></span>
+                <a href="/2019/07/24/CSAPP第六章存储器/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2019/07/24/CSAPP第六章存储器/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -387,7 +392,7 @@
 
           
 	  
-   		<span id="/2019/07/02/ffm-review/" class="leancloud_visitors" data-flag-title="FFM模型">
+   		<span id="/2019/07/24/CSAPP第六章存储器/" class="leancloud_visitors" data-flag-title="CPU存储器&随机读取&顺序读取(CSAPP chapter6)">
    &nbsp; | &nbsp;
      <span class="post-meta-divider">阅读次数:</span>
      <span class="post-meta-item-icon">
@@ -419,178 +424,148 @@
       
 
       
-        <h2 id="1-背景"><a href="#1-背景" class="headerlink" title="1. 背景"></a>1. 背景</h2><p>FFM（Field-aware Factorization Machine）最初的概念来自Yu-Chin Juan（阮毓钦，毕业于中国台湾大学，现在美国Criteo工作）与其比赛队员，是他们借鉴了来自Michael Jahrer的论文<a href="https://kaggle2.blob.core.windows.net/competitions/kddcup2012/2748/media/Opera.pdf" target="_blank" rel="noopener">[1]</a>中的field概念提出了FM的升级版模型。通过引入field的概念，FFM把相同性质的特征归于同一个field。</p>
-<h2 id="2-FFM原理推导"><a href="#2-FFM原理推导" class="headerlink" title="2. FFM原理推导"></a>2. FFM原理推导</h2><p>考虑下面的数据集：</p>
-<table>
-<thead>
-<tr>
-<th align="left">Clicked?</th>
-<th align="left">Publisher(P)</th>
-<th align="left">Advertiser(A)</th>
-<th align="left">Gender(G)</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">1</td>
-<td align="left">EPSN</td>
-<td align="left">Nike</td>
-<td align="left">Male</td>
-</tr>
-<tr>
-<td align="left">0</td>
-<td align="left">NBC</td>
-<td align="left">Adidas</td>
-<td align="left">Female</td>
-</tr>
-</tbody></table>
-<p>对于第一条数据来说，FM模型的二次项为：<strong>w</strong>𝐸𝑃𝑆𝑁⋅<strong>𝐰</strong>𝑁𝑖𝑘𝑒+<strong>𝐰</strong>𝐸𝑃𝑆𝑁⋅<strong>𝐰</strong>𝑀𝑎𝑙𝑒+<strong>𝐰</strong>𝑁𝑖𝑘𝑒⋅<strong>𝐰</strong>𝑀𝑎𝑙𝑒。（这里只是把上面的v符合改成了w）每个特征只用一个隐向量来学习和其它特征的潜在影响。对于上面的例子中，Nike是广告主，Male是用户的性别，描述（EPSN，Nike）和（EPSN，Male）特征组合，FM模型都用同一个<strong>𝐰</strong>𝐸𝑆𝑃𝑁，而实际上，ESPN作为广告商，其对广告主和用户性别的潜在影响可能是不同的。</p>
-<p>因此，Yu-Chin Juan借鉴Michael Jahrer的论文（Ensemble of collaborative filtering and feature engineered models for click through rate prediction），将field概念引入FM模型。</p>
-<p>field是什么呢？即相同性质的特征放在一个field。比如EPSN、NBC都是属于广告商field的，Nike、Adidas都是属于广告主field，Male、Female都是属于性别field的。简单的说，同一个类别特征进行one-hot编码后生成的数值特征都可以放在同一个field中，比如最开始的例子中Day=26/11/15 Day=19/2/15可以放于同一个field中。如果是数值特征而非类别，可以直接作为一个field。</p>
-<p>引入了field后，对于刚才的例子来说，二次项变为：</p>
-​
-
-$\underbrace{{\bf w}_{EPSN, A} \cdot {\bf w}_{Nike, P}}_{P \times A} + \underbrace{{\bf w}_{EPSN, G} \cdot {\bf w}_{Male,P}}_{P \times G} + \underbrace{{{\bf w}_{Nike, G} \cdot {\bf w}_{Male,A}}}_{A \times G}$
-
-​
-
+        <h2 id="1-存储器层次化结构"><a href="#1-存储器层次化结构" class="headerlink" title="1. 存储器层次化结构"></a>1. 存储器层次化结构</h2><p>存储器有很多种类，我们常见的有内存、磁盘，还有平时看不到的集成在CPU内部的寄存器、高速缓存等。</p>
+<p>存储器是分层次的，离CPU越近的存储器，速度越快，每字节的成本越高，同时容量也因此越小。寄存器速度最快，离CPU最近，成本最高，所以个数容量有限，其次是高速缓存（缓存也是分级，有L1，L2等缓存），再次是主存（普通内存），再次是本地磁盘。</p>
+<p>寄存器的速度最快，可以在一个时钟周期内访问，其次是高速缓存，可以在几个时钟周期内访问，普通内存可以在几十个或几百个时钟周期内访问。</p>
+<p>正常来说，存储器的容量和性能应该伴随着CPU的速度和性能提升而提升，以匹配CPU的数据处理。但随着时间的推移，CPU和存储器在性能上的发展差异越来越大，存储器在性能增长越来越跟不上CPU性能发展的需要。</p>
+<p>那怎么办呢？</p>
+<p>为了缩小存储器和CPU之间的性能差距，通常在计算机内部采用层次化的存储器体系结构，以此来发挥出存储器的综合性能。</p>
+<p>存储器层次化结构如下：</p>
+<p><img src="https://kaito-blog-1253469779.cos.ap-beijing.myqcloud.com/1534925865.png?imageMogr2/thumbnail/!70p" alt="img"></p>
+<p>最上层的是寄存器，存取时间极快，但容量小。其次是高速缓存，存取时间次之，容量比寄存器大一些。再往下就是我们常见的内存、硬盘，存取速度递减，但容量越来越大。</p>
+<p>CPU在访问数据时，数据一般在相邻两层之间复制传送，且总是从慢速存储器复制到快速存储器，通过这种方式保证CPU的速度和存储器的速度相匹配。</p>
+<h2 id="2-cache介绍"><a href="#2-cache介绍" class="headerlink" title="2. cache介绍"></a>2. cache介绍</h2><h3 id="什么是cache"><a href="#什么是cache" class="headerlink" title="什么是cache"></a>什么是cache</h3><p>Cache Memory也被称为Cache，是存储器子系统的组成部分，存放着程序经常使用的指令和数据，这就是Cache的传统定义。从广义的角度上看，Cache是快设备为了缓解访问慢设备延时的预留的Buffer，从而可以在掩盖访问延时的同时，尽可能地提高数据传输率。 快和慢是一个相对概念，与微架构(Microarchitecture)中的 L1/L2/L3 Cache相比， DDR内存是一个慢速设备；在磁盘 I/O 系统中，DDR却是快速设备，在磁盘 I/O 系统中，仍在使用DDR内存作为磁介质的Cache。在一个微架构中，除了有L1/L2/L3 Cache之外，用于虚实地址转换的各级TLB， MOB( Memory Ordering Buffers)、在指令流水线中的ROB，Register File和BTB等等也是一种Cache。我们这里的Cache，是狭义 Cache，是CPU流水线和主存储器的 L1/L2/L3 Cache。</p>
+<p>cache，中译名高速缓冲存储器，其作用是为了更好的利用局部性原理，减少CPU访问主存的次数。简单地说，CPU正在访问的指令和数据，其可能会被以后多次访问到，或者是该指令和数据附近的内存区域，也可能会被多次访问。因此，第一次访问这一块区域时，将其复制到cache中，以后访问该区域的指令或者数据时，就不用再从主存中取出。</p>
+<h3 id="各级cache读取延迟"><a href="#各级cache读取延迟" class="headerlink" title="各级cache读取延迟"></a>各级cache读取延迟</h3><p>L1cache,L2cache,L3cache，虽然它们都是由CAM（Content Addressable Memory ）为主体的tag和SRAM组成的，但是区别却是明显的：L1（先不考虑指令和数据L1的不同）是为了更快的速度访问而优化过的，它用了更多/更复杂/更大的晶体管，从而更加昂贵和更加耗电；L2相对来说是为提供更大的容量优化的，用了更少/更简单的晶体管，从而相对便宜和省电。同样的道理还可以推广到L2和L3上。</p>
+<p>在同一代制程中，单位面积可以放入晶体管的数目是确定的，这些晶体管如果都给L1则容量太少，Cache命中率（Hit Rate）严重降低，功耗上升太快；如果都给L2，容量大了但延迟提高了一个数量级：</p>
+<p><img src="https://pic1.zhimg.com/80/v2-ce714e2a5ec81adbe545bc88152e6888_hd.jpg" alt="img"></p>
+<p>如何平衡L1、L2和L3，用固定的晶体管数目达成最好的综合效果，这是一种平衡的艺术。在多年实践之后，现在已经相对固定下来，Intel和AMD的L1 Cache命中率，现在往往高于95%，增加更多的L1效果不是很显著，现在更多的是增大L3，以达到花同样的代价，干更多的事的目的。</p>
+<h3 id="为什么cache不会越做越大"><a href="#为什么cache不会越做越大" class="headerlink" title="为什么cache不会越做越大"></a>为什么cache不会越做越大</h3><p>L3现在动辄数十M，比以往那是阔绰很多了，但相对摩尔定律增长的内存容量来说则大幅落后。为什么Cache增长这么缓慢？还是Cost的问题。一个最简单的SRAM就要消耗6个晶体管：</p>
+<p><img src="https://pic3.zhimg.com/80/v2-c72da734b1a9102a05a00f61f266dac6_hd.jpg" alt="img"></p>
+<p>再加上Tag，最少需要数十个晶体管，代价很大。我们花这么大的代价增加Cache，衡量性能的命中率是如何变化的呢？</p>
+<p><img src="https://pic3.zhimg.com/80/v2-ebd47393e3401d4d8fa811a0fc8d5762_hd.jpg" alt="img"></p>
+<p>为简化起见，我们假设L1维持在不到60%的命中率（实际情况95%左右）。从图中可以看出，随着L2容量的增加，开始时L2和整体命中率快速提高，这表明提高L2容量效用很明显。随后L2的命中率在容量增加到64KB后增长趋缓，而整体命中率也同时趋缓，最后甚至基本不大变化了。增加同样的晶体管，而受益却越来越少，出现了边际效用递减的问题。</p>
+<h2 id="3-程序访问的局部性"><a href="#3-程序访问的局部性" class="headerlink" title="3. 程序访问的局部性"></a>3. 程序访问的局部性</h2><p>最早期的计算机，在执行一段程序时，都是把硬盘中的数据加载到内存，然后CPU从内存中取出代码和数据执行，在把计算结果写入内存，最终输出结果。</p>
+<p>其实这么干，本身没有什么问题，但后来程序运行越来越多，就发现一个规律：<strong>内存中某个地址被访问后，短时间内还有可能继续访问这块地址。内存中的某个地址被访问后，它相邻的内存单元被访问的概率也很大。</strong></p>
+<p>人们发现的这种规律被称为<strong>程序访问的局部性</strong>。</p>
+<p>程序访问的局部性包含2种：</p>
 <ul>
-<li>对于特征组合（EPSN，Nike）来说，其隐向量采用的是<strong>𝐰</strong>𝐸𝑃𝑆𝑁,𝐴和<strong>𝐰</strong>𝑁𝑖𝑘𝑒,𝑃，对于<strong>𝐰</strong>𝐸𝑃𝑆𝑁,𝐴这是因为Nike属于广告主（Advertiser）的field，而第二项<strong>𝐰</strong>𝑁𝑖𝑘𝑒,𝑃则是EPSN是广告商（Publisher）的field。</li>
-<li>再举个例子，对于特征组合（EPSN，Male）来说，<strong>𝐰</strong>𝐸𝑃𝑆𝑁,𝐺 是因为Male是用户性别(Gender)的field，而第二项<strong>𝐰</strong>𝑀𝑎𝑙𝑒,𝑃是因为EPSN是广告商（Publisher）的field。</li>
+<li>时间局部性：某个内存单元在较短时间内很可能被再次访问</li>
+<li>空间局部性：某个内存单元被访问后相邻的内存单元较短时间内很可能被访问</li>
 </ul>
-<p>下面的图来自criteo，很好的表示了三个模型的区别</p>
-<blockquote>
-<p>For Poly2, a dedicated weight is learned for each feature pair: </p>
-<p><img src="https://www.hrwhisper.me/wp-content/uploads/2018/07/poly2-model-example.png" alt="img"></p>
-<p>For FMs, each feature has one latent vector, which is used to interact with any other latent vectors:</p>
-<p><img src="https://www.hrwhisper.me/wp-content/uploads/2018/07/fm-model-example.png" alt="img"></p>
-<p>For FFMs, each feature has several latent vectors, one of them is used depending on the field of the other feature:</p>
-<p><img src="https://www.hrwhisper.me/wp-content/uploads/2018/07/ffm-model-example.png" alt="img"></p>
-</blockquote>
-<h2 id="3-FFM模型学习"><a href="#3-FFM模型学习" class="headerlink" title="3. FFM模型学习"></a>3. FFM模型学习</h2><h3 id="3-1-FFM-数学公式"><a href="#3-1-FFM-数学公式" class="headerlink" title="3.1 FFM 数学公式"></a>3.1 FFM 数学公式</h3><p>假设样本的 n 个特征属于 f 个field，那么FFM的二次项有 $nf$个隐向量。而在FM模型中，每一维特征的隐向量只有一个。FM可以看作FFM的特例，是把所有特征都归属到一个field时的FFM模型。根据FFM的field敏感特性，可以导出其模型方程。</p>
-<p>$y(\mathbf{x}) = w_0 + \sum_{i=1}^d w_i x_i + \sum_{i=1}^d \sum_{j=i+1}^d (w_{i, f_j} \cdot w_{j, f_i}) x_i x_j  \tag{3-0}$</p>
-<p>其中，$f_j$是第j个特征所属的field。如果隐向量的长度为k，那么FFM的二次参数有$nfk$个，远多于FM模型的nk个。此外，由于隐向量与field相关，FFM二次项并不能够化简，其复杂度为$O(kn^2)$。</p>
-<h3 id="3-2-FFM-模型学习"><a href="#3-2-FFM-模型学习" class="headerlink" title="3.2 FFM 模型学习"></a>3.2 FFM 模型学习</h3><p>为了方便推导，这里省略FFM的一次项和常数项，公式为：</p>
-<p>$\phi(\mathbf{w}, \mathbf{x}) =\sum_{a=1}^d \sum_{b=a+1}^d ( w_{a, f_b} \cdot w_{b, f_a}) x_a x_b\tag{3-1}$</p>
-<p>FFM模型使用logistic loss作为损失函数，并加上L2正则项：</p>
-<p>$\mathcal{L} = \sum_{i=1}^N\log\left(1 + \exp(-y_i\phi({\bf w}, {\bf x_i}))\right) + \frac{\lambda}{2} |!|{\bf w}|!|^2 \tag{3-2}$</p>
-<p>采用随机梯度下降来（SGD）来优化损失函数，因此，损失函数只采用单个样本的损失：</p>
-<p>$\mathcal{L} =\log\left(1 + \exp(-y_i\phi({\bf w}, {\bf x}))\right) + \frac{\lambda}{2} |!|{\bf w}|!|^2 \tag{3-3}$</p>
-<p>对于每次迭代，选取一条数据(<strong>𝐱</strong>,𝑦)，然后让L对<strong>𝐰</strong>𝑎,𝑓𝑏和<strong>𝐰</strong>𝑏,𝑓𝑎求偏导（注意，采用SGD上面的求和项就去掉了，只采用单个样本的损失），得：</p>
-
-
-$\begin{align}  g_{a,f_b} \equiv \frac{\partial \mathcal{L}}{\partial w_{a,f_b}} = \kappa\cdot w_{b, f_a} x_a x_b + \lambda w_{a,f_b}^2 \tag{3-4} \\  g_{b,f_a} \equiv \frac{\partial \mathcal{L}}{\partial w_{b,f_a}} = \kappa\cdot w_{a, f_b} x_a x_b + \lambda w_{b,f_a}^2 \tag{3-5}\\  其中, \kappa = \frac{-y}{1+\exp(y\phi({\bf w,x}))}  \tag{3-6}\end{align}$
-
-
-
-<p>在具体的实现中，这里有两个trick，</p>
-<p>第一个trick是梯度的分步计算。</p>
-
-
-$\mathcal{L} = \mathcal{L} _{err} + \mathcal{L} _{reg} = \log\left(1 + \exp(-y_i\phi({\bf w}, {\bf x}))\right) + \frac{\lambda}{2} |\!|{\bf w}|\!|^2\\  \frac{\partial\mathcal{L}}{\partial\mathbf{w}} = \frac{\partial\mathcal{L}_{err}}{\partial\phi}\cdot \frac{\partial\phi}{\partial\mathbf{w}} + \frac{\partial\mathcal{L}_{reg}}{\partial\mathbf{w}}\tag{3-7}$
-
-
-
-<p>注意到$\frac{\partial\mathcal{L}_{err}}{\partial\phi}$和参数无关，每次更新模型时，只需要计算一次，之后直接调用结果即可。对于总共有𝑑𝑓𝑘个模型参数的计算来说，使用这种方式能极大提升运算效率。</p>
-<p>第二个trick是FFM的学习率是随迭代次数变化的，具体的是采用<a href="https://en.wikipedia.org/wiki/Stochastic_gradient_descent#AdaGrad" target="_blank" rel="noopener">AdaGrad</a>算法，这里进行简单的介绍。</p>
-<p>Adagrad算法能够在训练中自动的调整学习率，<strong>对于稀疏的参数增加学习率，而稠密的参数则降低学习率。因此，Adagrad非常适合处理稀疏数据。</strong></p>
-<p>设𝑔𝑡,𝑗为第t轮第j个参数的梯度，则SGD和采用Adagrad的参数更新公式分别如下：</p>
-
-
-$\begin{align*}  SGD: \ & w_{t+1,j} = w_{t,j} -\eta \cdot g_{t,j} \tag{3-8}\\  Adagrad: \ & w_{t+1,j} = w_{t,j} – \frac{\eta}{\sqrt{G_{t,jj}+ \epsilon}} \cdot g_{t,j}  \tag{3-9}\end{align*}$
-
-
-
-<p>可以看出，Adagrad在学习率𝜂上还除以一项$\sqrt{G_{t,jj}+ \epsilon}$，这是什么意思呢？𝜖为平滑项，防止分母为0，$G_{t,jj} = \sum_{\iota=1}^tg_{\iota, jj}^2$即𝐺𝑡,𝑗𝑗为对角矩阵，每个对角线位置𝑗,𝑗的值为参数𝑤𝑗每一轮的平方和，可以看出，随着迭代的进行，每个参数的历史梯度累加到一起，使得每个参数的学习率逐渐减小。</p>
-<p>因此，用3-4、3-5计算完梯度后，下一步就是更新分母的对角矩阵。</p>
-
-
-$\begin{align}  G_{a,f_b} \leftarrow G_{a,f_b} + (g_{a,f_b})^2 \tag{3-10}\\  G_{b,f_a} \leftarrow G_{b,f_a} + (g_{b,f_a})^2 \tag{3-11}  \end{align}$
-
-
-
-<p>最后，更新模型参数：</p>
-
-
-$\begin{align}  w_{a,f_b} &\leftarrow w_{a,f_b} – \frac{\eta}{\sqrt{G_{a,f_b}+ 1}}g_{a,f_b} \tag{3-12}\\  w_{b,f_a} &\leftarrow w_{b,f_a} – \frac{\eta}{\sqrt{G_{b,f_a}+ 1}}g_{b,f_a} \tag{3-13}  \end{align}$
-
-
-
-<p>这就是论文中算法1描述的过程：</p>
-<p><img src="https://www.hrwhisper.me/wp-content/uploads/2018/07/ffm-model-training.png" alt="img"></p>
-<p><img src="https://awps-assets.meituan.net/mit-x/blog-images-bundle-2016/0ba057eb.png" alt="img"></p>
-<p>参考 ($ Algorithm; 1$ ), 下面简单解释一下FFM的SGD优化过程。 算法的输入 $( tr )、(va)、( pa ) $分别是训练样本集、验证样本集和训练参数设置。</p>
-<ol>
-<li><p>根据样本特征数量$（ tr.n)$、field的个数$( tr.m )$和训练参数$( pa)$，生成初始化模型，即随机生成模型的参数；</p>
-</li>
-<li><p>如果归一化参数 $( pa.norm )$ 为真，计算训练和验证样本的归一化系数，样本 $( i ) $的归一化系数为</p>
-<p>$R[i] = \frac{1}{| \mathbf{X}[i] |}$</p>
-</li>
-<li><p>对每一轮迭代，如果随机更新参数 ( pa.rand ) 为真，随机打乱训练样本的顺序；</p>
-</li>
-<li><p>对每一个训练样本，执行如下操作</p>
+<p>出现这种情况的原因很简单，因为程序是指令和数据组成的，指令在内存中按顺序存放且地址连续，如果运行一段循环程序或调用一个方法，又或者再程序中遍历一个数组，都有可能符合上面提到的局部性原理。</p>
+<p>那既然在执行程序时，内存的某些单元很可能会经常的访问或写入，那可否在CPU和内存之间，加一个缓存，CPU在访问数据时，先看一下缓存中是否存在，如果有直接就读取缓存中的数据即可。如果缓存中不存在，再从内存中读取数据。</p>
+<p>事实证明利用这种方式，程序的运行效率会提高90%以上，这个缓存也叫做<strong>高速缓存Cache</strong>。</p>
+<h2 id="4-高速缓存cache原理"><a href="#4-高速缓存cache原理" class="headerlink" title="4. 高速缓存cache原理"></a>4. 高速缓存cache原理</h2><p>高速缓存Cache是非常小容量的存储器，它集成在CPU芯片内。为了便于CPU、高速缓存Cache、内存之间的信息交换，内存按块划分，高速缓存Cache按行或槽划分。</p>
+<p>CPU对内存、高速缓存Cache进行数据访问的流程如图：</p>
+<p><img src="https://kaito-blog-1253469779.cos.ap-beijing.myqcloud.com/1534995073.png?imageMogr2/thumbnail/!70p" alt="img"></p>
+<p>CPU先查询Cache中是否有数据，如果有，直接读取即可。</p>
+<p>如果Cache中没有，则从内存中读取数据，同时把数据放入Cache中，然后把数据返回给CPU。</p>
+<p>整个流程其实很简单，但对于Cache和内存信息的交换，需要考虑一些问题：</p>
 <ul>
-<li>计算每一个样本的FFM项，$\phi $；</li>
-<li>计算每一个样本的训练误差，如算法所示，这里采用的是交叉熵损失函数$\log ( 1 + e\phi )$；</li>
-<li>利用单个样本的损失函数计算梯度$ g_\Phi $，再根据梯度更新模型参数；</li>
+<li>对于CPU读取数据，如果Cache中没有数据，从内存中读取数据后，如何分配到Cache中？</li>
+<li>如果Cache满了，采用什么策略替换？</li>
+<li>对于CPU写入数据，如何保证Cache和内存数据的一致性？</li>
 </ul>
-</li>
-<li><p>对每一个验证样本，计算样本的FFM输出，计算验证误差；</p>
-</li>
-<li><p>重复步骤3~5，直到迭代结束或验证误差达到最小。</p>
-</li>
-</ol>
-<h3 id="3-3-实现的trick"><a href="#3-3-实现的trick" class="headerlink" title="3.3 实现的trick"></a>3.3 实现的trick</h3><p>本小节主要摘录美团点评的内容。</p>
-<p>除了上面提到的梯度分步计算和自适应学习率两个trick外，还有：</p>
-<blockquote>
-<ol>
-<li>OpenMP多核并行计算。OpenMP是用于共享内存并行系统的多处理器程序设计的编译方案，便于移植和多核扩展<a href="http://openmp.org/wp/openmp-specifications/" target="_blank" rel="noopener">[1]</a>。FFM的源码采用了OpenMP的API，对参数训练过程SGD进行了多线程扩展，支持多线程编译。因此，OpenMP技术极大地提高了FFM的训练效率和多核CPU的利用率。在训练模型时，输入的训练参数ns_threads指定了线程数量，一般设定为CPU的核心数，便于完全利用CPU资源。</li>
-<li>SSE3指令并行编程。SSE3全称为数据流单指令多数据扩展指令集3，是CPU对数据层并行的关键指令，主要用于多媒体和游戏的应用程序中<a href="http://blog.csdn.net/gengshenghong/article/details/7008704" target="_blank" rel="noopener">[2]</a>。SSE3指令采用128位的寄存器，同时操作4个单精度浮点数或整数。SSE3指令的功能非常类似于向量运算。例如，a和b采用SSE3指令相加（a和b分别包含4个数据），其功能是a种的4个元素与b中4个元素对应相加，得到4个相加后的值。采用SSE3指令后，向量运算的速度更加快捷，这对包含大量向量运算的FFM模型是非常有利的。</li>
-</ol>
-<p>除了上面的技巧之外，FFM的实现中还有很多调优技巧需要探索。例如，代码是按field和特征的编号申请参数空间的，如果选取了非连续或过大的编号，就会造成大量的内存浪费；在每个样本中加入值为1的新特征，相当于引入了因子化的一次项，避免了缺少一次项带来的模型偏差等。</p>
-</blockquote>
-<h2 id="4-适用范围和使用技巧"><a href="#4-适用范围和使用技巧" class="headerlink" title="4. 适用范围和使用技巧"></a>4. 适用范围和使用技巧</h2><p>在FFM原论文中，作者指出，FFM模型对于one-hot后类别特征十分有效，但是如果数据不够稀疏，可能相比其它模型提升没有稀疏的时候那么大，此外，对于数值型的数据效果不是特别的好。</p>
-<p>在Github上有FFM的<a href="https://github.com/guestwalk/libffm" target="_blank" rel="noopener">开源实现</a>，要使用FFM模型，特征需要转化为“<strong>field_id:feature_id:value</strong>”格式，相比LibSVM的格式多了field_id，即特征所属的field的编号，feature_id是特征编号，value为特征的值。</p>
-<p>此外，美团点评的文章中，提到了训练FFM时的一些注意事项：</p>
-<blockquote>
-<p>第一，样本归一化。FFM默认是进行样本数据的归一化的 。若不进行归一化，很容易造成数据inf溢出，进而引起梯度计算的nan错误。因此，样本层面的数据是推荐进行归一化的。</p>
-<p>第二，特征归一化。CTR/CVR模型采用了多种类型的源特征，包括数值型和categorical类型等。但是，categorical类编码后的特征取值只有0或1，较大的数值型特征会造成样本归一化后categorical类生成特征的值非常小，没有区分性。例如，一条用户-商品记录，用户为“男”性，商品的销量是5000个（假设其它特征的值为零），那么归一化后特征“sex=male”（性别为男）的值略小于0.0002，而“volume”（销量）的值近似为1。特征“sex=male”在这个样本中的作用几乎可以忽略不计，这是相当不合理的。因此，将源数值型特征的值归一化到[0,1]是非常必要的。</p>
-<p>第三，省略零值特征。从FFM模型的表达式(3-1)可以看出，零值特征对模型完全没有贡献。包含零值特征的一次项和组合项均为零，对于训练模型参数或者目标值预估是没有作用的。因此，可以省去零值特征，提高FFM模型训练和预测的速度，这也是稀疏样本采用FFM的显著优势。</p>
-</blockquote>
-<p>在DSP的场景中，FFM主要用来预估站内的CTR和CVR，即一个用户对一个商品的潜在点击率和点击后的转化率。</p>
-<p>CTR和CVR预估模型都是在线下训练，然后用于线上预测。两个模型采用的特征大同小异，主要有三类：用户相关的特征、商品相关的特征、以及用户-商品匹配特征。用户相关的特征包括年龄、性别、职业、兴趣、品类偏好、浏览/购买品类等基本信息，以及用户近期点击量、购买量、消费额等统计信息。商品相关的特征包括所属品类、销量、价格、评分、历史CTR/CVR等信息。用户-商品匹配特征主要有浏览/购买品类匹配、浏览/购买商家匹配、兴趣偏好匹配等几个维度。</p>
-<p>为了使用FFM方法，所有的特征必须转换成“field_id:feat_id:value”格式，field_id代表特征所属field的编号，feat_id是特征编号，value是特征的值。数值型的特征比较容易处理，只需分配单独的field编号，如用户评论得分、商品的历史CTR/CVR等。categorical特征需要经过One-Hot编码成数值型，编码产生的所有特征同属于一个field，而特征的值只能是0或1，如用户的性别、年龄段，商品的品类id等。除此之外，还有第三类特征，如用户浏览/购买品类，有多个品类id且用一个数值衡量用户浏览或购买每个品类商品的数量。这类特征按照categorical特征处理，不同的只是特征的值不是0或1，而是代表用户浏览或购买数量的数值。按前述方法得到field_id之后，再对转换后特征顺序编号，得到feat_id，特征的值也可以按照之前的方法获得。</p>
-<p>CTR、CVR预估样本的类别是按不同方式获取的。CTR预估的正样本是站内点击的用户-商品记录，负样本是展现但未点击的记录；CVR预估的正样本是站内支付（发生转化）的用户-商品记录，负样本是点击但未支付的记录。构建出样本数据后，采用FFM训练预估模型，并测试模型的性能。</p>
-<table>
-<thead>
-<tr>
-<th align="left"></th>
-<th align="left">#(field)</th>
-<th align="left">#(feature)</th>
-<th align="left">AUC</th>
-<th align="left">Logloss</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">站内CTR</td>
-<td align="left">39</td>
-<td align="left">2456</td>
-<td align="left">0.77</td>
-<td align="left">0.38</td>
-</tr>
-<tr>
-<td align="left">站内CVR</td>
-<td align="left">67</td>
-<td align="left">2441</td>
-<td align="left">0.92</td>
-<td align="left">0.13</td>
-</tr>
-</tbody></table>
-<p>由于模型是按天训练的，每天的性能指标可能会有些波动，但变化幅度不是很大。这个表的结果说明，站内CTR/CVR预估模型是非常有效的。</p>
-<p>在训练FFM的过程中，有许多小细节值得特别关注。</p>
-<p>第一，样本归一化。FFM默认是进行样本数据的归一化，即 ( pa.norm ) 为真；若此参数设置为假，很容易造成数据inf溢出，进而引起梯度计算的nan错误。因此，样本层面的数据是推荐进行归一化的。</p>
-<p>第二，特征归一化。CTR/CVR模型采用了多种类型的源特征，包括数值型和categorical类型等。但是，categorical类编码后的特征取值只有0或1，较大的数值型特征会造成样本归一化后categorical类生成特征的值非常小，没有区分性。例如，一条用户-商品记录，用户为“男”性，商品的销量是5000个（假设其它特征的值为零），那么归一化后特征“sex=male”（性别为男）的值略小于0.0002，而“volume”（销量）的值近似为1。特征“sex=male”在这个样本中的作用几乎可以忽略不计，这是相当不合理的。因此，将源数值型特征的值归一化到 ( [0, 1] ) 是非常必要的。</p>
-<p>第三，省略零值特征。从FFM模型的表达式可以看出，零值特征对模型完全没有贡献。包含零值特征的一次项和组合项均为零，对于训练模型参数或者目标值预估是没有作用的。因此，可以省去零值特征，提高FFM模型训练和预测的速度，这也是稀疏样本采用FFM的显著优势。</p>
-<p>本文主要介绍了FFM的思路来源和理论原理，并结合源码说明FFM的实际应用和一些小细节。从理论上分析，FFM的参数因子化方式具有一些显著的优势，特别适合处理样本稀疏性问题，且确保了较好的性能；从应用结果来看，站内CTR/CVR预估采用FFM是非常合理的，各项指标都说明了FFM在点击率预估方面的卓越表现。</p>
+<p>对于这3个问题，下面依次来分析是如何解决的。</p>
+<h2 id="5-CPU和cache的内存映射"><a href="#5-CPU和cache的内存映射" class="headerlink" title="5. CPU和cache的内存映射"></a>5. CPU和cache的内存映射</h2><p>对于第一个问题，Cache中没有命中数据时，内存数据是如何分配到Cache中的。</p>
+<p>由于内存的容量比Cache容量要大，两者之间的容量不匹配，所以内存数据填充到Cache中，就需要设计一种规则来保证Cache的利用率最大，保证CPU访问Cache的命中率最高。</p>
+<p>内存到Cache的映射规则有3种方式：</p>
+<ul>
+<li>直接映射：每个内存块数据只映射到<strong>固定</strong>的缓存行中</li>
+<li>全相联映射：每个内存块数据可以映射到<strong>任意</strong>缓存行中</li>
+<li>组相联映射：每个内存块数据可以映射到<strong>固定组</strong>的<strong>任意</strong>缓存行中</li>
+</ul>
+<p>下面我们分别来看这3种映射方式。</p>
+<h3 id="直接映射"><a href="#直接映射" class="headerlink" title="直接映射"></a>直接映射</h3><p>访问内存数据会给出一个内存地址，首先把这个内存地址，按位划分为3个字段：标记、Cache行号、块内地址，如图：</p>
+<p><a href="https://kaito-blog-1253469779.cos.ap-beijing.myqcloud.com/1535007716.png?imageMogr2/thumbnail/!70p" target="_blank" rel="noopener"><img src="https://kaito-blog-1253469779.cos.ap-beijing.myqcloud.com/1535007716.png?imageMogr2/thumbnail/!70p" alt="img"></a></p>
+<p>然后根据第2个字段的二进制位进行<strong>取模</strong>运算，得到对应的Cache行号。</p>
+<p>找到对应的Cache号后，校验Cache的有效位，如果有效，再比较内存第1个字段的标记与Cache的标记是否一致，如果一致，直接获取Cache中的数据即可。</p>
+<p>如果有效位无效，或有效位有效但内存第1个字段的标记与Cache的标记不一致，那么根据内存地址去内存获取数据，然后把对应的Cache行有效位设置为有效，标记设置为与内存标记一致，并在Cache中记录内存的数据，以便下次获取。</p>
+<p>具体映射关系如图：</p>
+<p><img src="https://kaito-blog-1253469779.cos.ap-beijing.myqcloud.com/1535008731.png?imageMogr2/thumbnail/!70p" alt="img"></p>
+<p>可见Cache与内存的映射可能是一对多的，即不同内存块可能映射到同一Cache行。</p>
+<p><strong>这种映射方式比较简单粗暴，如果缓存不命中或内存和Cache标识不一致，就会替换Cache行中的数据。这就可能导致同一Cache行在短时间内被频繁替换，命中率不高。</strong></p>
+<h3 id="全相联映射"><a href="#全相联映射" class="headerlink" title="全相联映射"></a>全相联映射</h3><p>全相联映射与直接映射方式不同的是，它把内存分成2个字段：标记、块内地址，没有了Cache行号这个字段。</p>
+<p><a href="https://kaito-blog-1253469779.cos.ap-beijing.myqcloud.com/1535009099.png?imageMogr2/thumbnail/!70p" target="_blank" rel="noopener"><img src="https://kaito-blog-1253469779.cos.ap-beijing.myqcloud.com/1535009099.png?imageMogr2/thumbnail/!70p" alt="img"></a></p>
+<p>在访问数据时，直接根据内存地址中的标记，去直接遍历对比每一个Cache行，直到找到一致的标记的Cache行，然后访问Cache中的数据即可。</p>
+<p>如果遍历完Cache行后，没有找到一致的标记，那么会从内存中获取数据，然后找到空闲的Cache行，直接写入标记和数据即可。</p>
+<p>也就是说，这种映射方式，就是哪里有空闲的Cache行，我就把内存块映射到这个Cache行中。在访问时，依次遍历Cache行，直到找到标记一直的Cache行，然后读取数据。</p>
+<p><strong>这种方式虽然在空间利用率上保证最大化，但其缺点在于要在Cache中寻找符合标识一致的行的时间要比直接映射的时间久，效率较低。</strong></p>
+<p>那有什么方式能集合上面2种方式，发挥各自的优势呢？这就是下面要说的组相联映射方式。</p>
+<h3 id="组相联映射方式"><a href="#组相联映射方式" class="headerlink" title="组相联映射方式"></a>组相联映射方式</h3><p>组相联映射方式把内存也分为3个字段：标记、Cache组号、块内地址</p>
+<p><a href="https://kaito-blog-1253469779.cos.ap-beijing.myqcloud.com/1535015356.png?imageMogr2/thumbnail/!70p" target="_blank" rel="noopener"><img src="https://kaito-blog-1253469779.cos.ap-beijing.myqcloud.com/1535015356.png?imageMogr2/thumbnail/!70p" alt="img"></a></p>
+<p>注意，与直接映射不同的是，第2个字段是<strong>组号</strong>而不是行号。这种方式把Cache行先进行分组，然后每个分组中包含多个Cache行，如图：</p>
+<p><a href="https://kaito-blog-1253469779.cos.ap-beijing.myqcloud.com/1535009827.png?imageMogr2/thumbnail/!70p" target="_blank" rel="noopener"><img src="https://kaito-blog-1253469779.cos.ap-beijing.myqcloud.com/1535009827.png?imageMogr2/thumbnail/!70p" alt="img"></a></p>
+<p>在访问数据时，先根据内存地址中的Cache组号，定位到Cache的分组，然后在这个组内，依次遍历每个行，寻找标记一致的Cache行，如果标记一致则获取数据，不一致则从内存中获取数据后写入当前组内空闲的任意一个Cache行中。</p>
+<p><strong>这种方式兼顾了访问速度和空间利用率，使用前2种方式结合的方案，保证缓存命中率最大化。在现实中实际上采用的这种映射方式。</strong></p>
+<h2 id="6-cache替换算法"><a href="#6-cache替换算法" class="headerlink" title="6. cache替换算法"></a>6. cache替换算法</h2><p>对于上面提的第2个问题，如果Cache满了，如何进行替换？</p>
+<p>Cache容量比内存小，所以内存数据映射到Cache时，必然会导致Cache满的情况，那之后的内存映射要替Cache中的哪些行呢？这就需要制定一种策略。</p>
+<p>常见的替换算法有如下几种：</p>
+<ul>
+<li>先进先出算法（FIFO)：总是把最早装入Cache的行替换掉，这种算法实现简单，但不能正确反映程序的访问局部性，命中率不高</li>
+<li>最近最少使用算法（LRU)：总是选择最近最少使用的Cache行替换，这种这种算法稍微复杂一些，但可以正确反映程序访问的局部性，命中率最高</li>
+<li>最不经常使用算法（LFU）：总是替换掉Cache中引用次数最少的行，与LRU类似，但没有LRU替换方式更精准</li>
+<li>随机替换算法（Random）：随机替换掉Cache中的行，与使用情况无关，命中率不高</li>
+</ul>
+<p>现实使用最多的是最近最少使用算法（LRU)进行Cache行的替换方案，这种方案使得缓存的命中率最高。</p>
+<h2 id="7-cache的一致性问题"><a href="#7-cache的一致性问题" class="headerlink" title="7. cache的一致性问题"></a>7. cache的一致性问题</h2><p>上面提的第3个问题，对于写入的数据，如何保证Cache和内存数据的一致性？</p>
+<p>试想，如果CPU想要修改某个内存的数据，这块内存的数据刚好在Cache中存在，那么是不是要同时更新Cache中的数据？</p>
+<p>这个写入数据的过程，通常采用2种方式：</p>
+<ul>
+<li>全写法（通写法/直写法/写直达法）</li>
+<li>回写法（写回法）</li>
+</ul>
+<h3 id="全写法"><a href="#全写法" class="headerlink" title="全写法"></a>全写法</h3><p>在写操作时，如果Cache命中，则同时写Cache和内存。</p>
+<p>如果Cache中不命中，则分为以下2种情况：</p>
+<ul>
+<li>写分配法：先更新内存数据，然后再写入空闲的Cache行中，保证Cache有数据，提高了缓存命中率，但增加了写入Cache的开销</li>
+<li>非写分配法：只更新内存数据，不写入Cache，只有等访问不命中时，再进行缓存写入</li>
+</ul>
+<p>另外，这种方式为了减少内存的写入开销，一般会在Cache和内存之间加一个写缓冲队列，在CPU写入Cache的同时，也会写入缓冲队列，然后由存储控制器将缓冲队列写入内存。</p>
+<p>如果在写操作不频繁的情况下，效果很好。但如果写操作频繁，则会导致写缓冲队列饱和而发生阻塞。</p>
+<h3 id="回写法"><a href="#回写法" class="headerlink" title="回写法"></a>回写法</h3><p>这种方式在写操作时，如果Cache命中，则只更新Cache而不更新内存。</p>
+<p>如果Cache不命中，则从内存中读取内容，写入Cache并更新为最新内容。</p>
+<p>这种方式不会主动更新内存，只有在Cache被再次修改时，才将内容一次性写入内存。这样做的好处是减少了写内存的次数，大大降低内存带宽需求。但有可能在某个时间点，Cache和内存中的数据会出现不一致的情况。</p>
+<h2 id="8-影响Cache的性能因素"><a href="#8-影响Cache的性能因素" class="headerlink" title="8. 影响Cache的性能因素"></a>8. 影响Cache的性能因素</h2><p>既然Cache在CPU访问数据时提升的效率这么高，那决定Cache性能的因素有哪些？</p>
+<p>决定访问性能的重要因素之一就是Cache的命中率，它与许多因素有关，具体涉及如下：</p>
+<ul>
+<li>Cache容量：容量越大，缓存数据越多，命中率越高</li>
+<li>内存块大小：大的内存交换单位能更好地利用空间局部性，但过大也会导致命中率降低，必须适中</li>
+</ul>
+<p>除此之外，如何设计Cache也会影响到它的性能：</p>
+<ul>
+<li>多级Cache：现在的CPU会采用3级Cache，最大程度的提升命中率</li>
+<li>内存、总线、Cache连接结构：设计一个效率高的传输通道，能够提升Cache的访问速度</li>
+<li>内存结构与Cache配合：在访问不命中时，会去访问内存，设计效率高的传输通道与Cache配合也可以提升Cache的性能</li>
+</ul>
+<h2 id="9-HDD和SSD的区别"><a href="#9-HDD和SSD的区别" class="headerlink" title="9. HDD和SSD的区别"></a>9. HDD和SSD的区别</h2><p>主要是顺序读取和随机读取。</p>
+<h3 id="吞吐量"><a href="#吞吐量" class="headerlink" title="吞吐量"></a>吞吐量</h3><p>顺序读取看吞吐量：指单位时间内可以成功传输的数据数量。顺序读写频繁的应用，如视频点播，关注连续读写性能、数据吞吐量是关键衡量指标。它主要取决于磁盘阵列的架构，通道的大小以及磁盘的个数。不同的磁盘阵列存在不同的架构，但他们都有自己的内部带宽，一般情况下，内部带宽都设计足够充足，不会存在瓶颈。磁盘阵列与服务器之间的数据通道对吞吐量影响很大，比如一个2Gbps的光纤通道，其所能支撑的最大流量仅为250MB/s。最后，当前面的瓶颈都不再存在时，硬盘越多的情况下吞吐量越大。</p>
+<h3 id="IOPS"><a href="#IOPS" class="headerlink" title="IOPS"></a>IOPS</h3><p>随机读取看IOPS：IOPS（Input/Output Per Second）即每秒的输入输出量（或读写次数），即指每秒内系统能处理的I/O请求数量。随机读写频繁的应用，如小文件存储等，关注随机读写性能，IOPS是关键衡量指标。可以推算出磁盘的IOPS = 1000ms / (Tseek + Trotation + Transfer)，如果忽略数据传输时间，理论上可以计算出随机读写最大的IOPS。常见磁盘的随机读写最大IOPS为： - 7200rpm的磁盘 IOPS = 76 IOPS - 10000rpm的磁盘IOPS = 111 IOPS - 15000rpm的磁盘IOPS = 166 IOPS</p>
+<h3 id="HDD"><a href="#HDD" class="headerlink" title="HDD"></a>HDD</h3><p>HDD中，顺序读取：预读机制，很快，</p>
+<p>​                随机读取：因为要寻道时间+旋转时间+传输时间</p>
+<p>​                                寻道时间一般：3-15ms</p>
+<p>​                                旋转时间与转速有关：7200rpm一般4ms，15000rpm一般2ms</p>
+<p>机械硬盘的连续读写性能很好，但随机读写性能很差，这主要是因为磁头移动到正确的磁道上需要时间，随机读写时，磁头需要不停的移动，时间都浪费在了磁头寻址上，所以性能不高。</p>
+<h3 id="SSD"><a href="#SSD" class="headerlink" title="SSD"></a>SSD</h3><p>SSD中，顺序读取：</p>
+<p>​                随机读取：在SSD中，一般会维护一个mapping table，维护逻辑地址到物理地址的映射。每次读写时，可以通过逻辑地址直接查表计算出物理地址，与传统的机械磁盘相比，省去了寻道时间和旋转时间。</p>
+<h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><p>所以SSD与HDD的主要区别：</p>
+<p>从NAND Flash的原理可以看出，其和HDD的主要区别为</p>
+<ul>
+<li>定位数据快：HDD需要经过寻道和旋转，才能定位到要读写的数据块，而SSD通过mapping table直接计算即可</li>
+<li>读取速度块：HDD的速度取决于旋转速度，而SSD只需要加电压读取数据，一般而言，要快于HDD</li>
+</ul>
+<p>因此，在顺序读测试中，由于定位数据只需要一次，定位之后，则是大批量的读取数据的过程，此时，HDD和SSD的性能差距主要体现在读取速度上，HDD能到200M左右，而普通SSD是其两倍。</p>
+<p>在随机读测试中，由于每次读都要先定位数据，然后再读取，HDD的定位数据的耗费时间很多，一般是几毫秒到十几毫秒，远远高于SSD的定位数据时间(一般0.1ms左右)，因此，随机读写测试主要体现在两者定位数据的速度上，此时，SSD的性能是要远远好于HDD的。</p>
+<h2 id="10-总结"><a href="#10-总结" class="headerlink" title="10. 总结"></a>10. 总结</h2><p>本篇文章主要介绍了高速缓存Cache的重点知识，总结如下：</p>
+<ul>
+<li>程序运行有访问局部性的规律：时间局部性、空间局部性</li>
+<li>内存与Cache的映射方式有3种：直接映射、全相联映射、组相联映射，其中组相联映射方式命中率最高</li>
+<li>Cache的替换算法有4种：先进先出（FIFO）、最近最少使用（LRU）、最不经常使用（LFU）、随机（Random），其中最近最少使用算法的命中率最高</li>
+<li>保证内存与Cache的一致性方案有2种：全写法、回写法</li>
+<li>影响Cache的性能因素有：容量、内存块大小、Cache组合、内存结构与传输通道设计等</li>
+<li>HDD和SSD在顺序读取，随机读取的不同</li>
+</ul>
 
       
     </div>
@@ -608,7 +583,7 @@ $\begin{align}  w_{a,f_b} &\leftarrow w_{a,f_b} – \frac{\eta}{\sqrt{G_{a,f_b}+
       
         <div class="post-tags">
           
-            <a href="/tags/论文/" rel="tag"># 论文</a>
+            <a href="/tags/阅读/" rel="tag"># 阅读</a>
           
         </div>
       
@@ -621,8 +596,8 @@ $\begin{align}  w_{a,f_b} &\leftarrow w_{a,f_b} – \frac{\eta}{\sqrt{G_{a,f_b}+
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/02/1. 推荐系统中的评价标准，准确度，AUC，召回率等/" rel="next" title="面试常问问题复习(二)">
-                <i class="fa fa-chevron-left"></i> 面试常问问题复习(二)
+              <a href="/2019/07/21/leetcode141-160/" rel="next" title="leetcode141-160">
+                <i class="fa fa-chevron-left"></i> leetcode141-160
               </a>
             
           </div>
@@ -630,10 +605,6 @@ $\begin{align}  w_{a,f_b} &\leftarrow w_{a,f_b} – \frac{\eta}{\sqrt{G_{a,f_b}+
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/07/02/问题：/" rel="prev" title="面试常问问题复习(一)">
-                面试常问问题复习(一) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -774,7 +745,7 @@ $\begin{align}  w_{a,f_b} &\leftarrow w_{a,f_b} – \frac{\eta}{\sqrt{G_{a,f_b}+
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-背景"><span class="nav-number">1.</span> <span class="nav-text">1. 背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-FFM原理推导"><span class="nav-number">2.</span> <span class="nav-text">2. FFM原理推导</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-FFM模型学习"><span class="nav-number">3.</span> <span class="nav-text">3. FFM模型学习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-FFM-数学公式"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 FFM 数学公式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-FFM-模型学习"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 FFM 模型学习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-实现的trick"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 实现的trick</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-适用范围和使用技巧"><span class="nav-number">4.</span> <span class="nav-text">4. 适用范围和使用技巧</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-存储器层次化结构"><span class="nav-number">1.</span> <span class="nav-text">1. 存储器层次化结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-cache介绍"><span class="nav-number">2.</span> <span class="nav-text">2. cache介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是cache"><span class="nav-number">2.1.</span> <span class="nav-text">什么是cache</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#各级cache读取延迟"><span class="nav-number">2.2.</span> <span class="nav-text">各级cache读取延迟</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么cache不会越做越大"><span class="nav-number">2.3.</span> <span class="nav-text">为什么cache不会越做越大</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-程序访问的局部性"><span class="nav-number">3.</span> <span class="nav-text">3. 程序访问的局部性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-高速缓存cache原理"><span class="nav-number">4.</span> <span class="nav-text">4. 高速缓存cache原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-CPU和cache的内存映射"><span class="nav-number">5.</span> <span class="nav-text">5. CPU和cache的内存映射</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#直接映射"><span class="nav-number">5.1.</span> <span class="nav-text">直接映射</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#全相联映射"><span class="nav-number">5.2.</span> <span class="nav-text">全相联映射</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组相联映射方式"><span class="nav-number">5.3.</span> <span class="nav-text">组相联映射方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-cache替换算法"><span class="nav-number">6.</span> <span class="nav-text">6. cache替换算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-cache的一致性问题"><span class="nav-number">7.</span> <span class="nav-text">7. cache的一致性问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#全写法"><span class="nav-number">7.1.</span> <span class="nav-text">全写法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回写法"><span class="nav-number">7.2.</span> <span class="nav-text">回写法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-影响Cache的性能因素"><span class="nav-number">8.</span> <span class="nav-text">8. 影响Cache的性能因素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-HDD和SSD的区别"><span class="nav-number">9.</span> <span class="nav-text">9. HDD和SSD的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#吞吐量"><span class="nav-number">9.1.</span> <span class="nav-text">吞吐量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IOPS"><span class="nav-number">9.2.</span> <span class="nav-text">IOPS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HDD"><span class="nav-number">9.3.</span> <span class="nav-text">HDD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SSD"><span class="nav-number">9.4.</span> <span class="nav-text">SSD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#区别"><span class="nav-number">9.5.</span> <span class="nav-text">区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-总结"><span class="nav-number">10.</span> <span class="nav-text">10. 总结</span></a></li></ol></div>
             
 
           </div>
