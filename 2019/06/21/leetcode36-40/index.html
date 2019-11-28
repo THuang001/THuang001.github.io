@@ -98,7 +98,7 @@
 <meta property="og:image" content="https://pic.leetcode-cn.com/48973835efb916f1d216c2b1dbf460fb19f9757825573962b7eba8a967d11a99-Snipaste_2019-05-08_15-33-58.png">
 <meta property="og:image" content="http://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Sudoku-by-L2G-20050714.svg/250px-Sudoku-by-L2G-20050714.svg.png">
 <meta property="og:image" content="http://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Sudoku-by-L2G-20050714_solution.svg/250px-Sudoku-by-L2G-20050714_solution.svg.png">
-<meta property="og:updated_time" content="2019-06-22T07:32:18.523Z">
+<meta property="og:updated_time" content="2019-07-27T13:44:08.929Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="leetcode36-40">
 <meta name="twitter:description" content="1. 有效的数独(Medium)判断一个 9x9 的数独是否有效。只需要根据以下规则，验证已经填入的数字是否有效即可。  数字 1-9 在每一行只能出现一次。 数字 1-9 在每一列只能出现一次。 数字 1-9 在每一个以粗实线分隔的 3x3 宫内只能出现一次。   上图是一个部分填充的有效的数独。 数独部分空格内已填入了数字，空白格用 &amp;#39;.&amp;#39; 表示。 示例 1: 12345678">
@@ -532,8 +532,14 @@
 <p><strong>思路：递归解法</strong></p>
 <p>此问题可以拆分成子问题求解。</p>
 <p>每一个子问题，可以分成两步：</p>
-<pre><code>1. 跳过当前数字
- 2. 取当前数字并继续保留当前数字为candidates</code></pre><p>失败条件是tmp_sum&gt;target或者i==n</p>
+<ol>
+<li><p>跳过当前数字</p>
+<ol start="2">
+<li>取当前数字并继续保留当前数字为candidates</li>
+</ol>
+</li>
+</ol>
+<p>失败条件是tmp_sum&gt;target或者i==n</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">combinationSum</span><span class="params">(self, candidates, target)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type candidates: List[int]</span></span><br><span class="line"><span class="string">        :type target: int</span></span><br><span class="line"><span class="string">        :rtype: List[List[int]]</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        candidates.sort()</span><br><span class="line">        n = len(candidates)</span><br><span class="line">        res = []</span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">helper</span><span class="params">(i,tmp_sum,tmp)</span>:</span></span><br><span class="line">            <span class="keyword">if</span> tmp_sum &gt; target <span class="keyword">or</span> i == n:</span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line">            <span class="keyword">if</span> tmp_sum == target:</span><br><span class="line">                res.append(tmp)</span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line">            helper(i,tmp_sum+candidates[i],tmp+[candidates[i]])</span><br><span class="line">            helper(i+<span class="number">1</span>,tmp_sum,tmp)</span><br><span class="line">        helper(<span class="number">0</span>,<span class="number">0</span>,[])</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
 
 <p><strong>思路二：回溯算法</strong></p>
@@ -689,7 +695,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-count">39</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -700,7 +706,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -711,7 +717,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
