@@ -1,37 +1,545 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
-{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
 
-{% block page_class %}page-post-detail{% endblock %}
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"8.0.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"بحث...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
+  </script>
+
+  <meta name="description" content="1. 缺失的第一个正数(Hard)给定一个未排序的整数数组，找出其中没有出现的最小的正整数。 示例 1: 12输入: [1,2,0]输出: 3  示例 2: 12输入: [3,4,-1,1]输出: 2  示例 3: 12输入: [7,8,9,11,12]输出: 1  说明: 你的算法的时间复杂度应为O(n)，并且只能使用常数级别的空间。 解答： 思路： 官方题解：还是哈希表，不过，key是nums">
+<meta property="og:type" content="article">
+<meta property="og:title" content="leetcode41-45(附415)">
+<meta property="og:url" content="http://yoursite.com/2019/06/22/leetcode41-45/index.html">
+<meta property="og:site_name" content="晨曦微光">
+<meta property="og:description" content="1. 缺失的第一个正数(Hard)给定一个未排序的整数数组，找出其中没有出现的最小的正整数。 示例 1: 12输入: [1,2,0]输出: 3  示例 2: 12输入: [3,4,-1,1]输出: 2  示例 3: 12输入: [7,8,9,11,12]输出: 1  说明: 你的算法的时间复杂度应为O(n)，并且只能使用常数级别的空间。 解答： 思路： 官方题解：还是哈希表，不过，key是nums">
+<meta property="og:locale">
+<meta property="og:image" content="http://yoursite.com/images/rainwatertrap.png">
+<meta property="article:published_time" content="2019-06-22T07:33:20.000Z">
+<meta property="article:modified_time" content="2019-07-20T15:25:46.000Z">
+<meta property="article:author" content="Aurora">
+<meta property="article:tag" content="leetcode">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/images/rainwatertrap.png">
 
 
-{% block content %}
+<link rel="canonical" href="http://yoursite.com/2019/06/22/leetcode41-45/">
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
 
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>leetcode41-45(附415) | 晨曦微光</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="تشغيل شريط التصفح">
     </div>
   </div>
 
-{% endblock %}
+  <div class="site-meta">
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">晨曦微光</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          المحتويات
+        </li>
+        <li class="sidebar-nav-overview">
+          عام
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E7%BC%BA%E5%A4%B1%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E6%AD%A3%E6%95%B0-Hard"><span class="nav-number">1.</span> <span class="nav-text">1. 缺失的第一个正数(Hard)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%8E%A5%E9%9B%A8%E6%B0%B4-Hard"><span class="nav-number">2.</span> <span class="nav-text">2. 接雨水(Hard)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9B%B8%E4%B9%98-Medium"><span class="nav-number">3.</span> <span class="nav-text">3. 字符串相乘(Medium)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9B%B8%E5%8A%A0-Easy-415"><span class="nav-number">4.</span> <span class="nav-text">4. 字符串相加(Easy)(415)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E9%80%9A%E9%85%8D%E7%AC%A6%E5%8C%B9%E9%85%8D-Hard"><span class="nav-number">5.</span> <span class="nav-text">5. 通配符匹配(Hard)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E8%B7%B3%E8%B7%83%E6%B8%B8%E6%88%8F2-Hard"><span class="nav-number">6.</span> <span class="nav-text">6. 跳跃游戏2(Hard)</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Aurora</p>
+  <div class="site-description" itemprop="description">6.3</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">50</span>
+          <span class="site-state-item-name">المقالات</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">التصنيفات</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">الوسوم</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/22/leetcode41-45/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Aurora">
+      <meta itemprop="description" content="6.3">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="晨曦微光">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          leetcode41-45(附415)
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">نُشر في</span>
+
+      <time title="أُنشأ: 2019-06-22 15:33:20" itemprop="dateCreated datePublished" datetime="2019-06-22T15:33:20+08:00">2019-06-22</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">عُدل في</span>
+        <time title="عُدل: 2019-07-20 23:25:46" itemprop="dateModified" datetime="2019-07-20T23:25:46+08:00">2019-07-20</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">في</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="1-缺失的第一个正数-Hard"><a href="#1-缺失的第一个正数-Hard" class="headerlink" title="1. 缺失的第一个正数(Hard)"></a>1. 缺失的第一个正数(Hard)</h2><p>给定一个未排序的整数数组，找出其中没有出现的最小的正整数。</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [1,2,0]</span><br><span class="line">输出: 3</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [3,4,-1,1]</span><br><span class="line">输出: 2</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [7,8,9,11,12]</span><br><span class="line">输出: 1</span><br></pre></td></tr></table></figure>
+
+<p><strong>说明:</strong></p>
+<p>你的算法的时间复杂度应为O(<em>n</em>)，并且只能使用常数级别的空间。</p>
+<p><strong>解答：</strong></p>
+<p><strong>思路：</strong></p>
+<p>官方题解：还是哈希表，不过，key是nums的索引，value是正负号，如果nums[i]出现过，则为正号，否则为负号，nums[i]因为映射到索引，所以是按顺序来的。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">firstMissingPositive</span>(<span class="params">self, nums</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> <span class="number">1</span> <span class="keyword">not</span> <span class="keyword">in</span> nums:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(nums) == <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">2</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(nums)):</span><br><span class="line">            <span class="keyword">if</span> nums[i]&lt;= <span class="number">0</span> <span class="keyword">or</span> nums[i] &gt; <span class="built_in">len</span>(nums):</span><br><span class="line">                nums[i] = <span class="number">1</span></span><br><span class="line">            </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(nums)):</span><br><span class="line">            a = <span class="built_in">abs</span>(nums[i])</span><br><span class="line">            <span class="keyword">if</span> a == <span class="built_in">len</span>(nums):</span><br><span class="line">                nums[<span class="number">0</span>] = -<span class="built_in">abs</span>(nums[<span class="number">0</span>])</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                nums[a] = -<span class="built_in">abs</span>(nums[a])</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="built_in">len</span>(nums)):</span><br><span class="line">            <span class="keyword">if</span> nums[i]&gt;<span class="number">0</span>:</span><br><span class="line">                <span class="keyword">return</span> i</span><br><span class="line">        <span class="keyword">if</span> nums[<span class="number">0</span>] &gt; <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">len</span>(nums)</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">len</span>(nums)+<span class="number">1</span>   </span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-接雨水-Hard"><a href="#2-接雨水-Hard" class="headerlink" title="2. 接雨水(Hard)"></a>2. 接雨水(Hard)</h2><p>给定 <em>n</em> 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。</p>
+<p><img src="/images/rainwatertrap.png"></p>
+<p>上面是由数组 [0,1,0,2,1,0,1,3,2,1,2,1] 表示的高度图，在这种情况下，可以接 6 个单位的雨水（蓝色部分表示雨水）。</p>
+<p><strong>示例:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [0,1,0,2,1,0,1,3,2,1,2,1]</span><br><span class="line">输出: 6</span><br></pre></td></tr></table></figure>
+
+<p><strong>解答：</strong></p>
+<p><strong>思路：</strong></p>
+<p>题目有几个特性可用，bar width = 1,然后第一个和最后一个是不能trap water，其次中间的部分能trap多少水是看<code>左右高度差较低的那个 - 本身的高度</code></p>
+<p>设置双指针l和r，然后获取左右最低的那个高度min_h，因为短板效应，所以水的高度不可能大于min_h，所以我们继续移动双指针，如果接下来移动的位置的高度小于min_h，则可以装水，直到遇到高度高于min_h，更新l和r继续这个过程。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">trap</span>(<span class="params">self, height</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type height: List[int]</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        l,r = <span class="number">0</span>,<span class="built_in">len</span>(height)-<span class="number">1</span></span><br><span class="line">        water = <span class="number">0</span></span><br><span class="line">        min_height = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> l &lt; r:</span><br><span class="line">            min_height = <span class="built_in">min</span>(height[l],height[r])</span><br><span class="line">            <span class="keyword">while</span> l &lt; r <span class="keyword">and</span> height[l] &lt;= min_height:</span><br><span class="line">                water += min_height - height[l]</span><br><span class="line">                l += <span class="number">1</span></span><br><span class="line">            <span class="keyword">while</span> l &lt; r <span class="keyword">and</span> height[r] &lt;= min_height:</span><br><span class="line">                water += min_height - height[r]</span><br><span class="line">                r -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> water </span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-字符串相乘-Medium"><a href="#3-字符串相乘-Medium" class="headerlink" title="3. 字符串相乘(Medium)"></a>3. 字符串相乘(Medium)</h2><p>给定两个以字符串形式表示的非负整数 <code>num1</code> 和 <code>num2</code>，返回 <code>num1</code> 和 <code>num2</code> 的乘积，它们的乘积也表示为字符串形式。</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: num1 = &quot;2&quot;, num2 = &quot;3&quot;</span><br><span class="line">输出: &quot;6&quot;</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: num1 = &quot;123&quot;, num2 = &quot;456&quot;</span><br><span class="line">输出: &quot;56088&quot;</span><br></pre></td></tr></table></figure>
+
+<p><strong>说明：</strong></p>
+<ol>
+<li><code>num1</code> 和 <code>num2</code> 的长度小于110。</li>
+<li><code>num1</code> 和 <code>num2</code> 只包含数字 <code>0-9</code>。</li>
+<li><code>num1</code> 和 <code>num2</code> 均不以零开头，除非是数字 0 本身。</li>
+<li><strong>不能使用任何标准库的大数类型（比如 BigInteger）</strong>或<strong>直接将输入转换为整数来处理</strong>。</li>
+</ol>
+<p><strong>解答：</strong></p>
+<p><strong>思路：</strong></p>
+<p>完全模拟乘法过程。</p>
+<ol>
+<li>m位的数字乘以n位的数字的结果最大为m+n位：<ul>
+<li>999<em>99 &lt; 1000</em>100 = 100000，最多为3+2 = 5位数。</li>
+</ul>
+</li>
+<li>先将字符串逆序便于从最低位开始计算。</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">multiply</span>(<span class="params">self, num1, num2</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type num1: str</span></span><br><span class="line"><span class="string">        :type num2: str</span></span><br><span class="line"><span class="string">        :rtype: str</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        lookup = &#123;<span class="string">&#x27;0&#x27;</span>:<span class="number">0</span>,<span class="string">&#x27;1&#x27;</span>:<span class="number">1</span>,<span class="string">&#x27;2&#x27;</span>:<span class="number">2</span>,<span class="string">&#x27;3&#x27;</span>:<span class="number">3</span>,<span class="string">&#x27;4&#x27;</span>:<span class="number">4</span>,<span class="string">&#x27;5&#x27;</span>:<span class="number">5</span>,<span class="string">&#x27;6&#x27;</span>:<span class="number">6</span>,<span class="string">&#x27;7&#x27;</span>:<span class="number">7</span>,<span class="string">&#x27;8&#x27;</span>:<span class="number">8</span>,<span class="string">&#x27;9&#x27;</span>:<span class="number">9</span>&#125;</span><br><span class="line">        <span class="keyword">if</span> num1 == <span class="string">&#x27;0&#x27;</span> <span class="keyword">or</span> num2 == <span class="string">&#x27;0&#x27;</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&#x27;0&#x27;</span></span><br><span class="line">        num1,num2 = num1[::-<span class="number">1</span>],num2[::-<span class="number">1</span>]</span><br><span class="line">        </span><br><span class="line">        tmp_res = [<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(num1)+<span class="built_in">len</span>(num2))]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(num1)):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(num2)):</span><br><span class="line">                tmp_res[i+j] += lookup[num1[i]] * lookup[num2[j]]</span><br><span class="line">        res = [<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(num1)+<span class="built_in">len</span>(num2))]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(tmp_res)):</span><br><span class="line">            res[i] = tmp_res[i]%<span class="number">10</span></span><br><span class="line">            <span class="keyword">if</span> i &lt; <span class="built_in">len</span>(num1)+<span class="built_in">len</span>(num2)-<span class="number">1</span>:</span><br><span class="line">                tmp_res[i+<span class="number">1</span>] += tmp_res[i]/<span class="number">10</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;&#x27;</span>.join(<span class="built_in">str</span>(i) <span class="keyword">for</span> i <span class="keyword">in</span> res[::-<span class="number">1</span>]).lstrip(<span class="string">&#x27;0&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-字符串相加-Easy-415"><a href="#4-字符串相加-Easy-415" class="headerlink" title="4. 字符串相加(Easy)(415)"></a>4. 字符串相加(Easy)(415)</h2><p>给定两个字符串形式的非负整数 <code>num1</code> 和<code>num2</code> ，计算它们的和。</p>
+<p><strong>注意：</strong></p>
+<ol>
+<li><code>num1</code> 和<code>num2</code> 的长度都小于 5100.</li>
+<li><code>num1</code> 和<code>num2</code> 都只包含数字 <code>0-9</code>.</li>
+<li><code>num1</code> 和<code>num2</code> 都不包含任何前导零。</li>
+<li><strong>你不能使用任何內建 BigInteger 库， 也不能直接将输入的字符串转换为整数形式。</strong></li>
+</ol>
+<p>解答：</p>
+<p>思路：</p>
+<p>和上述同样的题目</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">addStrings</span>(<span class="params">self, num1, num2</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type num1: str</span></span><br><span class="line"><span class="string">        :type num2: str</span></span><br><span class="line"><span class="string">        :rtype: str</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        num1,num2 = num1[::-<span class="number">1</span>],num2[::-<span class="number">1</span>]</span><br><span class="line">        l1 = <span class="built_in">len</span>(num1)</span><br><span class="line">        l2 = <span class="built_in">len</span>(num2)</span><br><span class="line">        <span class="keyword">if</span> l1 &lt; l2:</span><br><span class="line">            num1,num2 = num2,num1</span><br><span class="line">            l1,l2 = l2,l1</span><br><span class="line">        tmp = <span class="number">0</span></span><br><span class="line">        res = []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(l1):</span><br><span class="line">            tmp += <span class="built_in">int</span>(num1[i])</span><br><span class="line">            <span class="keyword">if</span> i &lt; l2:</span><br><span class="line">                tmp += <span class="built_in">int</span>(num2[i])</span><br><span class="line">            res.append(tmp%<span class="number">10</span>)</span><br><span class="line">            tmp = tmp/<span class="number">10</span></span><br><span class="line">        <span class="keyword">if</span> tmp:</span><br><span class="line">            res.append(tmp)</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;&#x27;</span>.join(<span class="built_in">str</span>(c) <span class="keyword">for</span> c <span class="keyword">in</span> res[::-<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="5-通配符匹配-Hard"><a href="#5-通配符匹配-Hard" class="headerlink" title="5. 通配符匹配(Hard)"></a>5. 通配符匹配(Hard)</h2><p>给定一个字符串 (<code>s</code>) 和一个字符模式 (<code>p</code>) ，实现一个支持 <code>&#39;?&#39;</code> 和 <code>&#39;*&#39;</code> 的通配符匹配。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x27;?&#x27; 可以匹配任何单个字符。</span><br><span class="line">&#x27;*&#x27; 可以匹配任意字符串（包括空字符串）。</span><br></pre></td></tr></table></figure>
+
+<p>两个字符串<strong>完全匹配</strong>才算匹配成功。</p>
+<p><strong>说明:</strong></p>
+<ul>
+<li><code>s</code> 可能为空，且只包含从 <code>a-z</code> 的小写字母。</li>
+<li><code>p</code> 可能为空，且只包含从 <code>a-z</code> 的小写字母，以及字符 <code>?</code> 和 <code>*</code>。</li>
+</ul>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入:</span><br><span class="line">s = &quot;aa&quot;</span><br><span class="line">p = &quot;a&quot;</span><br><span class="line">输出: false</span><br><span class="line">解释: &quot;a&quot; 无法匹配 &quot;aa&quot; 整个字符串。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入:</span><br><span class="line">s = &quot;aa&quot;</span><br><span class="line">p = &quot;*&quot;</span><br><span class="line">输出: true</span><br><span class="line">解释: &#x27;*&#x27; 可以匹配任意字符串。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入:</span><br><span class="line">s = &quot;cb&quot;</span><br><span class="line">p = &quot;?a&quot;</span><br><span class="line">输出: false</span><br><span class="line">解释: &#x27;?&#x27; 可以匹配 &#x27;c&#x27;, 但第二个 &#x27;a&#x27; 无法匹配 &#x27;b&#x27;。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 4:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入:</span><br><span class="line">s = &quot;adceb&quot;</span><br><span class="line">p = &quot;*a*b&quot;</span><br><span class="line">输出: true</span><br><span class="line">解释: 第一个 &#x27;*&#x27; 可以匹配空字符串, 第二个 &#x27;*&#x27; 可以匹配字符串 &quot;dce&quot;.</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 5:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入:</span><br><span class="line">s = &quot;acdcb&quot;</span><br><span class="line">p = &quot;a*c?b&quot;</span><br><span class="line">输入: false</span><br></pre></td></tr></table></figure>
+
+<p><strong>解答：</strong></p>
+<p><strong>思路：</strong></p>
+<p><strong>很显然，第一种思想，动态规划，</strong></p>
+<p>dp[i][j]表示s[:i]和p[:j]是否匹配。</p>
+<p>首先dp[0][0] = True</p>
+<p>其次，dp[0][j] = dp[0][j-1] if p[j] == ‘*’</p>
+<p>其次，dp[j][0] = False</p>
+<p>动态方程：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> s[i] == p[j] <span class="keyword">or</span> p[j] == <span class="string">&#x27;?&#x27;</span> <span class="keyword">and</span> dp[i-<span class="number">1</span>][j-<span class="number">1</span>]:</span><br><span class="line">		dp[i][j] = <span class="literal">True</span></span><br><span class="line"><span class="keyword">if</span> p[j] == <span class="string">&#x27;*&#x27;</span>:</span><br><span class="line">  	dp[i][j] = dp[i-<span class="number">1</span>][j] <span class="keyword">or</span> dp[i][j-<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+
+<p>下面是代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">isMatch</span>(<span class="params">self, s, p</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :type p: str</span></span><br><span class="line"><span class="string">        :rtype: bool</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        dp = [[<span class="literal">False</span>] * (<span class="built_in">len</span>(p)+<span class="number">1</span>) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(s)+<span class="number">1</span>)]</span><br><span class="line">        dp[<span class="number">0</span>][<span class="number">0</span>] = <span class="literal">True</span></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="built_in">len</span>(p)+<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">if</span> p[j-<span class="number">1</span>] == <span class="string">&#x27;*&#x27;</span>:</span><br><span class="line">                dp[<span class="number">0</span>][j] = dp[<span class="number">0</span>][j-<span class="number">1</span>]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="built_in">len</span>(s)+<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="built_in">len</span>(p)+<span class="number">1</span>):</span><br><span class="line">                <span class="keyword">if</span> p[j-<span class="number">1</span>] == <span class="string">&#x27;*&#x27;</span>:</span><br><span class="line">                    dp[i][j] = dp[i-<span class="number">1</span>][j] <span class="keyword">or</span> dp[i][j-<span class="number">1</span>]</span><br><span class="line">                <span class="keyword">elif</span> s[i-<span class="number">1</span>]==p[j-<span class="number">1</span>] <span class="keyword">or</span> p[j-<span class="number">1</span>] == <span class="string">&#x27;?&#x27;</span>:</span><br><span class="line">                    dp[i][j] = dp[i-<span class="number">1</span>][j-<span class="number">1</span>]</span><br><span class="line">        <span class="keyword">return</span> dp[-<span class="number">1</span>][-<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+
+<p><strong>思路二，双指针法</strong></p>
+<p>双指针法还是很难理解的。</p>
+<p>具体看代码吧</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">isMatch</span>(<span class="params">self, s, p</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :type p: str</span></span><br><span class="line"><span class="string">        :rtype: bool</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        point_s,point_p = <span class="number">0</span>,<span class="number">0</span></span><br><span class="line">        match = <span class="number">0</span></span><br><span class="line">        star = -<span class="number">1</span></span><br><span class="line">        <span class="keyword">while</span> point_s &lt; <span class="built_in">len</span>(s):</span><br><span class="line">            <span class="keyword">if</span> point_p &lt; <span class="built_in">len</span>(p) <span class="keyword">and</span> (s[point_s] == p[point_p] <span class="keyword">or</span> p[point_p] == <span class="string">&#x27;?&#x27;</span>):</span><br><span class="line">                point_s += <span class="number">1</span></span><br><span class="line">                point_p += <span class="number">1</span></span><br><span class="line">            <span class="keyword">elif</span> point_p &lt; <span class="built_in">len</span>(p) <span class="keyword">and</span> p[point_p] == <span class="string">&#x27;*&#x27;</span>:</span><br><span class="line">                star = point_p</span><br><span class="line">                match = point_s</span><br><span class="line">                point_p += <span class="number">1</span></span><br><span class="line">            <span class="keyword">elif</span> star != -<span class="number">1</span>:</span><br><span class="line">                point_p = star + <span class="number">1</span></span><br><span class="line">                match += <span class="number">1</span></span><br><span class="line">                point_s = match</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="keyword">while</span> point_p &lt; <span class="built_in">len</span>(p) <span class="keyword">and</span> p[point_p] == <span class="string">&#x27;*&#x27;</span>:</span><br><span class="line">            point_p += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> point_p == <span class="built_in">len</span>(p)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="6-跳跃游戏2-Hard"><a href="#6-跳跃游戏2-Hard" class="headerlink" title="6. 跳跃游戏2(Hard)"></a>6. 跳跃游戏2(Hard)</h2><p>给定一个非负整数数组，你最初位于数组的第一个位置。</p>
+<p>数组中的每个元素代表你在该位置可以跳跃的最大长度。</p>
+<p>你的目标是使用最少的跳跃次数到达数组的最后一个位置。</p>
+<p><strong>示例:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入: [2,3,1,1,4]</span><br><span class="line">输出: 2</span><br><span class="line">解释: 跳到最后一个位置的最小跳跃数是 2。</span><br><span class="line">     从下标为 0 跳到下标为 1 的位置，跳 1 步，然后跳 3 步到达数组的最后一个位置。</span><br></pre></td></tr></table></figure>
+
+<p><strong>说明:</strong></p>
+<p>假设你总是可以到达数组的最后一个位置。</p>
+<p><strong>解答：</strong></p>
+<p><strong>思路：</strong></p>
+<p><strong>贪心规律</strong></p>
+<pre><code>*  在到达**某点**前，若一直不跳跃，如果发现**从该点无法跳跃更远的地方**了，在这之前，肯定有一次必要的跳跃
+</code></pre>
+<ul>
+<li>在无法到达更远的地方时，在这之前应该跳到一个可以到达更远位置的位置</li>
+</ul>
+<p><strong>算法思路</strong></p>
+<ol>
+<li>设置cur 为当前可达的最远位置</li>
+<li>pre 为遍历各个位置过程中，各个位置能达到的最远位置</li>
+<li>res 为最少跳跃次数</li>
+<li>利用i遍历nums数组，如超过cur 则res加1, cur=pre</li>
+<li>遍历过程中，如果pre&lt; nums[i] + i 则更新pre</li>
+<li>i表示当前位置，num[i]表示当前可以跳多远</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">jump</span>(<span class="params">self, nums</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(nums)&lt;<span class="number">2</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        cur = nums[<span class="number">0</span>]</span><br><span class="line">        pre = nums[<span class="number">0</span>]</span><br><span class="line">        res = <span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(nums)):</span><br><span class="line">            <span class="keyword">if</span> cur &lt; i:</span><br><span class="line">                cur = pre</span><br><span class="line">                res += <span class="number">1</span></span><br><span class="line">            pre = <span class="built_in">max</span>(pre,i + nums[i])</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+
+<p>另一份AC代码可能更好理解：</p>
+<p>cur_far表示当前下一步可跳最远距离</p>
+<p>cur_end表示上一跳所跳的位置</p>
+<p>i表示当前所在的位置</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">jump</span>(<span class="params">self, nums</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        cur_end, cur_farthest, step = <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(nums)-<span class="number">1</span>):</span><br><span class="line">            cur_farthest = <span class="built_in">max</span>(cur_farthest, i+nums[i])</span><br><span class="line">            <span class="keyword">if</span> cur_farthest &gt;= <span class="built_in">len</span>(nums) - <span class="number">1</span>:</span><br><span class="line">                step += <span class="number">1</span></span><br><span class="line">                <span class="keyword">return</span> step</span><br><span class="line">            <span class="keyword">if</span> i == cur_end:</span><br><span class="line">                cur_end = cur_farthest</span><br><span class="line">                step += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> step</span><br></pre></td></tr></table></figure>
+
+<p><strong>Very elegant method, but it took me a long time to understand. Some comment for the above:</strong></p>
+<p><strong>e: longest distance in current minimum step</strong></p>
+<p><strong>sc: minimum steps for reaching e</strong></p>
+<p><strong>From i to e, even max is changed in a loop, it is reachable in one step.</strong></p>
+<p><strong>思路三：动态规划</strong></p>
+<p>超级容易理解。<br>dp[i]代表的是到达index为i的位置的最少步数, 依然超时。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">jump</span>(<span class="params">self, nums</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> nums <span class="keyword">or</span> <span class="built_in">len</span>(nums) == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        dp = [sys.maxsize] * <span class="built_in">len</span>(nums)</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="built_in">len</span>(nums)):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(i):</span><br><span class="line">                <span class="keyword">if</span> j + nums[j] &gt;= i:</span><br><span class="line">                    dp[i] = <span class="built_in">min</span>(dp[i], dp[j]+<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> dp[-<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/leetcode/" rel="tag"># leetcode</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/06/21/leetcode36-40/" rel="prev" title="leetcode36-40">
+                  <i class="fa fa-chevron-left"></i> leetcode36-40
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/06/22/leetcode46-50/" rel="next" title="leetcode46-50">
+                  leetcode46-50 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+  
+  
+  
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Aurora</span>
+</div>
+  <div class="powered-by">تطبيق الموقع <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

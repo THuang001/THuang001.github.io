@@ -1,37 +1,520 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
-{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
 
-{% block page_class %}page-post-detail{% endblock %}
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"8.0.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"بحث...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
+  </script>
+
+  <meta name="description" content="1. 合并两个有序链表(Easy)将两个有序链表合并为一个新的有序链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。  示例： 12输入：1-&gt;2-&gt;4, 1-&gt;3-&gt;4输出：1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4  解答： 思路：时间复杂度: $O(n)$，空间复杂度:$ O(1)$ 同样是dummy head 1234567891011">
+<meta property="og:type" content="article">
+<meta property="og:title" content="leetcode21-25">
+<meta property="og:url" content="http://yoursite.com/2019/06/20/leetcode21-30/index.html">
+<meta property="og:site_name" content="晨曦微光">
+<meta property="og:description" content="1. 合并两个有序链表(Easy)将两个有序链表合并为一个新的有序链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。  示例： 12输入：1-&gt;2-&gt;4, 1-&gt;3-&gt;4输出：1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4  解答： 思路：时间复杂度: $O(n)$，空间复杂度:$ O(1)$ 同样是dummy head 1234567891011">
+<meta property="og:locale">
+<meta property="article:published_time" content="2019-06-20T12:59:12.000Z">
+<meta property="article:modified_time" content="2019-06-22T14:33:58.000Z">
+<meta property="article:author" content="Aurora">
+<meta property="article:tag" content="leetcode">
+<meta name="twitter:card" content="summary">
 
 
-{% block content %}
+<link rel="canonical" href="http://yoursite.com/2019/06/20/leetcode21-30/">
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
 
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>leetcode21-25 | 晨曦微光</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="تشغيل شريط التصفح">
     </div>
   </div>
 
-{% endblock %}
+  <div class="site-meta">
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">晨曦微光</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          المحتويات
+        </li>
+        <li class="sidebar-nav-overview">
+          عام
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8-Easy"><span class="nav-number">1.</span> <span class="nav-text">1. 合并两个有序链表(Easy)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%8B%AC%E5%8F%B7%E7%94%9F%E6%88%90-Medium"><span class="nav-number">2.</span> <span class="nav-text">2. 括号生成(Medium)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90%EF%BC%9A"><span class="nav-number">2.1.</span> <span class="nav-text">复杂度分析：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%90%88%E5%B9%B6K%E4%B8%AA%E6%9C%89%E5%BA%8F%E5%88%97%E8%A1%A8-Hard"><span class="nav-number">3.</span> <span class="nav-text">3. 合并K个有序列表(Hard)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90"><span class="nav-number">3.1.</span> <span class="nav-text">复杂度分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9-Medium"><span class="nav-number">4.</span> <span class="nav-text">4. 两两交换链表中的节点(Medium)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-K%E4%B8%AA%E4%B8%80%E7%BB%84%E7%BF%BB%E8%BD%AC%E9%93%BE%E8%A1%A8-Hard"><span class="nav-number">5.</span> <span class="nav-text">5. K个一组翻转链表(Hard)</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Aurora</p>
+  <div class="site-description" itemprop="description">6.3</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">50</span>
+          <span class="site-state-item-name">المقالات</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">التصنيفات</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">الوسوم</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/20/leetcode21-30/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Aurora">
+      <meta itemprop="description" content="6.3">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="晨曦微光">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          leetcode21-25
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">نُشر في</span>
+
+      <time title="أُنشأ: 2019-06-20 20:59:12" itemprop="dateCreated datePublished" datetime="2019-06-20T20:59:12+08:00">2019-06-20</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">عُدل في</span>
+        <time title="عُدل: 2019-06-22 22:33:58" itemprop="dateModified" datetime="2019-06-22T22:33:58+08:00">2019-06-22</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">في</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="1-合并两个有序链表-Easy"><a href="#1-合并两个有序链表-Easy" class="headerlink" title="1. 合并两个有序链表(Easy)"></a>1. 合并两个有序链表(Easy)</h2><p>将两个有序链表合并为一个新的有序链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。 </p>
+<p><strong>示例：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：1-&gt;2-&gt;4, 1-&gt;3-&gt;4</span><br><span class="line">输出：1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4</span><br></pre></td></tr></table></figure>
+
+<p><strong>解答：</strong></p>
+<p><strong>思路：时间复杂度: $O(n)$，空间复杂度:$ O(1)</strong>$</p>
+<p>同样是<strong>dummy head</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode(object):</span></span><br><span class="line"><span class="comment">#     def __init__(self, x):</span></span><br><span class="line"><span class="comment">#         self.val = x</span></span><br><span class="line"><span class="comment">#         self.next = None</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">mergeTwoLists</span>(<span class="params">self, l1, l2</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type l1: ListNode</span></span><br><span class="line"><span class="string">        :type l2: ListNode</span></span><br><span class="line"><span class="string">        :rtype: ListNode</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> l1:</span><br><span class="line">            <span class="keyword">return</span> l2</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> l2:</span><br><span class="line">            <span class="keyword">return</span> l1</span><br><span class="line">        dummy = cur = ListNode(-<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">while</span> l1 <span class="keyword">and</span> l2:</span><br><span class="line">            <span class="keyword">if</span> l1.val&lt;l2.val:</span><br><span class="line">                cur.<span class="built_in">next</span> = l1</span><br><span class="line">                l1 = l1.<span class="built_in">next</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                cur.<span class="built_in">next</span> = l2</span><br><span class="line">                l2 = l2.<span class="built_in">next</span></span><br><span class="line">            cur = cur.<span class="built_in">next</span></span><br><span class="line">        cur.<span class="built_in">next</span> = l1 <span class="keyword">if</span> l1 <span class="keyword">else</span> l2</span><br><span class="line">        <span class="keyword">return</span> dummy.<span class="built_in">next</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-括号生成-Medium"><a href="#2-括号生成-Medium" class="headerlink" title="2. 括号生成(Medium)"></a>2. 括号生成(Medium)</h2><p>给出 n 代表生成括号的对数，请你写出一个函数，使其能够生成所有可能的并且有效的括号组合。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">例如，给出 n = 3，生成结果为：</span><br><span class="line">[</span><br><span class="line">  &quot;((()))&quot;,</span><br><span class="line">  &quot;(()())&quot;,</span><br><span class="line">  &quot;(())()&quot;,</span><br><span class="line">  &quot;()(())&quot;,</span><br><span class="line">  &quot;()()()&quot;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p><strong>解答：</strong></p>
+<p><strong>思路一：</strong></p>
+<p>官方解答：<strong>回溯法</strong></p>
+<p>只有在我们知道序列仍然保持有效时才添加 ‘(‘ or ‘)’，而不是每次添加。我们可以通过跟踪到目前为止放置的左括号和右括号的数目来做到这一点，</p>
+<p>如果我们还剩一个位置，我们可以开始放一个左括号。 如果它不超过左括号的数量，我们可以放一个右括号。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">generateParenthesis</span>(<span class="params">self, n</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type n: int</span></span><br><span class="line"><span class="string">        :rtype: List[str]</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        ans = []</span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">backtrack</span>(<span class="params">s=<span class="string">&#x27;&#x27;</span>,left = <span class="number">0</span>,right = <span class="number">0</span>,n = n</span>):</span></span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(s) == <span class="number">2</span> * n:</span><br><span class="line">                ans.append(s)</span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line">            <span class="keyword">if</span> left &lt; n:</span><br><span class="line">                backtrack(s+<span class="string">&#x27;(&#x27;</span>,left+<span class="number">1</span>,right,n)</span><br><span class="line">            <span class="keyword">if</span> right &lt; left:</span><br><span class="line">                backtrack(s+<span class="string">&#x27;)&#x27;</span>,left,right+<span class="number">1</span>,n)</span><br><span class="line">            </span><br><span class="line">        backtrack()</span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>
+
+<p>以这道题为例，backtrack的题应该怎么去思考？</p>
+<p>所谓Backtracking都是这样的思路：在当前局面下，你有若干种选择。那么尝试每一种选择。如果已经发现某种选择肯定不行（因为违反了某些限定条件），就返回；如果某种选择试到最后发现是正确解，就将其加入解集</p>
+<p>所以你思考递归题时，只要明确三点就行：选择 (Options)，限制 (Restraints)，结束条件 (Termination)。即“ORT原则”（这个是我自己编的）。</p>
+<p>对于这道题，在任何时刻，你都有两种选择：</p>
+<ol>
+<li>加左括号。</li>
+<li>加右括号。</li>
+</ol>
+<p>同时有以下限制：</p>
+<ol>
+<li>如果左括号已经用完了，则不能再加左括号了。</li>
+<li>如果已经出现的右括号和左括号一样多，则不能再加右括号了。因为那样的话新加入的右括号一定无法匹配。</li>
+</ol>
+<p>结束条件是：左右括号都已经用完。</p>
+<p>结束后的正确性：</p>
+<p>左右括号用完以后，一定是正确解。因为1. 左右括号一样多，2. 每个右括号都一定有与之配对的左括号。因此一旦结束就可以加入解集（有时也可能出现结束以后不一定是正确解的情况，这时要多一步判断）。</p>
+<p>递归函数传入参数：</p>
+<p>限制和结束条件中有“用完”和“一样多”字样，因此你需要知道左右括号的数目。当然你还需要知道当前局面sublist和解集res。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (左右括号都已用完) &#123;</span><br><span class="line">  加入解集，返回</span><br><span class="line">&#125;</span><br><span class="line">//否则开始试各种选择</span><br><span class="line"><span class="keyword">if</span> (还有左括号可以用) &#123;</span><br><span class="line">  加一个左括号，继续递归</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (右括号小于左括号) &#123;</span><br><span class="line">  加一个右括号，继续递归</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这题其实是最好的backtracking初学练习之一，因为ORT三者都非常简单明显。你不妨按上述思路再梳理一遍，还有问题的话再说。</p>
+<p>以上文字来自 <strong>1point3arces</strong>的牛人解答</p>
+<h3 id="复杂度分析："><a href="#复杂度分析：" class="headerlink" title="复杂度分析："></a>复杂度分析：</h3><p>我们的复杂度分析依赖于理解 $generateParenthesis(n)$ 中有多少个元素。这个分析超出了本文的范畴，但事实证明这是第 n 个卡塔兰数 $\dfrac{1}{n+1}\binom{2n}{n} $，这是由 $\dfrac{4^n}{n\sqrt{n}} $ 渐近界定的。</p>
+<p>时间复杂度：$O(\dfrac{4^n}{\sqrt{n}})$，在回溯过程中，每个有效序列最多需要 n 步。</p>
+<p>空间复杂度：$O(\dfrac{4^n}{\sqrt{n}})$，如上所述，并使用 $O(n)$ 的空间来存储序列。</p>
+<p><strong>思路二：动态规划</strong></p>
+<p><strong>来自本题题解的解答。</strong></p>
+<p>在此题中，动态规划的思想类似于数学归纳法，当知道所有i&lt;n的情况时，我们可以通过某种算法算出i=n的情况。 本题最核心的思想是，考虑i=n时相比n-1组括号增加的那一组括号的位置。</p>
+<p>具体思路如下： 当我们清楚所有i&lt;n时括号的可能生成排列后，对与i=n的情况，我们考虑整个括号排列中最左边的括号。 它一定是一个左括号，那么它可以和它对应的右括号组成一组完整的括号”( )”，我们认为这一组是相比n-1增加进来的括号。</p>
+<p>那么，剩下n-1组括号有可能在哪呢？ <strong>剩下的括号要么在这一组新增的括号内部，要么在这一组新增括号的外部（右侧）</strong>。既然知道了i&lt;n的情况，那我们就可以对所有情况进行遍历： <strong>“(“ + 【i=p时所有括号的排列组合】 + “)” + 【i=q时所有括号的排列组合】 其中 p + q = n-1，且p q均为非负整数。</strong> 事实上，当上述p从0取到n-1，q从n-1取到0后，所有情况就遍历完了。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">generateParenthesis</span>(<span class="params">self, n: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="built_in">str</span>]:</span></span><br><span class="line">        <span class="keyword">if</span> n == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> []</span><br><span class="line">        total_l = []</span><br><span class="line">        total_l.append([<span class="literal">None</span>])</span><br><span class="line">        total_l.append([<span class="string">&quot;()&quot;</span>])</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>,n+<span class="number">1</span>):  <span class="comment"># 开始计算i时的括号组合，记为l</span></span><br><span class="line">            l = []</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(i): <span class="comment">#遍历所有可能的括号内外组合</span></span><br><span class="line">                now_list1 = total_l[j]</span><br><span class="line">                now_list2 = total_l[i-<span class="number">1</span>-j]</span><br><span class="line">                <span class="keyword">for</span> k1 <span class="keyword">in</span> now_list1:  <span class="comment">#开始具体取内外组合的实例</span></span><br><span class="line">                    <span class="keyword">for</span> k2 <span class="keyword">in</span> now_list2:</span><br><span class="line">                        <span class="keyword">if</span> k1 == <span class="literal">None</span>:</span><br><span class="line">                            k1 = <span class="string">&quot;&quot;</span></span><br><span class="line">                        <span class="keyword">if</span> k2 == <span class="literal">None</span>:</span><br><span class="line">                            k2 = <span class="string">&quot;&quot;</span></span><br><span class="line">                        el = <span class="string">&quot;(&quot;</span> + k1 + <span class="string">&quot;)&quot;</span> + k2</span><br><span class="line">                        l.append(el)</span><br><span class="line">            total_l.append(l)</span><br><span class="line">        <span class="keyword">return</span> total_l[n]</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-合并K个有序列表-Hard"><a href="#3-合并K个有序列表-Hard" class="headerlink" title="3. 合并K个有序列表(Hard)"></a>3. 合并K个有序列表(Hard)</h2><p>合并 k 个排序链表，返回合并后的排序链表。请分析和描述算法的复杂度。</p>
+<p><strong>示例:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">输入:</span><br><span class="line">[</span><br><span class="line">  1-&gt;4-&gt;5,</span><br><span class="line">  1-&gt;3-&gt;4,</span><br><span class="line">  2-&gt;6</span><br><span class="line">]</span><br><span class="line">输出: 1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4-&gt;5-&gt;6</span><br></pre></td></tr></table></figure>
+
+<p><strong>解答：</strong></p>
+<p>这道题有多种解法，都可以轻松理解，重要的是掌握和记住。</p>
+<p><strong>思路一：暴力解法。</strong></p>
+<ul>
+<li>遍历所有链表，将所有节点的值放到一个数组中。</li>
+<li>将这个数组排序，然后遍历所有元素得到正确顺序的值。</li>
+<li>用遍历得到的值，创建一个新的有序链表。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">mergeKLists</span>(<span class="params">self, lists</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type lists: List[ListNode]</span></span><br><span class="line"><span class="string">        :rtype: ListNode</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        self.nodes = []</span><br><span class="line">        head = point = ListNode(<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">for</span> l <span class="keyword">in</span> lists:</span><br><span class="line">            <span class="keyword">while</span> l:</span><br><span class="line">                self.nodes.append(l.val)</span><br><span class="line">                l = l.<span class="built_in">next</span></span><br><span class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">sorted</span>(self.nodes):</span><br><span class="line">            point.<span class="built_in">next</span> = ListNode(x)</span><br><span class="line">            point = point.<span class="built_in">next</span></span><br><span class="line">        <span class="keyword">return</span> head.<span class="built_in">next</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h3><p>时间复杂度：$O(N\log N)$ ，其中 $N$ 是节点的总数目。</p>
+<ol>
+<li>遍历所有的值需花费 $O(N)$ 的时间。</li>
+<li>一个稳定的排序算法花费 $O(N\log N)$ 的时间。</li>
+<li>遍历同时创建新的有序链表花费 $O(N)$ 的时间。</li>
+</ol>
+<p>空间复杂度：$O(N)$。</p>
+<ol>
+<li>排序花费 $O(N)$ 空间（这取决于你选择的算法）。</li>
+<li>创建一个新的链表花费 $O(N)$ 的空间。</li>
+</ol>
+<p><strong>执行用时 :132 ms, 在所有 Python 提交中击败了63.46%的用户</strong></p>
+<p><strong>思路二：优先队列（必须掌握）</strong></p>
+<p>算法：</p>
+<ul>
+<li>比较 k 个节点（每个链表的首节点），获得最小值的节点。</li>
+<li>将选中的节点接在最终有序链表的后面。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, x):</span></span><br><span class="line"><span class="comment">#         self.val = x</span></span><br><span class="line"><span class="comment">#         self.next = None</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">mergeKLists</span>(<span class="params">self, lists: <span class="type">List</span>[ListNode]</span>) -&gt; ListNode:</span></span><br><span class="line">        <span class="keyword">import</span> heapq</span><br><span class="line">        dummy = ListNode(<span class="number">0</span>)</span><br><span class="line">        p = dummy</span><br><span class="line">        head = []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(lists)):</span><br><span class="line">            <span class="keyword">if</span> lists[i] :</span><br><span class="line">                heapq.heappush(head, (lists[i].val, i))</span><br><span class="line">                lists[i] = lists[i].<span class="built_in">next</span></span><br><span class="line">        <span class="keyword">while</span> head:</span><br><span class="line">            val, idx = heapq.heappop(head)</span><br><span class="line">            p.<span class="built_in">next</span> = ListNode(val)</span><br><span class="line">            p = p.<span class="built_in">next</span></span><br><span class="line">            <span class="keyword">if</span> lists[idx]:</span><br><span class="line">                heapq.heappush(head, (lists[idx].val, idx))</span><br><span class="line">                lists[idx] = lists[idx].<span class="built_in">next</span></span><br><span class="line">        <span class="keyword">return</span> dummy.<span class="built_in">next</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>执行用时 :116 ms, 在所有 Python 提交中击败了79.42%的用户</strong></p>
+<p><strong>思路三：分治算法</strong></p>
+<p>类似于归并排序</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, x):</span></span><br><span class="line"><span class="comment">#         self.val = x</span></span><br><span class="line"><span class="comment">#         self.next = None</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">mergeKLists</span>(<span class="params">self, lists: <span class="type">List</span>[ListNode]</span>) -&gt; ListNode:</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> lists:<span class="keyword">return</span> </span><br><span class="line">        n = <span class="built_in">len</span>(lists)</span><br><span class="line">        <span class="keyword">return</span> self.merge(lists, <span class="number">0</span>, n-<span class="number">1</span>)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">merge</span>(<span class="params">self,lists, left, right</span>):</span></span><br><span class="line">        <span class="keyword">if</span> left == right:</span><br><span class="line">            <span class="keyword">return</span> lists[left]</span><br><span class="line">        mid = left + (right - left) // <span class="number">2</span></span><br><span class="line">        l1 = self.merge(lists, left, mid)</span><br><span class="line">        l2 = self.merge(lists, mid+<span class="number">1</span>, right)</span><br><span class="line">        <span class="keyword">return</span> self.mergeTwoLists(l1, l2)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">mergeTwoLists</span>(<span class="params">self,l1, l2</span>):</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> l1:<span class="keyword">return</span> l2</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> l2:<span class="keyword">return</span> l1</span><br><span class="line">        <span class="keyword">if</span> l1.val &lt; l2.val:</span><br><span class="line">            l1.<span class="built_in">next</span> = self.mergeTwoLists(l1.<span class="built_in">next</span>, l2)</span><br><span class="line">            <span class="keyword">return</span> l1</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            l2.<span class="built_in">next</span> = self.mergeTwoLists(l1, l2.<span class="built_in">next</span>)</span><br><span class="line">            <span class="keyword">return</span> l2</span><br></pre></td></tr></table></figure>
+
+<p><strong>执行用时 :136 ms, 在所有 Python 提交中击败了60.55%的用户</strong></p>
+<h2 id="4-两两交换链表中的节点-Medium"><a href="#4-两两交换链表中的节点-Medium" class="headerlink" title="4. 两两交换链表中的节点(Medium)"></a>4. 两两交换链表中的节点(Medium)</h2><p>给定一个链表，两两交换其中相邻的节点，并返回交换后的链表。</p>
+<p>你不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换。</p>
+<p><strong>示例:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">给定 1-&gt;2-&gt;3-&gt;4, 你应该返回 2-&gt;1-&gt;4-&gt;3.</span><br></pre></td></tr></table></figure>
+
+<p><strong>解答：</strong></p>
+<p><strong>思路一：递归</strong></p>
+<p><strong>一眼就看出来要用递归来做。</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode(object):</span></span><br><span class="line"><span class="comment">#     def __init__(self, x):</span></span><br><span class="line"><span class="comment">#         self.val = x</span></span><br><span class="line"><span class="comment">#         self.next = None</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">swapPairs</span>(<span class="params">self, head</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type head: ListNode</span></span><br><span class="line"><span class="string">        :rtype: ListNode</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> head <span class="keyword">or</span> <span class="keyword">not</span> head.<span class="built_in">next</span>:</span><br><span class="line">            <span class="keyword">return</span> head</span><br><span class="line">        tmp = head.<span class="built_in">next</span></span><br><span class="line">        head.<span class="built_in">next</span> = self.swapPairs(head.<span class="built_in">next</span>.<span class="built_in">next</span>)</span><br><span class="line">        tmp.<span class="built_in">next</span> = head</span><br><span class="line">        <span class="keyword">return</span> tmp</span><br></pre></td></tr></table></figure>
+
+<p><strong>执行用时 :20 ms, 在所有 Python 提交中击败了93.45%的用户</strong></p>
+<p>思路二：用<strong>loop</strong>做，and <strong>dummy大法</strong>对于nodeList这类题简直无敌。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode(object):</span></span><br><span class="line"><span class="comment">#     def __init__(self, x):</span></span><br><span class="line"><span class="comment">#         self.val = x</span></span><br><span class="line"><span class="comment">#         self.next = None</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">swapPairs</span>(<span class="params">self, head</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type head: ListNode</span></span><br><span class="line"><span class="string">        :rtype: ListNode</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> head <span class="keyword">or</span> <span class="keyword">not</span> head.<span class="built_in">next</span>:</span><br><span class="line">            <span class="keyword">return</span> head</span><br><span class="line">        cur = dummy = ListNode(-<span class="number">1</span>)</span><br><span class="line">        dummy.<span class="built_in">next</span> = head        </span><br><span class="line">        <span class="keyword">while</span> cur.<span class="built_in">next</span> <span class="keyword">and</span> cur.<span class="built_in">next</span>.<span class="built_in">next</span>:</span><br><span class="line">            one,two,three = cur.<span class="built_in">next</span>,cur.<span class="built_in">next</span>.<span class="built_in">next</span>,cur.<span class="built_in">next</span>.<span class="built_in">next</span>.<span class="built_in">next</span></span><br><span class="line">            cur.<span class="built_in">next</span> = two</span><br><span class="line">            two.<span class="built_in">next</span> = one</span><br><span class="line">            one.<span class="built_in">next</span> = three</span><br><span class="line">            cur = one</span><br><span class="line">        <span class="keyword">return</span> dummy.<span class="built_in">next</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>执行用时 :12 ms, 在所有 Python 提交中击败了100.00%的用户</strong></p>
+<h2 id="5-K个一组翻转链表-Hard"><a href="#5-K个一组翻转链表-Hard" class="headerlink" title="5. K个一组翻转链表(Hard)"></a>5. K个一组翻转链表(Hard)</h2><p>给你一个链表，每 k 个节点一组进行翻转，请你返回翻转后的链表。</p>
+<p>k 是一个正整数，它的值小于或等于链表的长度。</p>
+<p>如果节点总数不是 k 的整数倍，那么请将最后剩余的节点保持原有顺序。</p>
+<p><strong>示例 :</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">给定这个链表：1-&gt;2-&gt;3-&gt;4-&gt;5</span><br><span class="line"></span><br><span class="line">当 k = 2 时，应当返回: 2-&gt;1-&gt;4-&gt;3-&gt;5</span><br><span class="line"></span><br><span class="line">当 k = 3 时，应当返回: 3-&gt;2-&gt;1-&gt;4-&gt;5</span><br></pre></td></tr></table></figure>
+
+<p>说明 :你的算法只能使用常数的额外空间。<br>你不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换。</p>
+<p><strong>解答：</strong></p>
+<p><strong>思路一：递归版本</strong></p>
+<p>可以递归操作, 有两种情况：</p>
+<ol>
+<li>就是压根没有k个node，那么我们直接保持这个k-group不动返回head</li>
+<li>如果有k个node的话，那么我们先找到第k个node之后的递归结果 node = nxt，然后反转前面k个node，让反转结果的结尾 tail.next = nxt</li>
+</ol>
+<p>也可以这样理解，在解决所有node时，将前k个node和剩余的node分开，剩余的node可以递归调用解决，这样，问题就变成了前k个node链表方向依次反向来解决。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode(object):</span></span><br><span class="line"><span class="comment">#     def __init__(self, x):</span></span><br><span class="line"><span class="comment">#         self.val = x</span></span><br><span class="line"><span class="comment">#         self.next = None</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">reverseKGroup</span>(<span class="params">self, head, k</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type head: ListNode</span></span><br><span class="line"><span class="string">        :type k: int</span></span><br><span class="line"><span class="string">        :rtype: ListNode</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        cur = head</span><br><span class="line">        cnt = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> cur <span class="keyword">and</span> cnt != k:</span><br><span class="line">            cur = cur.<span class="built_in">next</span></span><br><span class="line">            cnt += <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> cnt == k:</span><br><span class="line">            cur = self.reverseKGroup(cur,k)</span><br><span class="line">            <span class="keyword">while</span> cnt:</span><br><span class="line">                tmp = head.<span class="built_in">next</span></span><br><span class="line">                head.<span class="built_in">next</span> = cur</span><br><span class="line">                cur = head</span><br><span class="line">                head = tmp</span><br><span class="line">                cnt -= <span class="number">1</span></span><br><span class="line">            head = cur</span><br><span class="line">        <span class="keyword">return</span> head</span><br></pre></td></tr></table></figure>
+
+<p><strong>思路二：用堆栈</strong></p>
+<p>用栈，我们把 k 个数压入栈中，然后弹出来的顺序就是翻转的！</p>
+<p>这里要注意几个问题：</p>
+<ol>
+<li><p>第一，剩下的链表个数够不够 k 个（因为不够 k 个不用翻转）；</p>
+</li>
+<li><p>第二，已经翻转的部分要与剩下链表连接起来</p>
+</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">reverseKGroup</span>(<span class="params">self, head: ListNode, k: <span class="built_in">int</span></span>) -&gt; ListNode:</span></span><br><span class="line">        dummy = ListNode(<span class="number">0</span>)</span><br><span class="line">        p = dummy</span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            count = k </span><br><span class="line">            stack = []</span><br><span class="line">            tmp = head</span><br><span class="line">            <span class="keyword">while</span> count <span class="keyword">and</span> tmp:</span><br><span class="line">                stack.append(tmp)</span><br><span class="line">                tmp = tmp.<span class="built_in">next</span></span><br><span class="line">                count -= <span class="number">1</span></span><br><span class="line">            <span class="comment"># 注意,目前tmp所在k+1位置</span></span><br><span class="line">            <span class="comment"># 说明剩下的链表不够k个,跳出循环</span></span><br><span class="line">            <span class="keyword">if</span> count : </span><br><span class="line">                p.<span class="built_in">next</span> = head</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            <span class="comment"># 翻转操作</span></span><br><span class="line">            <span class="keyword">while</span> stack:</span><br><span class="line">                p.<span class="built_in">next</span> = stack.pop()</span><br><span class="line">                p = p.<span class="built_in">next</span></span><br><span class="line">            <span class="comment">#与剩下链表连接起来 </span></span><br><span class="line">            p.<span class="built_in">next</span> = tmp</span><br><span class="line">            head = tmp        </span><br><span class="line">        <span class="keyword">return</span> dummy.<span class="built_in">next</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>思路三：尾插法</strong></p>
+<p>见<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/reverse-nodes-in-k-group/solution/kge-yi-zu-fan-zhuan-lian-biao-by-powcai/">本题题解</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/leetcode/" rel="tag"># leetcode</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/06/20/leetcode16-20/" rel="prev" title="leetcode16-20">
+                  <i class="fa fa-chevron-left"></i> leetcode16-20
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/06/20/leetcode26-30/" rel="next" title="leetcode26-30">
+                  leetcode26-30 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+  
+  
+  
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Aurora</span>
+</div>
+  <div class="powered-by">تطبيق الموقع <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

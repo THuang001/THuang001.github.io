@@ -1,37 +1,416 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
-{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
 
-{% block page_class %}page-post-detail{% endblock %}
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"8.0.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"بحث...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
+  </script>
+
+  <meta name="description" content="一、综述二、字符串类题目思路三、例题1. 公共前缀问题最长公共前缀 二分查找实现基本原理同暴力实现，只是最初的比较对象，由基准元素的一个一个比较，变为基准元素的前一半进行比较，这里实现选取的基准元素改为数组中的最短元素。 注意：  左指针还是右指针移动的标记的设置，即实现中的flag变量 遍历结束，mid的值就是元素minElement中最长前缀的停止位置（不包含mid所在位置）  1234567">
+<meta property="og:type" content="article">
+<meta property="og:title" content="字符串算法题集合">
+<meta property="og:url" content="http://yoursite.com/2019/07/10/STRING/index.html">
+<meta property="og:site_name" content="晨曦微光">
+<meta property="og:description" content="一、综述二、字符串类题目思路三、例题1. 公共前缀问题最长公共前缀 二分查找实现基本原理同暴力实现，只是最初的比较对象，由基准元素的一个一个比较，变为基准元素的前一半进行比较，这里实现选取的基准元素改为数组中的最短元素。 注意：  左指针还是右指针移动的标记的设置，即实现中的flag变量 遍历结束，mid的值就是元素minElement中最长前缀的停止位置（不包含mid所在位置）  1234567">
+<meta property="og:locale">
+<meta property="article:published_time" content="2019-07-10T07:07:29.000Z">
+<meta property="article:modified_time" content="2019-07-10T13:32:40.000Z">
+<meta property="article:author" content="Aurora">
+<meta property="article:tag" content="string">
+<meta name="twitter:card" content="summary">
 
 
-{% block content %}
+<link rel="canonical" href="http://yoursite.com/2019/07/10/STRING/">
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
 
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>字符串算法题集合 | 晨曦微光</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="تشغيل شريط التصفح">
     </div>
   </div>
 
-{% endblock %}
+  <div class="site-meta">
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">晨曦微光</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          المحتويات
+        </li>
+        <li class="sidebar-nav-overview">
+          عام
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E7%BB%BC%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">一、综述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B1%BB%E9%A2%98%E7%9B%AE%E6%80%9D%E8%B7%AF"><span class="nav-number">2.</span> <span class="nav-text">二、字符串类题目思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E4%BE%8B%E9%A2%98"><span class="nav-number">3.</span> <span class="nav-text">三、例题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%85%AC%E5%85%B1%E5%89%8D%E7%BC%80%E9%97%AE%E9%A2%98"><span class="nav-number">3.1.</span> <span class="nav-text">1. 公共前缀问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E5%AE%9E%E7%8E%B0"><span class="nav-number">3.1.1.</span> <span class="nav-text">二分查找实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ZIP-%E5%A4%A7%E6%B3%95"><span class="nav-number">3.1.2.</span> <span class="nav-text">ZIP()大法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D%E7%9A%84KMP%E7%AE%97%E6%B3%95%EF%BC%8CBM%E7%AE%97%E6%B3%95%EF%BC%8CSunday%E7%AE%97%E6%B3%95"><span class="nav-number">3.2.</span> <span class="nav-text">2. 字符串匹配的KMP算法，BM算法，Sunday算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#KMP%E7%AE%97%E6%B3%95"><span class="nav-number">3.2.1.</span> <span class="nav-text">KMP算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#KMP%E7%9A%84%E7%AE%97%E6%B3%95%E6%B5%81%E7%A8%8B"><span class="nav-number">3.2.1.1.</span> <span class="nav-text">KMP的算法流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%92%E6%8E%A8%E8%AE%A1%E7%AE%97next-%E6%95%B0%E7%BB%84"><span class="nav-number">3.2.1.2.</span> <span class="nav-text">递推计算next 数组</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%8E%92%E5%88%97%E3%80%81%E7%BB%84%E5%90%88"><span class="nav-number">3.3.</span> <span class="nav-text">3. 字符串的排列、组合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%9B%9E%E6%96%87%E7%B3%BB%E5%88%97"><span class="nav-number">3.4.</span> <span class="nav-text">4. 字符串的回文系列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E7%BF%BB%E8%BD%AC%EF%BC%8C%E6%97%8B%E8%BD%AC%EF%BC%8C%E6%9B%BF%E6%8D%A2%E7%AD%89"><span class="nav-number">3.5.</span> <span class="nav-text">5. 字符串的翻转，旋转，替换等</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6"><span class="nav-number">3.6.</span> <span class="nav-text">6.</span></a></li></ol></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Aurora</p>
+  <div class="site-description" itemprop="description">6.3</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">50</span>
+          <span class="site-state-item-name">المقالات</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">التصنيفات</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">الوسوم</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/10/STRING/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Aurora">
+      <meta itemprop="description" content="6.3">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="晨曦微光">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          字符串算法题集合
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">نُشر في</span>
+      
+
+      <time title="أُنشأ: 2019-07-10 15:07:29 / عُدل: 21:32:40" itemprop="dateCreated datePublished" datetime="2019-07-10T15:07:29+08:00">2019-07-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">في</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="一、综述"><a href="#一、综述" class="headerlink" title="一、综述"></a>一、综述</h1><h1 id="二、字符串类题目思路"><a href="#二、字符串类题目思路" class="headerlink" title="二、字符串类题目思路"></a>二、字符串类题目思路</h1><h1 id="三、例题"><a href="#三、例题" class="headerlink" title="三、例题"></a>三、例题</h1><h2 id="1-公共前缀问题"><a href="#1-公共前缀问题" class="headerlink" title="1. 公共前缀问题"></a>1. 公共前缀问题</h2><p>最长公共前缀</p>
+<h3 id="二分查找实现"><a href="#二分查找实现" class="headerlink" title="二分查找实现"></a>二分查找实现</h3><p>基本原理同暴力实现，只是最初的比较对象，由基准元素的一个一个比较，变为基准元素的前一半进行比较，<strong>这里实现选取的基准元素改为数组中的最短元素。</strong></p>
+<p><strong>注意：</strong></p>
+<ol>
+<li>左指针还是右指针移动的标记的设置，即实现中的flag变量</li>
+<li>遍历结束，mid的值就是元素minElement中最长前缀的停止位置（不包含mid所在位置）</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">longestCommonPrefix</span>(<span class="params">self, strs</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type strs: List[str]</span></span><br><span class="line"><span class="string">        :rtype: str</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(strs)&lt;<span class="number">1</span>:           </span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(strs) ==<span class="number">1</span>:        </span><br><span class="line">            <span class="keyword">return</span> strs[<span class="number">0</span>]</span><br><span class="line">        </span><br><span class="line">        minElement = strs[<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(strs)):</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(strs[i])&lt;<span class="built_in">len</span>(minElement):</span><br><span class="line">                minElement = strs[i]</span><br><span class="line">        left = <span class="number">0</span></span><br><span class="line">        right =<span class="built_in">len</span>(minElement)</span><br><span class="line">        mid = (left+right)//<span class="number">2</span></span><br><span class="line">        <span class="keyword">while</span> left&lt;right:</span><br><span class="line">            flag = <span class="literal">True</span>           </span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(strs)):</span><br><span class="line">                <span class="keyword">if</span>  minElement[:mid+<span class="number">1</span>] != strs[j][:mid+<span class="number">1</span>]: </span><br><span class="line">                    right = mid</span><br><span class="line">                    flag = <span class="literal">False</span></span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">if</span> flag :</span><br><span class="line">                left = mid+<span class="number">1</span></span><br><span class="line">            mid = (left+right)//<span class="number">2</span>   </span><br><span class="line">            </span><br><span class="line">        <span class="keyword">return</span> minElement[:mid]</span><br></pre></td></tr></table></figure>
+
+<h3 id="ZIP-大法"><a href="#ZIP-大法" class="headerlink" title="ZIP()大法"></a>ZIP()大法</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">longestCommonPrefix</span>(<span class="params">self, strs</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type strs: List[str]</span></span><br><span class="line"><span class="string">        :rtype: str</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        res = <span class="string">&quot;&quot;</span></span><br><span class="line">        <span class="keyword">for</span> tmp <span class="keyword">in</span> <span class="built_in">zip</span>(*strs):</span><br><span class="line">            tmp_set = <span class="built_in">set</span>(tmp)</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(tmp_set) == <span class="number">1</span>:</span><br><span class="line">                res += tmp[<span class="number">0</span>]</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-字符串匹配的KMP算法，BM算法，Sunday算法"><a href="#2-字符串匹配的KMP算法，BM算法，Sunday算法" class="headerlink" title="2. 字符串匹配的KMP算法，BM算法，Sunday算法"></a>2. 字符串匹配的KMP算法，BM算法，Sunday算法</h2><h3 id="KMP算法"><a href="#KMP算法" class="headerlink" title="KMP算法"></a>KMP算法</h3><p>这个也很容易理解。</p>
+<p>一个辅助数组next[]表示当前字符前面的字符串的最长回文的初始位置。</p>
+<p>然后每一次匹配的时候，当遇到匹配不成功时，主字符串移动next[]个位置。</p>
+<h4 id="KMP的算法流程"><a href="#KMP的算法流程" class="headerlink" title="KMP的算法流程"></a><strong>KMP的算法流程</strong></h4><p>假设现在文本串S匹配到 i 位置，模式串P匹配到 j 位置</p>
+<ol>
+<li><p>如果j = -1，或者当前字符匹配成功（即S[i] == P[j]），都令i++，j++，继续匹配下一个字符；</p>
+</li>
+<li><p>如果j != -1，且当前字符匹配失败（即S[i] != P[j]），则令 i 不变，j = next[j]。此举意味着失配时，模式串P相对于文本串S向右移动了j - next [j] 位。</p>
+</li>
+</ol>
+<h4 id="递推计算next-数组"><a href="#递推计算next-数组" class="headerlink" title="递推计算next 数组"></a>递推计算next 数组</h4><p>next 数组各值的含义：<strong>代表当前字符之前的字符串中，有多大长度的相同前缀后缀</strong>。例如如果next [j] = k，代表j 之前的字符串中有最大长度为<em>k</em> 的相同前缀后缀。</p>
+<ol>
+<li><p>如果对于值k，已有p0 p1, …, pk-1 = pj-k pj-k+1, …, pj-1，相当于next[j] = k。</p>
+</li>
+<li><p>对于P的前j+1个序列字符：</p>
+<p>若p[k] == p[j]，则next[j + 1 ] = next [j] + 1 = k + 1；</p>
+<p>若p[k ] ≠ p[j]，如果此时p[ next[k] ] == p[j ]，则next[ j + 1 ] =  next[k] + 1，否则继续递归前缀索引k = next[k]，而后重复此过程。 相当于在字符p[j+1]之前不存在长度为k+1的前缀”p0 p1, …, pk-1 pk”跟后缀“pj-k pj-k+1, …, pj-1 pj”相等，那么是否可能存在另一个值t+1 &lt; k+1，使得长度更小的前缀 “p0 p1, …, pt-1 pt” 等于长度更小的后缀 “pj-t pj-t+1, …, pj-1 pj” 呢？如果存在，那么这个t+1 便是next[ j+1]的值，此相当于利用已经求得的next 数组（next [0, …, k, …, j]）进行P串前缀跟P串后缀的匹配。</p>
+</li>
+</ol>
+<hr>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getNext</span>(<span class="params">p</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    p为模式串</span></span><br><span class="line"><span class="string">    返回next数组，即部分匹配表</span></span><br><span class="line"><span class="string">    等同于从模式字符串的第1位(注意，不包括第0位)开始对自身进行匹配运算。</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    nex = [<span class="number">0</span>] * <span class="built_in">len</span>(p)</span><br><span class="line">    nex[<span class="number">0</span>] = -<span class="number">1</span></span><br><span class="line">    i = <span class="number">0</span></span><br><span class="line">    j = -<span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> i &lt; <span class="built_in">len</span>(p) - <span class="number">1</span>:   <span class="comment"># len(p)-1防止越界，因为nex前面插入了-1</span></span><br><span class="line">        <span class="keyword">if</span> j == -<span class="number">1</span> <span class="keyword">or</span> p[i] == p[j]:</span><br><span class="line">            i += <span class="number">1</span></span><br><span class="line">            j += <span class="number">1</span></span><br><span class="line">            nex[i] = j     <span class="comment"># 这是最大的不同：记录next[i]</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            j = nex[j]    </span><br><span class="line">    <span class="keyword">return</span> nex</span><br></pre></td></tr></table></figure>
+
+<hr>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">KMP</span>(<span class="params">s, p</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    s为主串</span></span><br><span class="line"><span class="string">    p为模式串</span></span><br><span class="line"><span class="string">    如果t里有p，返回打头下标</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    nex = getNext(p)</span><br><span class="line">    i = j = <span class="number">0</span>   <span class="comment"># 分别是s和p的指针</span></span><br><span class="line">    <span class="keyword">while</span> i &lt; <span class="built_in">len</span>(s) <span class="keyword">and</span> j &lt; <span class="built_in">len</span>(p):</span><br><span class="line">        <span class="keyword">if</span> j == -<span class="number">1</span> <span class="keyword">or</span> s[i] == p[j]: <span class="comment"># j==-1是由于j=next[j]产生</span></span><br><span class="line">            i += <span class="number">1</span></span><br><span class="line">            j += <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            j = nex[j]</span><br><span class="line">            </span><br><span class="line">    <span class="keyword">if</span> j == <span class="built_in">len</span>(p): <span class="comment"># 匹配到了</span></span><br><span class="line">        <span class="keyword">return</span> i - j</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-字符串的排列、组合"><a href="#3-字符串的排列、组合" class="headerlink" title="3. 字符串的排列、组合"></a>3. 字符串的排列、组合</h2><h2 id="4-字符串的回文系列"><a href="#4-字符串的回文系列" class="headerlink" title="4. 字符串的回文系列"></a>4. 字符串的回文系列</h2><h2 id="5-字符串的翻转，旋转，替换等"><a href="#5-字符串的翻转，旋转，替换等" class="headerlink" title="5. 字符串的翻转，旋转，替换等"></a>5. 字符串的翻转，旋转，替换等</h2><h2 id="6"><a href="#6" class="headerlink" title="6."></a>6.</h2>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/string/" rel="tag"># string</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/07/09/leetcode101-120/" rel="prev" title="leetcode101-120">
+                  <i class="fa fa-chevron-left"></i> leetcode101-120
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/07/10/SLIDING-WINDOW/" rel="next" title="滑动窗口类题目(本章最后一题有惊喜)">
+                  滑动窗口类题目(本章最后一题有惊喜) <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+  
+  
+  
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Aurora</span>
+</div>
+  <div class="powered-by">تطبيق الموقع <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

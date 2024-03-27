@@ -1,23 +1,1742 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-{% block title %}{{ config.title }}{% if theme.index_with_subtitle and config.subtitle %} - {{config.subtitle }}{% endif %}{% endblock %}
+<link rel="stylesheet" href="/css/main.css">
 
-{% block page_class %}
-  {% if is_home() %}page-home{% endif -%}
-{% endblock %}
 
-{% block content %}
-  <section id="posts" class="posts-expand">
-    {% for post in page.posts %}
-      {{ post_template.render(post, true) }}
-    {% endfor %}
-  </section>
 
-  {% include '_partials/pagination.swig' %}
-{% endblock %}
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
 
-{% block sidebar %}
-  {{ sidebar_template.render(false) }}
-{% endblock %}
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"8.0.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"بحث...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
+  </script>
+
+  <meta property="og:type" content="website">
+<meta property="og:title" content="晨曦微光">
+<meta property="og:url" content="http://yoursite.com/page/2/index.html">
+<meta property="og:site_name" content="晨曦微光">
+<meta property="og:locale">
+<meta property="article:author" content="Aurora">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://yoursite.com/page/2/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>晨曦微光</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="تشغيل شريط التصفح">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">晨曦微光</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          المحتويات
+        </li>
+        <li class="sidebar-nav-overview">
+          عام
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Aurora</p>
+  <div class="site-description" itemprop="description">6.3</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">50</span>
+          <span class="site-state-item-name">المقالات</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">التصنيفات</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">الوسوم</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner index posts-expand">
+      
+
+      
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/11/29/test-3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Aurora">
+      <meta itemprop="description" content="6.3">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="晨曦微光">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/11/29/test-3/" class="post-title-link" itemprop="url">test</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">نُشر في</span>
+
+      <time title="أُنشأ: 2021-11-29 00:17:31" itemprop="dateCreated datePublished" datetime="2021-11-29T00:17:31+08:00">2021-11-29</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/11/29/test-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Aurora">
+      <meta itemprop="description" content="6.3">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="晨曦微光">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/11/29/test-2/" class="post-title-link" itemprop="url">test</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">نُشر في</span>
+
+      <time title="أُنشأ: 2021-11-29 00:10:39" itemprop="dateCreated datePublished" datetime="2021-11-29T00:10:39+08:00">2021-11-29</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/11/28/%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Aurora">
+      <meta itemprop="description" content="6.3">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="晨曦微光">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/11/28/%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97/" class="post-title-link" itemprop="url">单调队列</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">نُشر في</span>
+
+      <time title="أُنشأ: 2021-11-28 21:45:26" itemprop="dateCreated datePublished" datetime="2021-11-28T21:45:26+08:00">2021-11-28</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/11/28/test-sh/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Aurora">
+      <meta itemprop="description" content="6.3">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="晨曦微光">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/11/28/test-sh/" class="post-title-link" itemprop="url">test_sh</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">نُشر في</span>
+      
+
+      <time title="أُنشأ: 2021-11-28 21:15:03 / عُدل: 21:15:04" itemprop="dateCreated datePublished" datetime="2021-11-28T21:15:03+08:00">2021-11-28</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/11/28/test-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Aurora">
+      <meta itemprop="description" content="6.3">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="晨曦微光">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/11/28/test-1/" class="post-title-link" itemprop="url">test</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">نُشر في</span>
+      
+
+      <time title="أُنشأ: 2021-11-28 21:08:09 / عُدل: 21:08:10" itemprop="dateCreated datePublished" datetime="2021-11-28T21:08:09+08:00">2021-11-28</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/28/java01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Aurora">
+      <meta itemprop="description" content="6.3">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="晨曦微光">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/28/java01/" class="post-title-link" itemprop="url">java01</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">نُشر في</span>
+      
+
+      <time title="أُنشأ: 2019-11-28 14:41:20 / عُدل: 16:54:58" itemprop="dateCreated datePublished" datetime="2019-11-28T14:41:20+08:00">2019-11-28</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="一、基础知识"><a href="#一、基础知识" class="headerlink" title="一、基础知识"></a>一、基础知识</h2><ol>
+<li>跨平台性<ol>
+<li>通过java语言编写的应用程序可以在不同的系统平台上都可以运行</li>
+<li>原理：只需要运行Java的操作系统上安装Java虚拟机即JVM，由JVM来负责Java在系统中的运行</li>
+<li>因为有了JVM，Java可以跨平台运行</li>
+</ol>
+</li>
+<li>JRE = JVM + Java程序所需要的核心类库</li>
+<li>JDK = JRE + Java开发工具</li>
+</ol>
+<h2 id="二、基础语法"><a href="#二、基础语法" class="headerlink" title="二、基础语法"></a>二、基础语法</h2><ol>
+<li><p>hello world</p>
+<ul>
+<li>写程序</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></span><br><span class="line"><span class="function">		</span>&#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;Hello world!&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>解释：<ul>
+<li>class是用来定义类的，格式是: class 类名 {}</li>
+<li>程序要独立运行，必须有主方法，格式是：public static void main(String[] args){}</li>
+<li>程序要输出内容，必须有输出语句，格式是：System.out.println(“hello world!”);</li>
+</ul>
+</li>
+<li>编译与运行<ul>
+<li>编译：javac命令编译程序，后面跟的是文件名称，javac HelloWorld.java</li>
+<li>运行：java命令执行程序，后面跟的是class文件  名称，不含扩展名      java HelloWorld</li>
+</ul>
+</li>
+<li>一个完成的Java程序<ul>
+<li>编写Java源程序</li>
+<li>通过javac命令编译java程序，生成字节码文件</li>
+<li>通过java命令运行字节码文件</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>path环境变量</p>
+<ul>
+<li>为什么要配置path环境变量<pre><code>    为了让javac和java命令可以在任意目录下使用
+</code></pre>
+</li>
+<li>如何配置<ul>
+<li>直接修改path，在前面追加JDK的bin目录</li>
+<li>新建JAVA_HOME: JDK的安装目录<br>修改path: %JAVA_HOME%\bin;后面是以前的环境变量</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>classpath环境变量</p>
+<ul>
+<li>为什么要配置classpath环境变量<pre><code>    为了让class文件可以在任意目录下运行
+</code></pre>
+</li>
+<li>如何配置<pre><code>    新建：classpath，把你想要在任意目录下运行的class文件所在目录配置过去即可。
+    注意：将来在执行的时候，有先后顺序关系
+</code></pre>
+</li>
+<li>path和classpath的区别<pre><code>    path是为了让exe文件可以在任意目录下运行
+    classpath是为了让class文件可以在任意目录下运行
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p>注释</p>
+<ul>
+<li>注释:用于解释说明程序的文字</li>
+<li>分类：<ul>
+<li>单行：//注释文字</li>
+<li>多行：/* 注释文字 */</li>
+<li>文档注释：/** 注释文字 */</li>
+</ul>
+</li>
+<li>带注释的HelloWorld案例<pre><code>(4)注释的作用：
+    A:解释说明程序，提高程序的阅读性
+    B:帮助我们调试程序
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p>关键字</p>
+<ul>
+<li>关键字:被Java赋予特定含义的单词</li>
+<li>特点:全部小写</li>
+<li>注意事项：<ul>
+<li>goto和const作为保留字存在，目前不使用</li>
+<li>类似于Editplus这样的高级记事本，会对关键字有特殊颜色标记，方便记忆</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>标识符</p>
+<ul>
+<li>标识符：给类，接口，方法或者变量起名字的符号</li>
+<li>组成规则：<ul>
+<li>英文字母大小写</li>
+<li>数字</li>
+<li>_和$</li>
+</ul>
+</li>
+<li>注意事项：<ul>
+<li>不能以数字开头</li>
+<li>不能是Java中的关键字</li>
+<li>区分大小写<pre><code>        Student,student 这是两个名称
+</code></pre>
+</li>
+</ul>
+</li>
+<li>常见命名方式：<ul>
+<li>包 其实就是文件夹,用于解决相同类名问题<br>全部小写<br>单级：com<br>多级：cn.itcast</li>
+<li>类或者接口<br>一个单词：首字母大写<br>Student,Person,Teacher<br>多个单词：每个单词的首字母大写<br>HelloWorld,MyName,NameDemo</li>
+<li>方法或者变量<br>一个单词：全部小写<br>name,age,show()<br>多个单词：从第二个单词开始，每个单词首字母大写<br>myName,showAllStudentNames()</li>
+<li>常量<br>一个单词：全部大写<br>AGE<br>多个单词：每个单词都大写，用_连接<br>STUDENT_MAX_AGE</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>常量</p>
+<ul>
+<li>常量：在程序的运行过程中，其值不发生改变的量。</li>
+<li>常量的分类：<ul>
+<li>字面值常量</li>
+<li>自定义常量(面向对象部分讲)</li>
+</ul>
+</li>
+<li>字面值常量<ul>
+<li>字符串常量 用””括起来的内容。举例：”helloworld”</li>
+<li>整数常量 举例:1,200</li>
+<li>小数常量 举例:12.5</li>
+<li>字符常量 用’’括起来的内容。举例：’a’,’A’,’0’</li>
+<li>布尔常量 比较特殊，只有两个值。举例：true,false</li>
+<li>空常量 null(数组部分讲)</li>
+</ul>
+</li>
+<li>Java中针对整数常量的表现形式<ul>
+<li>二进制：由0,1组成。以0b开头</li>
+<li>八进制：由0,1,2,3,4,5,6,7组成。以0开头</li>
+<li>十进制：由0,1,2,3,4,5,6,7,8,9组成。默认是十进制。</li>
+<li>十六进制：由0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F组成。以0x开头。注意：字母不区分大小写。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>进制</p>
+<ul>
+<li>一种计数的方式。x进制表示逢x进1。</li>
+<li>进制转换<ul>
+<li>其他进制到十进制<pre><code>        系数*基数^权之和。
+</code></pre>
+</li>
+<li>十进制到其他进制<pre><code>        除基取余,直到商为0,余数反转。
+</code></pre>
+</li>
+<li>快速转换<ul>
+<li>二进制和十进制<pre><code>            8421码
+</code></pre>
+</li>
+<li>二进制和八进制<pre><code>            三位组合
+</code></pre>
+</li>
+<li>二进制和十六进制<pre><code>            四位组合
+</code></pre>
+</li>
+</ul>
+</li>
+<li>任意X进制到任意Y进制的转换<pre><code>        可以使用十进制作为桥梁即可。
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>有符号数据表示法</p>
+<ul>
+<li><p>计算机中数据的存储和运算都是采用补码进行的。</p>
+</li>
+<li><p>数据的有符号表示法</p>
+<p>​         用0表示正号,1表示负号。</p>
+<ul>
+<li>原码<pre><code>        正数:正常的二进制
+        负数:符号位为1的二进制
+</code></pre>
+</li>
+<li>反码<pre><code>        正数:和原码相同
+        负数:和原码的区别是,符号位不变，数值位取反。1变0，0变1
+</code></pre>
+</li>
+<li>补码<pre><code>        正数:和原码相同
+        负数:反码+1
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p>补充：float浮点数在计算机中的表示 </p>
+<pre><code>        符号位        指数位        底数位
+             S                 E                 M
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p>变量</p>
+</li>
+<li><p>数据类型</p>
+<ul>
+<li>![image-20191128165452052](../../../../../Library/Application Support/typora-user-images/image-20191128165452052.png)</li>
+<li></li>
+</ul>
+</li>
+<li><p>类型转换</p>
+</li>
+<li><p>运算符</p>
+</li>
+<li><p>算数运算符</p>
+</li>
+<li><p>赋值运算符</p>
+</li>
+<li><p>关系运算符</p>
+</li>
+<li><p>逻辑运算符</p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/15/Batch-Normalization/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Aurora">
+      <meta itemprop="description" content="6.3">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="晨曦微光">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/08/15/Batch-Normalization/" class="post-title-link" itemprop="url">Batch Normalization</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">نُشر في</span>
+      
+
+      <time title="أُنشأ: 2019-08-15 16:14:47 / عُدل: 16:15:44" itemprop="dateCreated datePublished" datetime="2019-08-15T16:14:47+08:00">2019-08-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">في</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">面试</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/24/%E9%9D%A2%E8%AF%95%E7%BB%8F%E9%AA%8C1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Aurora">
+      <meta itemprop="description" content="6.3">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="晨曦微光">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/07/24/%E9%9D%A2%E8%AF%95%E7%BB%8F%E9%AA%8C1/" class="post-title-link" itemprop="url">推荐算法面经总结1</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">نُشر في</span>
+
+      <time title="أُنشأ: 2019-07-24 23:32:09" itemprop="dateCreated datePublished" datetime="2019-07-24T23:32:09+08:00">2019-07-24</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">عُدل في</span>
+        <time title="عُدل: 2019-07-27 15:15:26" itemprop="dateModified" datetime="2019-07-27T15:15:26+08:00">2019-07-27</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">في</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8E%A8%E8%8D%90%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">推荐算法</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <ol>
+<li>逻辑斯特回归为什么要对特征进行离散化？</li>
+</ol>
+<ul>
+<li> 非线性！非线性！非线性！逻辑回归属于广义线性模型，表达能力受限；单变量离散化为N个后，每个变量有单独的权重，相当于为模型引入了非线性，能够提升模型表达能力，加大拟合； 离散特征的增加和减少都很容易，易于模型的快速迭代； </li>
+<li>速度快！速度快！速度快！稀疏向量内积乘法运算速度快，计算结果方便存储，容易扩展； </li>
+<li>鲁棒性！鲁棒性！鲁棒性！离散化后的特征对异常数据有很强的鲁棒性：比如一个特征是年龄&gt;30是1，否则0。如果特征没有离散化，一个异常数据“年龄300岁”会给模型造成很大的干扰； </li>
+<li>方便交叉与特征组合：离散化后可以进行特征交叉，由M+N个变量变为M*N个变量，进一步引入非线性，提升表达能力； </li>
+<li>稳定性：特征离散化后，模型会更稳定，比如如果对用户年龄离散化，20-30作为一个区间，不会因为一个用户年龄长了一岁就变成一个完全不同的人。当然处于区间相邻处的样本会刚好相反，所以怎么划分区间是门学问； </li>
+<li>简化模型：特征离散化以后，起到了简化了逻辑回归模型的作用，降低了模型过拟合的风险。</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/24/CSAPP%E7%AC%AC%E5%85%AD%E7%AB%A0%E5%AD%98%E5%82%A8%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Aurora">
+      <meta itemprop="description" content="6.3">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="晨曦微光">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/07/24/CSAPP%E7%AC%AC%E5%85%AD%E7%AB%A0%E5%AD%98%E5%82%A8%E5%99%A8/" class="post-title-link" itemprop="url">CPU存储器&随机读取&顺序读取(CSAPP chapter6)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">نُشر في</span>
+      
+
+      <time title="أُنشأ: 2019-07-24 21:53:46 / عُدل: 23:32:12" itemprop="dateCreated datePublished" datetime="2019-07-24T21:53:46+08:00">2019-07-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">في</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%AD%98%E5%82%A8/" itemprop="url" rel="index"><span itemprop="name">存储</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="1-存储器层次化结构"><a href="#1-存储器层次化结构" class="headerlink" title="1. 存储器层次化结构"></a>1. 存储器层次化结构</h2><p>存储器有很多种类，我们常见的有内存、磁盘，还有平时看不到的集成在CPU内部的寄存器、高速缓存等。</p>
+<p>存储器是分层次的，离CPU越近的存储器，速度越快，每字节的成本越高，同时容量也因此越小。寄存器速度最快，离CPU最近，成本最高，所以个数容量有限，其次是高速缓存（缓存也是分级，有L1，L2等缓存），再次是主存（普通内存），再次是本地磁盘。</p>
+<p>寄存器的速度最快，可以在一个时钟周期内访问，其次是高速缓存，可以在几个时钟周期内访问，普通内存可以在几十个或几百个时钟周期内访问。</p>
+<p>正常来说，存储器的容量和性能应该伴随着CPU的速度和性能提升而提升，以匹配CPU的数据处理。但随着时间的推移，CPU和存储器在性能上的发展差异越来越大，存储器在性能增长越来越跟不上CPU性能发展的需要。</p>
+<p>那怎么办呢？</p>
+<p>为了缩小存储器和CPU之间的性能差距，通常在计算机内部采用层次化的存储器体系结构，以此来发挥出存储器的综合性能。</p>
+<p>存储器层次化结构如下：</p>
+<p><img src="https://kaito-blog-1253469779.cos.ap-beijing.myqcloud.com/1534925865.png?imageMogr2/thumbnail/!70p" alt="img"></p>
+<p>最上层的是寄存器，存取时间极快，但容量小。其次是高速缓存，存取时间次之，容量比寄存器大一些。再往下就是我们常见的内存、硬盘，存取速度递减，但容量越来越大。</p>
+<p>CPU在访问数据时，数据一般在相邻两层之间复制传送，且总是从慢速存储器复制到快速存储器，通过这种方式保证CPU的速度和存储器的速度相匹配。</p>
+<h2 id="2-cache介绍"><a href="#2-cache介绍" class="headerlink" title="2. cache介绍"></a>2. cache介绍</h2><h3 id="什么是cache"><a href="#什么是cache" class="headerlink" title="什么是cache"></a>什么是cache</h3><p>Cache Memory也被称为Cache，是存储器子系统的组成部分，存放着程序经常使用的指令和数据，这就是Cache的传统定义。从广义的角度上看，Cache是快设备为了缓解访问慢设备延时的预留的Buffer，从而可以在掩盖访问延时的同时，尽可能地提高数据传输率。 快和慢是一个相对概念，与微架构(Microarchitecture)中的 L1/L2/L3 Cache相比， DDR内存是一个慢速设备；在磁盘 I/O 系统中，DDR却是快速设备，在磁盘 I/O 系统中，仍在使用DDR内存作为磁介质的Cache。在一个微架构中，除了有L1/L2/L3 Cache之外，用于虚实地址转换的各级TLB， MOB( Memory Ordering Buffers)、在指令流水线中的ROB，Register File和BTB等等也是一种Cache。我们这里的Cache，是狭义 Cache，是CPU流水线和主存储器的 L1/L2/L3 Cache。</p>
+<p>cache，中译名高速缓冲存储器，其作用是为了更好的利用局部性原理，减少CPU访问主存的次数。简单地说，CPU正在访问的指令和数据，其可能会被以后多次访问到，或者是该指令和数据附近的内存区域，也可能会被多次访问。因此，第一次访问这一块区域时，将其复制到cache中，以后访问该区域的指令或者数据时，就不用再从主存中取出。</p>
+<h3 id="各级cache读取延迟"><a href="#各级cache读取延迟" class="headerlink" title="各级cache读取延迟"></a>各级cache读取延迟</h3><p>L1cache,L2cache,L3cache，虽然它们都是由CAM（Content Addressable Memory ）为主体的tag和SRAM组成的，但是区别却是明显的：L1（先不考虑指令和数据L1的不同）是为了更快的速度访问而优化过的，它用了更多/更复杂/更大的晶体管，从而更加昂贵和更加耗电；L2相对来说是为提供更大的容量优化的，用了更少/更简单的晶体管，从而相对便宜和省电。同样的道理还可以推广到L2和L3上。</p>
+<p>在同一代制程中，单位面积可以放入晶体管的数目是确定的，这些晶体管如果都给L1则容量太少，Cache命中率（Hit Rate）严重降低，功耗上升太快；如果都给L2，容量大了但延迟提高了一个数量级：</p>
+<p><img src="https://pic1.zhimg.com/80/v2-ce714e2a5ec81adbe545bc88152e6888_hd.jpg" alt="img"></p>
+<p>如何平衡L1、L2和L3，用固定的晶体管数目达成最好的综合效果，这是一种平衡的艺术。在多年实践之后，现在已经相对固定下来，Intel和AMD的L1 Cache命中率，现在往往高于95%，增加更多的L1效果不是很显著，现在更多的是增大L3，以达到花同样的代价，干更多的事的目的。</p>
+<h3 id="为什么cache不会越做越大"><a href="#为什么cache不会越做越大" class="headerlink" title="为什么cache不会越做越大"></a>为什么cache不会越做越大</h3><p>L3现在动辄数十M，比以往那是阔绰很多了，但相对摩尔定律增长的内存容量来说则大幅落后。为什么Cache增长这么缓慢？还是Cost的问题。一个最简单的SRAM就要消耗6个晶体管：</p>
+<p><img src="https://pic3.zhimg.com/80/v2-c72da734b1a9102a05a00f61f266dac6_hd.jpg" alt="img"></p>
+<p>再加上Tag，最少需要数十个晶体管，代价很大。我们花这么大的代价增加Cache，衡量性能的命中率是如何变化的呢？</p>
+<p><img src="https://pic3.zhimg.com/80/v2-ebd47393e3401d4d8fa811a0fc8d5762_hd.jpg" alt="img"></p>
+<p>为简化起见，我们假设L1维持在不到60%的命中率（实际情况95%左右）。从图中可以看出，随着L2容量的增加，开始时L2和整体命中率快速提高，这表明提高L2容量效用很明显。随后L2的命中率在容量增加到64KB后增长趋缓，而整体命中率也同时趋缓，最后甚至基本不大变化了。增加同样的晶体管，而受益却越来越少，出现了边际效用递减的问题。</p>
+<h2 id="3-程序访问的局部性"><a href="#3-程序访问的局部性" class="headerlink" title="3. 程序访问的局部性"></a>3. 程序访问的局部性</h2><p>最早期的计算机，在执行一段程序时，都是把硬盘中的数据加载到内存，然后CPU从内存中取出代码和数据执行，在把计算结果写入内存，最终输出结果。</p>
+<p>其实这么干，本身没有什么问题，但后来程序运行越来越多，就发现一个规律：<strong>内存中某个地址被访问后，短时间内还有可能继续访问这块地址。内存中的某个地址被访问后，它相邻的内存单元被访问的概率也很大。</strong></p>
+<p>人们发现的这种规律被称为<strong>程序访问的局部性</strong>。</p>
+<p>程序访问的局部性包含2种：</p>
+<ul>
+<li>时间局部性：某个内存单元在较短时间内很可能被再次访问</li>
+<li>空间局部性：某个内存单元被访问后相邻的内存单元较短时间内很可能被访问</li>
+</ul>
+<p>出现这种情况的原因很简单，因为程序是指令和数据组成的，指令在内存中按顺序存放且地址连续，如果运行一段循环程序或调用一个方法，又或者再程序中遍历一个数组，都有可能符合上面提到的局部性原理。</p>
+<p>那既然在执行程序时，内存的某些单元很可能会经常的访问或写入，那可否在CPU和内存之间，加一个缓存，CPU在访问数据时，先看一下缓存中是否存在，如果有直接就读取缓存中的数据即可。如果缓存中不存在，再从内存中读取数据。</p>
+<p>事实证明利用这种方式，程序的运行效率会提高90%以上，这个缓存也叫做<strong>高速缓存Cache</strong>。</p>
+<h2 id="4-高速缓存cache原理"><a href="#4-高速缓存cache原理" class="headerlink" title="4. 高速缓存cache原理"></a>4. 高速缓存cache原理</h2><p>高速缓存Cache是非常小容量的存储器，它集成在CPU芯片内。为了便于CPU、高速缓存Cache、内存之间的信息交换，内存按块划分，高速缓存Cache按行或槽划分。</p>
+<p>CPU对内存、高速缓存Cache进行数据访问的流程如图：</p>
+<p><img src="https://kaito-blog-1253469779.cos.ap-beijing.myqcloud.com/1534995073.png?imageMogr2/thumbnail/!70p" alt="img"></p>
+<p>CPU先查询Cache中是否有数据，如果有，直接读取即可。</p>
+<p>如果Cache中没有，则从内存中读取数据，同时把数据放入Cache中，然后把数据返回给CPU。</p>
+<p>整个流程其实很简单，但对于Cache和内存信息的交换，需要考虑一些问题：</p>
+<ul>
+<li>对于CPU读取数据，如果Cache中没有数据，从内存中读取数据后，如何分配到Cache中？</li>
+<li>如果Cache满了，采用什么策略替换？</li>
+<li>对于CPU写入数据，如何保证Cache和内存数据的一致性？</li>
+</ul>
+<p>对于这3个问题，下面依次来分析是如何解决的。</p>
+<h2 id="5-CPU和cache的内存映射"><a href="#5-CPU和cache的内存映射" class="headerlink" title="5. CPU和cache的内存映射"></a>5. CPU和cache的内存映射</h2><p>对于第一个问题，Cache中没有命中数据时，内存数据是如何分配到Cache中的。</p>
+<p>由于内存的容量比Cache容量要大，两者之间的容量不匹配，所以内存数据填充到Cache中，就需要设计一种规则来保证Cache的利用率最大，保证CPU访问Cache的命中率最高。</p>
+<p>内存到Cache的映射规则有3种方式：</p>
+<ul>
+<li>直接映射：每个内存块数据只映射到<strong>固定</strong>的缓存行中</li>
+<li>全相联映射：每个内存块数据可以映射到<strong>任意</strong>缓存行中</li>
+<li>组相联映射：每个内存块数据可以映射到<strong>固定组</strong>的<strong>任意</strong>缓存行中</li>
+</ul>
+<p>下面我们分别来看这3种映射方式。</p>
+<h3 id="直接映射"><a href="#直接映射" class="headerlink" title="直接映射"></a>直接映射</h3><p>访问内存数据会给出一个内存地址，首先把这个内存地址，按位划分为3个字段：标记、Cache行号、块内地址，如图：</p>
+<p><a target="_blank" rel="noopener" href="https://kaito-blog-1253469779.cos.ap-beijing.myqcloud.com/1535007716.png?imageMogr2/thumbnail/!70p"><img src="https://kaito-blog-1253469779.cos.ap-beijing.myqcloud.com/1535007716.png?imageMogr2/thumbnail/!70p" alt="img"></a></p>
+<p>然后根据第2个字段的二进制位进行<strong>取模</strong>运算，得到对应的Cache行号。</p>
+<p>找到对应的Cache号后，校验Cache的有效位，如果有效，再比较内存第1个字段的标记与Cache的标记是否一致，如果一致，直接获取Cache中的数据即可。</p>
+<p>如果有效位无效，或有效位有效但内存第1个字段的标记与Cache的标记不一致，那么根据内存地址去内存获取数据，然后把对应的Cache行有效位设置为有效，标记设置为与内存标记一致，并在Cache中记录内存的数据，以便下次获取。</p>
+<p>具体映射关系如图：</p>
+<p><img src="https://kaito-blog-1253469779.cos.ap-beijing.myqcloud.com/1535008731.png?imageMogr2/thumbnail/!70p" alt="img"></p>
+<p>可见Cache与内存的映射可能是一对多的，即不同内存块可能映射到同一Cache行。</p>
+<p><strong>这种映射方式比较简单粗暴，如果缓存不命中或内存和Cache标识不一致，就会替换Cache行中的数据。这就可能导致同一Cache行在短时间内被频繁替换，命中率不高。</strong></p>
+<h3 id="全相联映射"><a href="#全相联映射" class="headerlink" title="全相联映射"></a>全相联映射</h3><p>全相联映射与直接映射方式不同的是，它把内存分成2个字段：标记、块内地址，没有了Cache行号这个字段。</p>
+<p><a target="_blank" rel="noopener" href="https://kaito-blog-1253469779.cos.ap-beijing.myqcloud.com/1535009099.png?imageMogr2/thumbnail/!70p"><img src="https://kaito-blog-1253469779.cos.ap-beijing.myqcloud.com/1535009099.png?imageMogr2/thumbnail/!70p" alt="img"></a></p>
+<p>在访问数据时，直接根据内存地址中的标记，去直接遍历对比每一个Cache行，直到找到一致的标记的Cache行，然后访问Cache中的数据即可。</p>
+<p>如果遍历完Cache行后，没有找到一致的标记，那么会从内存中获取数据，然后找到空闲的Cache行，直接写入标记和数据即可。</p>
+<p>也就是说，这种映射方式，就是哪里有空闲的Cache行，我就把内存块映射到这个Cache行中。在访问时，依次遍历Cache行，直到找到标记一直的Cache行，然后读取数据。</p>
+<p><strong>这种方式虽然在空间利用率上保证最大化，但其缺点在于要在Cache中寻找符合标识一致的行的时间要比直接映射的时间久，效率较低。</strong></p>
+<p>那有什么方式能集合上面2种方式，发挥各自的优势呢？这就是下面要说的组相联映射方式。</p>
+<h3 id="组相联映射方式"><a href="#组相联映射方式" class="headerlink" title="组相联映射方式"></a>组相联映射方式</h3><p>组相联映射方式把内存也分为3个字段：标记、Cache组号、块内地址</p>
+<p><a target="_blank" rel="noopener" href="https://kaito-blog-1253469779.cos.ap-beijing.myqcloud.com/1535015356.png?imageMogr2/thumbnail/!70p"><img src="https://kaito-blog-1253469779.cos.ap-beijing.myqcloud.com/1535015356.png?imageMogr2/thumbnail/!70p" alt="img"></a></p>
+<p>注意，与直接映射不同的是，第2个字段是<strong>组号</strong>而不是行号。这种方式把Cache行先进行分组，然后每个分组中包含多个Cache行，如图：</p>
+<p><a target="_blank" rel="noopener" href="https://kaito-blog-1253469779.cos.ap-beijing.myqcloud.com/1535009827.png?imageMogr2/thumbnail/!70p"><img src="https://kaito-blog-1253469779.cos.ap-beijing.myqcloud.com/1535009827.png?imageMogr2/thumbnail/!70p" alt="img"></a></p>
+<p>在访问数据时，先根据内存地址中的Cache组号，定位到Cache的分组，然后在这个组内，依次遍历每个行，寻找标记一致的Cache行，如果标记一致则获取数据，不一致则从内存中获取数据后写入当前组内空闲的任意一个Cache行中。</p>
+<p><strong>这种方式兼顾了访问速度和空间利用率，使用前2种方式结合的方案，保证缓存命中率最大化。在现实中实际上采用的这种映射方式。</strong></p>
+<h2 id="6-cache替换算法"><a href="#6-cache替换算法" class="headerlink" title="6. cache替换算法"></a>6. cache替换算法</h2><p>对于上面提的第2个问题，如果Cache满了，如何进行替换？</p>
+<p>Cache容量比内存小，所以内存数据映射到Cache时，必然会导致Cache满的情况，那之后的内存映射要替Cache中的哪些行呢？这就需要制定一种策略。</p>
+<p>常见的替换算法有如下几种：</p>
+<ul>
+<li>先进先出算法（FIFO)：总是把最早装入Cache的行替换掉，这种算法实现简单，但不能正确反映程序的访问局部性，命中率不高</li>
+<li>最近最少使用算法（LRU)：总是选择最近最少使用的Cache行替换，这种这种算法稍微复杂一些，但可以正确反映程序访问的局部性，命中率最高</li>
+<li>最不经常使用算法（LFU）：总是替换掉Cache中引用次数最少的行，与LRU类似，但没有LRU替换方式更精准</li>
+<li>随机替换算法（Random）：随机替换掉Cache中的行，与使用情况无关，命中率不高</li>
+</ul>
+<p>现实使用最多的是最近最少使用算法（LRU)进行Cache行的替换方案，这种方案使得缓存的命中率最高。</p>
+<h2 id="7-cache的一致性问题"><a href="#7-cache的一致性问题" class="headerlink" title="7. cache的一致性问题"></a>7. cache的一致性问题</h2><p>上面提的第3个问题，对于写入的数据，如何保证Cache和内存数据的一致性？</p>
+<p>试想，如果CPU想要修改某个内存的数据，这块内存的数据刚好在Cache中存在，那么是不是要同时更新Cache中的数据？</p>
+<p>这个写入数据的过程，通常采用2种方式：</p>
+<ul>
+<li>全写法（通写法/直写法/写直达法）</li>
+<li>回写法（写回法）</li>
+</ul>
+<h3 id="全写法"><a href="#全写法" class="headerlink" title="全写法"></a>全写法</h3><p>在写操作时，如果Cache命中，则同时写Cache和内存。</p>
+<p>如果Cache中不命中，则分为以下2种情况：</p>
+<ul>
+<li>写分配法：先更新内存数据，然后再写入空闲的Cache行中，保证Cache有数据，提高了缓存命中率，但增加了写入Cache的开销</li>
+<li>非写分配法：只更新内存数据，不写入Cache，只有等访问不命中时，再进行缓存写入</li>
+</ul>
+<p>另外，这种方式为了减少内存的写入开销，一般会在Cache和内存之间加一个写缓冲队列，在CPU写入Cache的同时，也会写入缓冲队列，然后由存储控制器将缓冲队列写入内存。</p>
+<p>如果在写操作不频繁的情况下，效果很好。但如果写操作频繁，则会导致写缓冲队列饱和而发生阻塞。</p>
+<h3 id="回写法"><a href="#回写法" class="headerlink" title="回写法"></a>回写法</h3><p>这种方式在写操作时，如果Cache命中，则只更新Cache而不更新内存。</p>
+<p>如果Cache不命中，则从内存中读取内容，写入Cache并更新为最新内容。</p>
+<p>这种方式不会主动更新内存，只有在Cache被再次修改时，才将内容一次性写入内存。这样做的好处是减少了写内存的次数，大大降低内存带宽需求。但有可能在某个时间点，Cache和内存中的数据会出现不一致的情况。</p>
+<h2 id="8-影响Cache的性能因素"><a href="#8-影响Cache的性能因素" class="headerlink" title="8. 影响Cache的性能因素"></a>8. 影响Cache的性能因素</h2><p>既然Cache在CPU访问数据时提升的效率这么高，那决定Cache性能的因素有哪些？</p>
+<p>决定访问性能的重要因素之一就是Cache的命中率，它与许多因素有关，具体涉及如下：</p>
+<ul>
+<li>Cache容量：容量越大，缓存数据越多，命中率越高</li>
+<li>内存块大小：大的内存交换单位能更好地利用空间局部性，但过大也会导致命中率降低，必须适中</li>
+</ul>
+<p>除此之外，如何设计Cache也会影响到它的性能：</p>
+<ul>
+<li>多级Cache：现在的CPU会采用3级Cache，最大程度的提升命中率</li>
+<li>内存、总线、Cache连接结构：设计一个效率高的传输通道，能够提升Cache的访问速度</li>
+<li>内存结构与Cache配合：在访问不命中时，会去访问内存，设计效率高的传输通道与Cache配合也可以提升Cache的性能</li>
+</ul>
+<h2 id="9-HDD和SSD的区别"><a href="#9-HDD和SSD的区别" class="headerlink" title="9. HDD和SSD的区别"></a>9. HDD和SSD的区别</h2><p>主要是顺序读取和随机读取。</p>
+<h3 id="吞吐量"><a href="#吞吐量" class="headerlink" title="吞吐量"></a>吞吐量</h3><p>顺序读取看吞吐量：指单位时间内可以成功传输的数据数量。顺序读写频繁的应用，如视频点播，关注连续读写性能、数据吞吐量是关键衡量指标。它主要取决于磁盘阵列的架构，通道的大小以及磁盘的个数。不同的磁盘阵列存在不同的架构，但他们都有自己的内部带宽，一般情况下，内部带宽都设计足够充足，不会存在瓶颈。磁盘阵列与服务器之间的数据通道对吞吐量影响很大，比如一个2Gbps的光纤通道，其所能支撑的最大流量仅为250MB/s。最后，当前面的瓶颈都不再存在时，硬盘越多的情况下吞吐量越大。</p>
+<h3 id="IOPS"><a href="#IOPS" class="headerlink" title="IOPS"></a>IOPS</h3><p>随机读取看IOPS：IOPS（Input/Output Per Second）即每秒的输入输出量（或读写次数），即指每秒内系统能处理的I/O请求数量。随机读写频繁的应用，如小文件存储等，关注随机读写性能，IOPS是关键衡量指标。可以推算出磁盘的IOPS = 1000ms / (Tseek + Trotation + Transfer)，如果忽略数据传输时间，理论上可以计算出随机读写最大的IOPS。常见磁盘的随机读写最大IOPS为： - 7200rpm的磁盘 IOPS = 76 IOPS - 10000rpm的磁盘IOPS = 111 IOPS - 15000rpm的磁盘IOPS = 166 IOPS</p>
+<h3 id="HDD"><a href="#HDD" class="headerlink" title="HDD"></a>HDD</h3><p>HDD中，顺序读取：预读机制，很快，</p>
+<p>​                随机读取：因为要寻道时间+旋转时间+传输时间</p>
+<p>​                                寻道时间一般：3-15ms</p>
+<p>​                                旋转时间与转速有关：7200rpm一般4ms，15000rpm一般2ms</p>
+<p>机械硬盘的连续读写性能很好，但随机读写性能很差，这主要是因为磁头移动到正确的磁道上需要时间，随机读写时，磁头需要不停的移动，时间都浪费在了磁头寻址上，所以性能不高。</p>
+<h3 id="SSD"><a href="#SSD" class="headerlink" title="SSD"></a>SSD</h3><p>SSD中，顺序读取：</p>
+<p>​                随机读取：在SSD中，一般会维护一个mapping table，维护逻辑地址到物理地址的映射。每次读写时，可以通过逻辑地址直接查表计算出物理地址，与传统的机械磁盘相比，省去了寻道时间和旋转时间。</p>
+<h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><p>所以SSD与HDD的主要区别：</p>
+<p>从NAND Flash的原理可以看出，其和HDD的主要区别为</p>
+<ul>
+<li>定位数据快：HDD需要经过寻道和旋转，才能定位到要读写的数据块，而SSD通过mapping table直接计算即可</li>
+<li>读取速度块：HDD的速度取决于旋转速度，而SSD只需要加电压读取数据，一般而言，要快于HDD</li>
+</ul>
+<p>因此，在顺序读测试中，由于定位数据只需要一次，定位之后，则是大批量的读取数据的过程，此时，HDD和SSD的性能差距主要体现在读取速度上，HDD能到200M左右，而普通SSD是其两倍。</p>
+<p>在随机读测试中，由于每次读都要先定位数据，然后再读取，HDD的定位数据的耗费时间很多，一般是几毫秒到十几毫秒，远远高于SSD的定位数据时间(一般0.1ms左右)，因此，随机读写测试主要体现在两者定位数据的速度上，此时，SSD的性能是要远远好于HDD的。</p>
+<h2 id="10-总结"><a href="#10-总结" class="headerlink" title="10. 总结"></a>10. 总结</h2><p>本篇文章主要介绍了高速缓存Cache的重点知识，总结如下：</p>
+<ul>
+<li>程序运行有访问局部性的规律：时间局部性、空间局部性</li>
+<li>内存与Cache的映射方式有3种：直接映射、全相联映射、组相联映射，其中组相联映射方式命中率最高</li>
+<li>Cache的替换算法有4种：先进先出（FIFO）、最近最少使用（LRU）、最不经常使用（LFU）、随机（Random），其中最近最少使用算法的命中率最高</li>
+<li>保证内存与Cache的一致性方案有2种：全写法、回写法</li>
+<li>影响Cache的性能因素有：容量、内存块大小、Cache组合、内存结构与传输通道设计等</li>
+<li>HDD和SSD在顺序读取，随机读取的不同</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/21/leetcode141-160/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Aurora">
+      <meta itemprop="description" content="6.3">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="晨曦微光">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/07/21/leetcode141-160/" class="post-title-link" itemprop="url">leetcode141-160</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">نُشر في</span>
+      
+
+      <time title="أُنشأ: 2019-07-21 20:45:22 / عُدل: 23:34:48" itemprop="dateCreated datePublished" datetime="2019-07-21T20:45:22+08:00">2019-07-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">في</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="1-环形链表-Easy"><a href="#1-环形链表-Easy" class="headerlink" title="1. 环形链表(Easy)"></a>1. 环形链表(Easy)</h2><p>给定一个链表，判断链表中是否有环。</p>
+<p>为了表示给定链表中的环，我们使用整数 <code>pos</code> 来表示链表尾连接到链表中的位置（索引从 0 开始）。 如果 <code>pos</code> 是 <code>-1</code>，则在该链表中没有环。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [3,2,0,-4], pos = 1</span><br><span class="line">输出：true</span><br><span class="line">解释：链表中有一个环，其尾部连接到第二个节点。</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/07/circularlinkedlist.png" alt="img"></p>
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [1,2], pos = 0</span><br><span class="line">输出：true</span><br><span class="line">解释：链表中有一个环，其尾部连接到第一个节点。</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/07/circularlinkedlist_test2.png" alt="img"></p>
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [1], pos = -1</span><br><span class="line">输出：false</span><br><span class="line">解释：链表中没有环。</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/07/circularlinkedlist_test3.png" alt="img"></p>
+<p><strong>进阶：</strong></p>
+<p>你能用 *O(1)*（即，常量）内存解决此问题吗？</p>
+<p>解答：</p>
+<p>思路：</p>
+<p>思路一，快慢指针，即双指针法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode(object):</span></span><br><span class="line"><span class="comment">#     def __init__(self, x):</span></span><br><span class="line"><span class="comment">#         self.val = x</span></span><br><span class="line"><span class="comment">#         self.next = None</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">hasCycle</span>(<span class="params">self, head</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type head: ListNode</span></span><br><span class="line"><span class="string">        :rtype: bool</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span>  <span class="keyword">not</span> head <span class="keyword">or</span> <span class="keyword">not</span> head.<span class="built_in">next</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        slow = fast = head</span><br><span class="line">        <span class="keyword">while</span> fast.<span class="built_in">next</span> <span class="keyword">and</span> fast.<span class="built_in">next</span>.<span class="built_in">next</span>:</span><br><span class="line">            slow = slow.<span class="built_in">next</span></span><br><span class="line">            fast = fast.<span class="built_in">next</span>.<span class="built_in">next</span></span><br><span class="line">            <span class="keyword">if</span> slow == fast:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+
+<p>另外，链表置空法</p>
+<p>运行速度比双指针慢。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode(object):</span></span><br><span class="line"><span class="comment">#     def __init__(self, x):</span></span><br><span class="line"><span class="comment">#         self.val = x</span></span><br><span class="line"><span class="comment">#         self.next = None</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">hasCycle</span>(<span class="params">self, head</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type head: ListNode</span></span><br><span class="line"><span class="string">        :rtype: bool</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> head <span class="keyword">or</span> <span class="keyword">not</span> head.<span class="built_in">next</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="keyword">while</span> head.<span class="built_in">next</span> <span class="keyword">and</span> head.val != <span class="literal">None</span>:</span><br><span class="line">            head.val = <span class="literal">None</span></span><br><span class="line">            head = head.<span class="built_in">next</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> head.<span class="built_in">next</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-环形链表2-Medium"><a href="#2-环形链表2-Medium" class="headerlink" title="2. 环形链表2(Medium)"></a>2. 环形链表2(Medium)</h2><p>给定一个链表，返回链表开始入环的第一个节点。 如果链表无环，则返回 <code>null</code>。</p>
+<p>为了表示给定链表中的环，我们使用整数 <code>pos</code> 来表示链表尾连接到链表中的位置（索引从 0 开始）。 如果 <code>pos</code> 是 <code>-1</code>，则在该链表中没有环。</p>
+<p><strong>说明：</strong>不允许修改给定的链表。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [3,2,0,-4], pos = 1</span><br><span class="line">输出：tail connects to node index 1</span><br><span class="line">解释：链表中有一个环，其尾部连接到第二个节点。</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/07/circularlinkedlist.png" alt="img"></p>
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [1,2], pos = 0</span><br><span class="line">输出：tail connects to node index 0</span><br><span class="line">解释：链表中有一个环，其尾部连接到第一个节点。</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/07/circularlinkedlist_test2.png" alt="img"></p>
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [1], pos = -1</span><br><span class="line">输出：no cycle</span><br><span class="line">解释：链表中没有环。</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/07/circularlinkedlist_test3.png" alt="img"></p>
+<p><strong>进阶：</strong><br>你是否可以不用额外空间解决此题？</p>
+<p>解答：</p>
+<p>思路：</p>
+<p>这道题和上述题思路一样</p>
+<ul>
+<li><p>快慢指针找到环中的节点，然后找到环的入口</p>
+</li>
+<li><p>设两指针fast,slow指向链表头部head，fast每轮走2步，slow每轮走一步：</p>
+<ul>
+<li>fast指针走到链表末端，说明无环，返回null；</li>
+<li>当fast == slow时跳出迭代break；</li>
+<li>设两指针分别走了f,s步，设链表头部到环需要走a步，链表环长度b步，则有：<ul>
+<li>快指针走了满指针两倍的路程f = 2s，快指针比慢指针多走了n个环的长度f = s + nb（因为每走一轮，fast与slow之间距离+1，如果有环快慢指针终会相遇）；</li>
+<li>因此可推出：f = 2nb,s = nb，即两指针分别走了2n个环、n个环的周长。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>接下来，我们将fast指针重新指向头部，并和slow指针一起向前走，每轮走一步，则有：<br>当fast指针走了a步时，slow指针正好走了a + nb步，此时两指针同时指向链表环入口。</p>
+</li>
+<li><p>最终返回fast。</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode(object):</span></span><br><span class="line"><span class="comment">#     def __init__(self, x):</span></span><br><span class="line"><span class="comment">#         self.val = x</span></span><br><span class="line"><span class="comment">#         self.next = None</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">detectCycle</span>(<span class="params">self, head</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type head: ListNode</span></span><br><span class="line"><span class="string">        :rtype: ListNode</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> head <span class="keyword">or</span> <span class="keyword">not</span> head.<span class="built_in">next</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">        slow = fast = head</span><br><span class="line">        <span class="keyword">while</span> fast <span class="keyword">and</span> fast.<span class="built_in">next</span>:</span><br><span class="line">            slow = slow.<span class="built_in">next</span></span><br><span class="line">            fast = fast.<span class="built_in">next</span>.<span class="built_in">next</span></span><br><span class="line">            <span class="keyword">if</span> slow == fast:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">        <span class="keyword">while</span> head != slow:</span><br><span class="line">            slow = slow.<span class="built_in">next</span></span><br><span class="line">            head = head.<span class="built_in">next</span></span><br><span class="line">        <span class="keyword">return</span> head</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-重排链表-Medium"><a href="#3-重排链表-Medium" class="headerlink" title="3. 重排链表(Medium)"></a>3. 重排链表(Medium)</h2><p>给定一个单链表 <em>L</em>：<em>L</em>0→<em>L</em>1→…→<em>L**n</em>-1→<em>L</em>n ，<br>将其重新排列后变为： <em>L</em>0→<em>L**n</em>→<em>L</em>1→<em>L**n</em>-1→<em>L</em>2→<em>L**n</em>-2→…</p>
+<p>你不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换。</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">给定链表 1-&gt;2-&gt;3-&gt;4, 重新排列为 1-&gt;4-&gt;2-&gt;3.</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">给定链表 1-&gt;2-&gt;3-&gt;4-&gt;5, 重新排列为 1-&gt;5-&gt;2-&gt;4-&gt;3.</span><br></pre></td></tr></table></figure>
+
+<p>解答：</p>
+<p>思路：</p>
+<p>双指针思路</p>
+<p>快慢指针找到中点</p>
+<p>然后将链表一分为二</p>
+<p>后面的链表倒序</p>
+<p>然后合并两个链表</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode(object):</span></span><br><span class="line"><span class="comment">#     def __init__(self, x):</span></span><br><span class="line"><span class="comment">#         self.val = x</span></span><br><span class="line"><span class="comment">#         self.next = None</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">reorderList</span>(<span class="params">self, head</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type head: ListNode</span></span><br><span class="line"><span class="string">        :rtype: None Do not return anything, modify head in-place instead.</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> head <span class="keyword">or</span> <span class="keyword">not</span> head.<span class="built_in">next</span>:</span><br><span class="line">            <span class="keyword">return</span> </span><br><span class="line">        s = f = head</span><br><span class="line">        <span class="keyword">while</span> f <span class="keyword">and</span> f.<span class="built_in">next</span>:</span><br><span class="line">            s = s.<span class="built_in">next</span></span><br><span class="line">            f = f.<span class="built_in">next</span>.<span class="built_in">next</span></span><br><span class="line">        head2 = s.<span class="built_in">next</span></span><br><span class="line">        s.<span class="built_in">next</span> = <span class="literal">None</span></span><br><span class="line">        p = <span class="literal">None</span></span><br><span class="line">        cur = head2</span><br><span class="line">        <span class="keyword">while</span> cur:</span><br><span class="line">            tmp = cur.<span class="built_in">next</span></span><br><span class="line">            cur.<span class="built_in">next</span> = p</span><br><span class="line">            p = cur</span><br><span class="line">            cur = tmp</span><br><span class="line">        l1 = head</span><br><span class="line">        l2 = p</span><br><span class="line">        <span class="keyword">while</span> l1 <span class="keyword">and</span> l2:</span><br><span class="line">            tmp = l2.<span class="built_in">next</span></span><br><span class="line">            l2.<span class="built_in">next</span> = l1.<span class="built_in">next</span></span><br><span class="line">            l1.<span class="built_in">next</span> = l2</span><br><span class="line">            l1 = l1.<span class="built_in">next</span>.<span class="built_in">next</span></span><br><span class="line">            l2 = tmp</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="4-二叉树的前序遍历-Medium"><a href="#4-二叉树的前序遍历-Medium" class="headerlink" title="4. 二叉树的前序遍历(Medium)"></a>4. 二叉树的前序遍历(Medium)</h2><p>给定一个二叉树，返回它的 <em>前序</em> 遍历。</p>
+<p> <strong>示例:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">输入: [1,null,2,3]  </span><br><span class="line">   1</span><br><span class="line">    \</span><br><span class="line">     2</span><br><span class="line">    /</span><br><span class="line">   3 </span><br><span class="line"></span><br><span class="line">输出: [1,2,3]</span><br></pre></td></tr></table></figure>
+
+<p><strong>进阶:</strong> 递归算法很简单，你可以通过迭代算法完成吗？</p>
+<p>解答：</p>
+<p>思路：</p>
+<p>很简单，递归和迭代都很简单。</p>
+<p>迭代</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"># class TreeNode(object):</span></span><br><span class="line"><span class="comment">#     def __init__(self, x):</span></span><br><span class="line"><span class="comment">#         self.val = x</span></span><br><span class="line"><span class="comment">#         self.left = None</span></span><br><span class="line"><span class="comment">#         self.right = None</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">preorderTraversal</span>(<span class="params">self, root</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type root: TreeNode</span></span><br><span class="line"><span class="string">        :rtype: List[int]</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">            <span class="keyword">return</span> []</span><br><span class="line">        res = []</span><br><span class="line">        node = root</span><br><span class="line">        stack = []</span><br><span class="line">        <span class="keyword">while</span> node <span class="keyword">or</span> <span class="built_in">len</span>(stack)&gt;<span class="number">0</span>:</span><br><span class="line">            <span class="keyword">while</span> node:</span><br><span class="line">                stack.append(node)</span><br><span class="line">                res.append(node.val)</span><br><span class="line">                node = node.left</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(stack)&gt;<span class="number">0</span>:</span><br><span class="line">                node = stack.pop()</span><br><span class="line">                node = node.right</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+
+<p>递归</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"># class TreeNode(object):</span></span><br><span class="line"><span class="comment">#     def __init__(self, x):</span></span><br><span class="line"><span class="comment">#         self.val = x</span></span><br><span class="line"><span class="comment">#         self.left = None</span></span><br><span class="line"><span class="comment">#         self.right = None</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">preorderTraversal</span>(<span class="params">self, root</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type root: TreeNode</span></span><br><span class="line"><span class="string">        :rtype: List[int]</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">            <span class="keyword">return</span> []</span><br><span class="line">        res = []</span><br><span class="line">        res.append(root.val)</span><br><span class="line">        <span class="keyword">if</span> root.left:</span><br><span class="line">            res+= (self.preorderTraversal(root.left))</span><br><span class="line">        <span class="keyword">if</span> root.right:</span><br><span class="line">            res+= (self.preorderTraversal(root.right))</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="5-二叉树的后序遍历-Medium"><a href="#5-二叉树的后序遍历-Medium" class="headerlink" title="5. 二叉树的后序遍历(Medium)"></a>5. 二叉树的后序遍历(Medium)</h2><p>给定一个二叉树，返回它的 <em>后序</em> 遍历。</p>
+<p><strong>示例:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">输入: [1,null,2,3]  </span><br><span class="line">   1</span><br><span class="line">    \</span><br><span class="line">     2</span><br><span class="line">    /</span><br><span class="line">   3 </span><br><span class="line"></span><br><span class="line">输出: [3,2,1]</span><br></pre></td></tr></table></figure>
+
+<p><strong>进阶:</strong> 递归算法很简单，你可以通过迭代算法完成吗？</p>
+<p>解答：</p>
+<p>思路：</p>
+<p>迭代</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"># class TreeNode(object):</span></span><br><span class="line"><span class="comment">#     def __init__(self, x):</span></span><br><span class="line"><span class="comment">#         self.val = x</span></span><br><span class="line"><span class="comment">#         self.left = None</span></span><br><span class="line"><span class="comment">#         self.right = None</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">postorderTraversal</span>(<span class="params">self, root</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type root: TreeNode</span></span><br><span class="line"><span class="string">        :rtype: List[int]</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        res = []</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">            <span class="keyword">return</span> res</span><br><span class="line">        stack = [root]</span><br><span class="line">        <span class="keyword">while</span> stack:</span><br><span class="line">            node = stack.pop()</span><br><span class="line">            <span class="keyword">if</span> node.left:</span><br><span class="line">                stack.append(node.left)</span><br><span class="line">            <span class="keyword">if</span> node.right:</span><br><span class="line">                stack.append(node.right)</span><br><span class="line">            res.append(node.val)</span><br><span class="line">        <span class="keyword">return</span> res[::-<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+
+<p>递归</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"># class TreeNode(object):</span></span><br><span class="line"><span class="comment">#     def __init__(self, x):</span></span><br><span class="line"><span class="comment">#         self.val = x</span></span><br><span class="line"><span class="comment">#         self.left = None</span></span><br><span class="line"><span class="comment">#         self.right = None</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">postorderTraversal</span>(<span class="params">self, root</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type root: TreeNode</span></span><br><span class="line"><span class="string">        :rtype: List[int]</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        res = []</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">            <span class="keyword">return</span> []</span><br><span class="line">        <span class="keyword">if</span> root.left:</span><br><span class="line">            res += self.postorderTraversal(root.left)</span><br><span class="line">        <span class="keyword">if</span> root.right:</span><br><span class="line">            res += self.postorderTraversal(root.right)</span><br><span class="line">        res.append(root.val)</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="6-LRU缓存机制-Medium"><a href="#6-LRU缓存机制-Medium" class="headerlink" title="6. LRU缓存机制(Medium)"></a>6. LRU缓存机制(Medium)</h2><p>运用你所掌握的数据结构，设计和实现一个  <a target="_blank" rel="noopener" href="https://baike.baidu.com/item/LRU">LRU (最近最少使用) 缓存机制</a>。它应该支持以下操作： 获取数据 <code>get</code> 和 写入数据 <code>put</code> 。</p>
+<p>获取数据 <code>get(key)</code> - 如果密钥 (key) 存在于缓存中，则获取密钥的值（总是正数），否则返回 -1。<br>写入数据 <code>put(key, value)</code> - 如果密钥不存在，则写入其数据值。当缓存容量达到上限时，它应该在写入新数据之前删除最近最少使用的数据值，从而为新的数据值留出空间。</p>
+<p><strong>进阶:</strong></p>
+<p>你是否可以在 <strong>O(1)</strong> 时间复杂度内完成这两种操作？</p>
+<p><strong>示例:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">LRUCache cache = new LRUCache( 2 /* 缓存容量 */ );</span><br><span class="line"></span><br><span class="line">cache.put(1, 1);</span><br><span class="line">cache.put(2, 2);</span><br><span class="line">cache.get(1);       // 返回  1</span><br><span class="line">cache.put(3, 3);    // 该操作会使得密钥 2 作废</span><br><span class="line">cache.get(2);       // 返回 -1 (未找到)</span><br><span class="line">cache.put(4, 4);    // 该操作会使得密钥 1 作废</span><br><span class="line">cache.get(1);       // 返回 -1 (未找到)</span><br><span class="line">cache.get(3);       // 返回  3</span><br><span class="line">cache.get(4);       // 返回  4</span><br></pre></td></tr></table></figure>
+
+<p>解答：</p>
+<p>思路：</p>
+<p>不用双向链表也可以，就是用字典保存key,value，用数组保存最近访问</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LRUCache</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, capacity</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type capacity: int</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        self.capacity = capacity</span><br><span class="line">        self.stack = &#123;&#125;</span><br><span class="line">        self.cache = []</span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get</span>(<span class="params">self, key</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type key: int</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> key <span class="keyword">in</span> self.stack:</span><br><span class="line">            self.cache.remove(key)</span><br><span class="line">            self.cache.append(key)</span><br><span class="line">            <span class="keyword">return</span> self.stack[key]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span></span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">put</span>(<span class="params">self, key, value</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type key: int</span></span><br><span class="line"><span class="string">        :type value: int</span></span><br><span class="line"><span class="string">        :rtype: None</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> key <span class="keyword">in</span> self.stack:</span><br><span class="line">            self.cache.remove(key)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(self.stack) == self.capacity:</span><br><span class="line">                <span class="keyword">del</span> self.stack[self.cache[<span class="number">0</span>]]</span><br><span class="line">                self.cache.pop(<span class="number">0</span>)            </span><br><span class="line">        self.cache.append(key)</span><br><span class="line">        self.stack[key] = value</span><br><span class="line">        </span><br><span class="line"><span class="comment"># Your LRUCache object will be instantiated and called as such:</span></span><br><span class="line"><span class="comment"># obj = LRUCache(capacity)</span></span><br><span class="line"><span class="comment"># param_1 = obj.get(key)</span></span><br><span class="line"><span class="comment"># obj.put(key,value)</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="7-对链表进行插入排序-Medium"><a href="#7-对链表进行插入排序-Medium" class="headerlink" title="7. 对链表进行插入排序(Medium)"></a>7. 对链表进行插入排序(Medium)</h2><p>对链表进行插入排序。</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/0/0f/Insertion-sort-example-300px.gif" alt="img"><br>插入排序的动画演示如上。从第一个元素开始，该链表可以被认为已经部分排序（用黑色表示）。<br>每次迭代时，从输入数据中移除一个元素（用红色表示），并原地将其插入到已排好序的链表中。</p>
+<p><strong>插入排序算法：</strong></p>
+<ol>
+<li>插入排序是迭代的，每次只移动一个元素，直到所有元素可以形成一个有序的输出列表。</li>
+<li>每次迭代中，插入排序只从输入数据中移除一个待排序的元素，找到它在序列中适当的位置，并将其插入。</li>
+<li>重复直到所有输入数据插入完为止。</li>
+</ol>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: 4-&gt;2-&gt;1-&gt;3</span><br><span class="line">输出: 1-&gt;2-&gt;3-&gt;4</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: -1-&gt;5-&gt;3-&gt;4-&gt;0</span><br><span class="line">输出: -1-&gt;0-&gt;3-&gt;4-&gt;5</span><br></pre></td></tr></table></figure>
+
+<p>解答：</p>
+<p>思路：插入排序</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode(object):</span></span><br><span class="line"><span class="comment">#     def __init__(self, x):</span></span><br><span class="line"><span class="comment">#         self.val = x</span></span><br><span class="line"><span class="comment">#         self.next = None</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">insertionSortList</span>(<span class="params">self, head</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type head: ListNode</span></span><br><span class="line"><span class="string">        :rtype: ListNode</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> head:</span><br><span class="line">            <span class="keyword">return</span> head</span><br><span class="line">        dummy = ListNode(<span class="number">0</span>)</span><br><span class="line">        cur = head</span><br><span class="line">        pre = dummy</span><br><span class="line">        nex = <span class="literal">None</span></span><br><span class="line">        <span class="keyword">while</span> cur:</span><br><span class="line">            nex = cur.<span class="built_in">next</span></span><br><span class="line">            <span class="keyword">while</span> pre.<span class="built_in">next</span> <span class="keyword">and</span> pre.<span class="built_in">next</span>.val &lt; cur.val:</span><br><span class="line">                pre = pre.<span class="built_in">next</span></span><br><span class="line">            cur.<span class="built_in">next</span> = pre.<span class="built_in">next</span></span><br><span class="line">            pre.<span class="built_in">next</span> = cur</span><br><span class="line">            cur = nex</span><br><span class="line">            pre = dummy</span><br><span class="line">        <span class="keyword">return</span> dummy.<span class="built_in">next</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="8-排序链表-Medium"><a href="#8-排序链表-Medium" class="headerlink" title="8. 排序链表(Medium)"></a>8. 排序链表(Medium)</h2><p>在 <em>O</em>(<em>n</em> log <em>n</em>) 时间复杂度和常数级空间复杂度下，对链表进行排序。</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: 4-&gt;2-&gt;1-&gt;3</span><br><span class="line">输出: 1-&gt;2-&gt;3-&gt;4</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: -1-&gt;5-&gt;3-&gt;4-&gt;0</span><br><span class="line">输出: -1-&gt;0-&gt;3-&gt;4-&gt;5</span><br></pre></td></tr></table></figure>
+
+<p>解答：</p>
+<p>思路：</p>
+<p>归并排序的原理，很简单</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode(object):</span></span><br><span class="line"><span class="comment">#     def __init__(self, x):</span></span><br><span class="line"><span class="comment">#         self.val = x</span></span><br><span class="line"><span class="comment">#         self.next = None</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">sortList</span>(<span class="params">self, head</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type head: ListNode</span></span><br><span class="line"><span class="string">        :rtype: ListNode</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> head <span class="keyword">or</span> <span class="keyword">not</span> head.<span class="built_in">next</span>:</span><br><span class="line">            <span class="keyword">return</span> head</span><br><span class="line">        slow,fast = head,head.<span class="built_in">next</span></span><br><span class="line">        <span class="keyword">while</span> fast <span class="keyword">and</span> fast.<span class="built_in">next</span>:</span><br><span class="line">            fast,slow = fast.<span class="built_in">next</span>.<span class="built_in">next</span>,slow.<span class="built_in">next</span></span><br><span class="line">        mid ,slow.<span class="built_in">next</span> = slow.<span class="built_in">next</span>,<span class="literal">None</span></span><br><span class="line">        left,right = self.sortList(head),self.sortList(mid)</span><br><span class="line">        h = res = ListNode(<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">while</span> left <span class="keyword">and</span> right:</span><br><span class="line">            <span class="keyword">if</span> left.val &lt; right.val:</span><br><span class="line">                h.<span class="built_in">next</span> = left</span><br><span class="line">                left = left.<span class="built_in">next</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                h.<span class="built_in">next</span> = right</span><br><span class="line">                right = right.<span class="built_in">next</span></span><br><span class="line">            h = h.<span class="built_in">next</span></span><br><span class="line">        h.<span class="built_in">next</span> = left <span class="keyword">if</span> left <span class="keyword">else</span> right</span><br><span class="line">        <span class="keyword">return</span> res.<span class="built_in">next</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="9-直线上最多的点-Medium"><a href="#9-直线上最多的点-Medium" class="headerlink" title="9. 直线上最多的点(Medium)"></a>9. 直线上最多的点(Medium)</h2><p>记录给定一个二维平面，平面上有 <em>n</em> 个点，求最多有多少个点在同一条直线上。</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">输入: [[1,1],[2,2],[3,3]]</span><br><span class="line">输出: 3</span><br><span class="line">解释:</span><br><span class="line">^</span><br><span class="line">|</span><br><span class="line">|        o</span><br><span class="line">|     o</span><br><span class="line">|  o  </span><br><span class="line">+-------------&gt;</span><br><span class="line">0  1  2  3  4</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">输入: [[1,1],[3,2],[5,3],[4,1],[2,3],[1,4]]</span><br><span class="line">输出: 4</span><br><span class="line">解释:</span><br><span class="line">^</span><br><span class="line">|</span><br><span class="line">|  o</span><br><span class="line">|     o        o</span><br><span class="line">|        o</span><br><span class="line">|  o        o</span><br><span class="line">+-------------------&gt;</span><br><span class="line">0  1  2  3  4  5  6</span><br></pre></td></tr></table></figure>
+
+<p>解答：</p>
+<p>思路：</p>
+<p>这道题比较难</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">maxPoints</span>(<span class="params">self, points: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>) -&gt; <span class="built_in">int</span>:</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">max_points_on_a_line</span>(<span class="params">i</span>):</span></span><br><span class="line">            <span class="function"><span class="keyword">def</span> <span class="title">add_line</span>(<span class="params">i,j,count,dup</span>):</span></span><br><span class="line">                x1 = points[i][<span class="number">0</span>]</span><br><span class="line">                y1 = points[i][<span class="number">1</span>]</span><br><span class="line">                x2 = points[j][<span class="number">0</span>]</span><br><span class="line">                y2 = points[j][<span class="number">1</span>]</span><br><span class="line">                <span class="keyword">if</span> x1 == x2 <span class="keyword">and</span> y1 == y2:</span><br><span class="line">                    dup += <span class="number">1</span></span><br><span class="line">                <span class="keyword">elif</span> y1 == y2:</span><br><span class="line">                    <span class="keyword">nonlocal</span> hori</span><br><span class="line">                    hori += <span class="number">1</span></span><br><span class="line">                    count = <span class="built_in">max</span>(hori,count)</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    slope = (x1-x2)/(y1-y2)</span><br><span class="line">                    lines[slope] = lines.get(slope,<span class="number">1</span>) + <span class="number">1</span></span><br><span class="line">                    count = <span class="built_in">max</span>(count,lines[slope])</span><br><span class="line">                <span class="keyword">return</span> count,dup</span><br><span class="line">            lines = &#123;&#125;</span><br><span class="line">            count = <span class="number">1</span></span><br><span class="line">            dup = <span class="number">0</span></span><br><span class="line">            hori = <span class="number">1</span></span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(i+<span class="number">1</span>,n):</span><br><span class="line">                count,dup = add_line(i,j,count,dup)</span><br><span class="line">            <span class="keyword">return</span> count + dup</span><br><span class="line">        n = <span class="built_in">len</span>(points)</span><br><span class="line">        <span class="keyword">if</span> n &lt; <span class="number">3</span>:</span><br><span class="line">            <span class="keyword">return</span> n</span><br><span class="line">        max_count = <span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n-<span class="number">1</span>):</span><br><span class="line">            max_count = <span class="built_in">max</span>(max_count,max_points_on_a_line(i))</span><br><span class="line">        <span class="keyword">return</span> max_count</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="10-逆波兰表达式求值-Medium"><a href="#10-逆波兰表达式求值-Medium" class="headerlink" title="10. 逆波兰表达式求值(Medium)"></a>10. 逆波兰表达式求值(Medium)</h2><p>根据<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E9%80%86%E6%B3%A2%E5%85%B0%E5%BC%8F/128437">逆波兰表示法</a>，求表达式的值。</p>
+<p>有效的运算符包括 <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code> 。每个运算对象可以是整数，也可以是另一个逆波兰表达式。</p>
+<p><strong>说明：</strong></p>
+<ul>
+<li>整数除法只保留整数部分。</li>
+<li>给定逆波兰表达式总是有效的。换句话说，表达式总会得出有效数值且不存在除数为 0 的情况。</li>
+</ul>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: [&quot;2&quot;, &quot;1&quot;, &quot;+&quot;, &quot;3&quot;, &quot;*&quot;]</span><br><span class="line">输出: 9</span><br><span class="line">解释: ((2 + 1) * 3) = 9</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: [&quot;4&quot;, &quot;13&quot;, &quot;5&quot;, &quot;/&quot;, &quot;+&quot;]</span><br><span class="line">输出: 6</span><br><span class="line">解释: (4 + (13 / 5)) = 6</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">输入: [&quot;10&quot;, &quot;6&quot;, &quot;9&quot;, &quot;3&quot;, &quot;+&quot;, &quot;-11&quot;, &quot;*&quot;, &quot;/&quot;, &quot;*&quot;, &quot;17&quot;, &quot;+&quot;, &quot;5&quot;, &quot;+&quot;]</span><br><span class="line">输出: 22</span><br><span class="line">解释: </span><br><span class="line">  ((10 * (6 / ((9 + 3) * -11))) + 17) + 5</span><br><span class="line">= ((10 * (6 / (12 * -11))) + 17) + 5</span><br><span class="line">= ((10 * (6 / -132)) + 17) + 5</span><br><span class="line">= ((10 * 0) + 17) + 5</span><br><span class="line">= (0 + 17) + 5</span><br><span class="line">= 17 + 5</span><br><span class="line">= 22</span><br></pre></td></tr></table></figure>
+
+<h2 id="11-翻转字符串里的单词-Medium"><a href="#11-翻转字符串里的单词-Medium" class="headerlink" title="11. 翻转字符串里的单词(Medium)"></a>11. 翻转字符串里的单词(Medium)</h2><p>给定一个字符串，逐个翻转字符串中的每个单词。 </p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;the sky is blue&quot;</span><br><span class="line">输出: &quot;blue is sky the&quot;</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;  hello world!  &quot;</span><br><span class="line">输出: &quot;world! hello&quot;</span><br><span class="line">解释: 输入字符串可以在前面或者后面包含多余的空格，但是反转后的字符不能包括。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;a good   example&quot;</span><br><span class="line">输出: &quot;example good a&quot;</span><br><span class="line">解释: 如果两个单词间有多余的空格，将反转后单词间的空格减少到只含一个。</span><br></pre></td></tr></table></figure>
+
+<p><strong>说明：</strong></p>
+<ul>
+<li>无空格字符构成一个单词。</li>
+<li>输入字符串可以在前面或者后面包含多余的空格，但是反转后的字符不能包括。</li>
+<li>如果两个单词间有多余的空格，将反转后单词间的空格减少到只含一个。</li>
+</ul>
+<p><strong>进阶：</strong></p>
+<p>请选用 C 语言的用户尝试使用 <em>O</em>(1) 额外空间复杂度的原地解法。</p>
+<p>解答：</p>
+<p>思路：</p>
+<p>双指针做法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">reverseWords</span>(<span class="params">self, s</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :rtype: str</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        s = s.strip()</span><br><span class="line">        res = <span class="string">&#x27;&#x27;</span></span><br><span class="line">        i,j = <span class="built_in">len</span>(s)-<span class="number">1</span>,<span class="built_in">len</span>(s)</span><br><span class="line">        <span class="keyword">while</span> i &gt; <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">if</span> s[i] == <span class="string">&#x27; &#x27;</span>:</span><br><span class="line">                res += s[i+<span class="number">1</span>:j] + <span class="string">&#x27; &#x27;</span></span><br><span class="line">                <span class="keyword">while</span> s[i] == <span class="string">&#x27; &#x27;</span>:</span><br><span class="line">                    i -= <span class="number">1</span></span><br><span class="line">                j = i +<span class="number">1</span></span><br><span class="line">            i -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> res + s[:j]</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="12-乘积最大子序列-Medium"><a href="#12-乘积最大子序列-Medium" class="headerlink" title="12. 乘积最大子序列(Medium)"></a>12. 乘积最大子序列(Medium)</h2><p>给定一个整数数组 <code>nums</code> ，找出一个序列中乘积最大的连续子序列（该序列至少包含一个数）。</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: [2,3,-2,4]</span><br><span class="line">输出: 6</span><br><span class="line">解释: 子数组 [2,3] 有最大乘积 6。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: [-2,0,-1]</span><br><span class="line">输出: 0</span><br><span class="line">解释: 结果不能为 2, 因为 [-2,-1] 不是子数组。</span><br></pre></td></tr></table></figure>
+
+<p>解答：</p>
+<p>思路：</p>
+<p>动态规划</p>
+<p>保存一个局部最小值和最大值</p>
+<p>遇到负数则交换两个值</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">maxProduct</span>(<span class="params">self, nums</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        minv,maxv,res = nums[<span class="number">0</span>],nums[<span class="number">0</span>],nums[<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="built_in">len</span>(nums)):</span><br><span class="line">            <span class="keyword">if</span> nums[i]&lt;<span class="number">0</span>:</span><br><span class="line">                minv,maxv = maxv,minv</span><br><span class="line">            maxv = <span class="built_in">max</span>(maxv*nums[i],nums[i])</span><br><span class="line">            minv = <span class="built_in">min</span>(minv*nums[i],nums[i])</span><br><span class="line">            res = <span class="built_in">max</span>(res,maxv)</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="13-寻找旋转排序数组中的最小值-Medium"><a href="#13-寻找旋转排序数组中的最小值-Medium" class="headerlink" title="13. 寻找旋转排序数组中的最小值(Medium)"></a>13. 寻找旋转排序数组中的最小值(Medium)</h2><p>假设按照升序排序的数组在预先未知的某个点上进行了旋转。</p>
+<p>( 例如，数组 <code>[0,1,2,4,5,6,7]</code> 可能变为 <code>[4,5,6,7,0,1,2]</code> )。</p>
+<p>请找出其中最小的元素。</p>
+<p>你可以假设数组中不存在重复元素。</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [3,4,5,1,2]</span><br><span class="line">输出: 1</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [4,5,6,7,0,1,2]</span><br><span class="line">输出: 0</span><br></pre></td></tr></table></figure>
+
+<p>解答：</p>
+<p>思路：</p>
+<p>简单的二分法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">findMin</span>(<span class="params">self, nums</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        l,r = <span class="number">0</span>,<span class="built_in">len</span>(nums)-<span class="number">1</span></span><br><span class="line">        <span class="keyword">while</span> l &lt; r:</span><br><span class="line">            mid = (l+r)//<span class="number">2</span></span><br><span class="line">            <span class="keyword">if</span> nums[mid] &gt; nums[r]:</span><br><span class="line">                l = mid + <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                r = mid</span><br><span class="line">        <span class="keyword">return</span> nums[l]</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="14-寻找旋转排序数组中的最小值2-Hard"><a href="#14-寻找旋转排序数组中的最小值2-Hard" class="headerlink" title="14. 寻找旋转排序数组中的最小值2(Hard)"></a>14. 寻找旋转排序数组中的最小值2(Hard)</h2><p>假设按照升序排序的数组在预先未知的某个点上进行了旋转。</p>
+<p>( 例如，数组 <code>[0,1,2,4,5,6,7]</code> 可能变为 <code>[4,5,6,7,0,1,2]</code> )。</p>
+<p>请找出其中最小的元素。</p>
+<p>注意数组中可能存在重复的元素。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [1,3,5]</span><br><span class="line">输出: 1</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [2,2,2,0,1]</span><br><span class="line">输出: 0</span><br></pre></td></tr></table></figure>
+
+<p><strong>说明：</strong></p>
+<ul>
+<li>这道题是 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array/description/">寻找旋转排序数组中的最小值</a> 的延伸题目。</li>
+<li>允许重复会影响算法的时间复杂度吗？会如何影响，为什么？</li>
+</ul>
+<p>解答：</p>
+<p>思路：</p>
+<p>和上题一样，二分法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">findMin</span>(<span class="params">self, nums</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        l,r = <span class="number">0</span>,<span class="built_in">len</span>(nums)-<span class="number">1</span></span><br><span class="line">        <span class="keyword">while</span> l &lt; r:</span><br><span class="line">            mid = (l+r)//<span class="number">2</span></span><br><span class="line">            <span class="keyword">if</span> nums[mid] &gt; nums[r]:</span><br><span class="line">                l = mid + <span class="number">1</span></span><br><span class="line">            <span class="keyword">elif</span> nums[mid] &lt; nums[r]:</span><br><span class="line">                r = mid</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                r = r-<span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> nums[l]</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="15-最小栈-Easy"><a href="#15-最小栈-Easy" class="headerlink" title="15. 最小栈(Easy)"></a>15. 最小栈(Easy)</h2><p>设计一个支持 push，pop，top 操作，并能在常数时间内检索到最小元素的栈。</p>
+<ul>
+<li>push(x) – 将元素 x 推入栈中。</li>
+<li>pop() – 删除栈顶的元素。</li>
+<li>top() – 获取栈顶元素。</li>
+<li>getMin() – 检索栈中的最小元素。</li>
+</ul>
+<p><strong>示例:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">MinStack minStack = new MinStack();</span><br><span class="line">minStack.push(-2);</span><br><span class="line">minStack.push(0);</span><br><span class="line">minStack.push(-3);</span><br><span class="line">minStack.getMin();   --&gt; 返回 -3.</span><br><span class="line">minStack.pop();</span><br><span class="line">minStack.top();      --&gt; 返回 0.</span><br><span class="line">minStack.getMin();   --&gt; 返回 -2.</span><br></pre></td></tr></table></figure>
+
+<h2 id="16-上下翻转二叉树-Medium"><a href="#16-上下翻转二叉树-Medium" class="headerlink" title="16. 上下翻转二叉树(Medium)"></a>16. 上下翻转二叉树(Medium)</h2><p>给定一个二叉树，其中所有的右节点要么是具有兄弟节点（拥有相同父节点的左节点）的叶节点，要么为空，将此二叉树上下翻转并将它变成一棵树， 原来的右节点将转换成左叶节点。返回新的根。</p>
+<p><strong>例子:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">输入: [1,2,3,4,5]</span><br><span class="line"></span><br><span class="line">    1</span><br><span class="line">   / \</span><br><span class="line">  2   3</span><br><span class="line"> / \</span><br><span class="line">4   5</span><br><span class="line"></span><br><span class="line">输出: 返回二叉树的根 [4,5,2,#,#,3,1]</span><br><span class="line"></span><br><span class="line">   4</span><br><span class="line">  / \</span><br><span class="line"> 5   2</span><br><span class="line">    / \</span><br><span class="line">   3   1  </span><br></pre></td></tr></table></figure>
+
+<p><strong>说明:</strong></p>
+<p>对 <code>[4,5,2,#,#,3,1]</code> 感到困惑? 下面详细介绍请查看 <a target="_blank" rel="noopener" href="https://support.leetcode-cn.com/hc/kb/article/1194353/">二叉树是如何被序列化的</a>。</p>
+<p>二叉树的序列化遵循层次遍历规则，当没有节点存在时，’#’ 表示路径终止符。</p>
+<p>这里有一个例子:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">  1</span><br><span class="line"> / \</span><br><span class="line">2   3</span><br><span class="line">   /</span><br><span class="line">  4</span><br><span class="line">   \</span><br><span class="line">    5</span><br></pre></td></tr></table></figure>
+
+<p>上面的二叉树则被序列化为 <code>[1,2,3,#,#,4,#,#,5]</code>.</p>
+<p>解答：</p>
+<p>思路：</p>
+<p>这道题很有意思，将左节点变成根节点，根节点变成右节点，右节点变成左节点</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"># class TreeNode(object):</span></span><br><span class="line"><span class="comment">#     def __init__(self, x):</span></span><br><span class="line"><span class="comment">#         self.val = x</span></span><br><span class="line"><span class="comment">#         self.left = None</span></span><br><span class="line"><span class="comment">#         self.right = None</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">upsideDownBinaryTree</span>(<span class="params">self, root</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type root: TreeNode</span></span><br><span class="line"><span class="string">        :rtype: TreeNode</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root <span class="keyword">or</span> <span class="keyword">not</span> root.left:</span><br><span class="line">            <span class="keyword">return</span> root</span><br><span class="line">        left = self.upsideDownBinaryTree(root.left)</span><br><span class="line">        root.left.left = root.right</span><br><span class="line">        root.left.right = root</span><br><span class="line">        root.left = <span class="literal">None</span></span><br><span class="line">        root.right = <span class="literal">None</span></span><br><span class="line">        <span class="keyword">return</span> left</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="17-用Read4读取N个字符-Easy"><a href="#17-用Read4读取N个字符-Easy" class="headerlink" title="17. 用Read4读取N个字符(Easy)"></a>17. 用Read4读取N个字符(Easy)</h2><p>给你一个文件，并且该文件只能通过给定的 <code>read4</code> 方法来读取，请实现一个方法使其能够读取 n 个字符。</p>
+<p><strong>read4 方法：</strong></p>
+<p>API <code>read4</code> 可以从文件中读取 4 个连续的字符，并且将它们写入缓存数组 <code>buf</code> 中。</p>
+<p>返回值为实际读取的字符个数。</p>
+<p>注意 <code>read4()</code> 自身拥有文件指针，很类似于 C 语言中的 <code>FILE *fp</code> 。</p>
+<p><strong>read4 的定义：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">参数类型: char[] buf</span><br><span class="line">返回类型: int</span><br><span class="line"></span><br><span class="line">注意: buf[] 是目标缓存区不是源缓存区，read4 的返回结果将会复制到 buf[] 当中。</span><br></pre></td></tr></table></figure>
+
+<p>下列是一些使用 <code>read4</code> 的例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">File file(&quot;abcdefghijk&quot;); // 文件名为 &quot;abcdefghijk&quot;， 初始文件指针 (fp) 指向 &#x27;a&#x27; </span><br><span class="line">char[] buf = new char[4]; // 创建一个缓存区使其能容纳足够的字符</span><br><span class="line">read4(buf); // read4 返回 4。现在 buf = &quot;abcd&quot;，fp 指向 &#x27;e&#x27;</span><br><span class="line">read4(buf); // read4 返回 4。现在 buf = &quot;efgh&quot;，fp 指向 &#x27;i&#x27;</span><br><span class="line">read4(buf); // read4 返回 3。现在 buf = &quot;ijk&quot;，fp 指向文件末尾</span><br></pre></td></tr></table></figure>
+
+<p><strong>read 方法：</strong></p>
+<p>通过使用 <code>read4</code> 方法，实现 <code>read</code> 方法。该方法可以从文件中读取 n 个字符并将其存储到缓存数组 <code>buf</code> 中。您 <strong>不能</strong> 直接操作文件。</p>
+<p>返回值为实际读取的字符。</p>
+<p><strong>read 的定义：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">参数类型:   char[] buf, int n</span><br><span class="line">返回类型:   int</span><br><span class="line"></span><br><span class="line">注意: buf[] 是目标缓存区不是源缓存区，你需要将结果写入 buf[] 中。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入： file = &quot;abc&quot;, n = 4</span><br><span class="line">输出： 3</span><br><span class="line">解释： 当执行你的 rand 方法后，buf 需要包含 &quot;abc&quot;。 文件一共 3 个字符，因此返回 3。 注意 &quot;abc&quot; 是文件的内容，不是 buf 的内容，buf 是你需要写入结果的目标缓存区。 </span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入： file = &quot;abcde&quot;, n = 5</span><br><span class="line">输出： 5</span><br><span class="line">解释： 当执行你的 rand 方法后，buf 需要包含 &quot;abcde&quot;。文件共 5 个字符，因此返回 5。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入： file = &quot;abcdABCD1234&quot;, n = 12</span><br><span class="line">输出： 12</span><br><span class="line">解释： 当执行你的 rand 方法后，buf 需要包含 &quot;abcdABCD1234&quot;。文件一共 12 个字符，因此返回 12。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 4:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入： file = &quot;leetcode&quot;, n = 5</span><br><span class="line">输出： 5</span><br><span class="line">解释： 当执行你的 rand 方法后，buf 需要包含 &quot;leetc&quot;。文件中一共 5 个字符，因此返回 5。</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<ol>
+<li>你 <strong>不能</strong> 直接操作该文件，文件只能通过 <code>read4</code> 获取而 <strong>不能</strong> 通过 <code>read</code>。</li>
+<li><code>read</code>  函数只在每个测试用例调用一次。</li>
+<li>你可以假定目标缓存数组 <code>buf</code> 保证有足够的空间存下 n 个字符。 </li>
+</ol>
+<h2 id="18-用Read4读取N个字符2-Hard"><a href="#18-用Read4读取N个字符2-Hard" class="headerlink" title="18. 用Read4读取N个字符2(Hard)"></a>18. 用Read4读取N个字符2(Hard)</h2><p>给你一个文件，并且该文件只能通过给定的 <code>read4</code> 方法来读取，请实现一个方法使其能够读取 n 个字符。<strong>注意：你的</strong> <strong>read 方法可能会被调用多次。</strong></p>
+<p><strong>read4 的定义：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">参数类型: char[] buf</span><br><span class="line">返回类型: int</span><br><span class="line"></span><br><span class="line">注意: buf[] 是目标缓存区不是源缓存区，read4 的返回结果将会复制到 buf[] 当中。</span><br></pre></td></tr></table></figure>
+
+<p>下列是一些使用 <code>read4</code> 的例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">File file(&quot;abcdefghijk&quot;); // 文件名为 &quot;abcdefghijk&quot;， 初始文件指针 (fp) 指向 &#x27;a&#x27; </span><br><span class="line">char[] buf = new char[4]; // 创建一个缓存区使其能容纳足够的字符</span><br><span class="line">read4(buf); // read4 返回 4。现在 buf = &quot;abcd&quot;，fp 指向 &#x27;e&#x27;</span><br><span class="line">read4(buf); // read4 返回 4。现在 buf = &quot;efgh&quot;，fp 指向 &#x27;i&#x27;</span><br><span class="line">read4(buf); // read4 返回 3。现在 buf = &quot;ijk&quot;，fp 指向文件末尾</span><br></pre></td></tr></table></figure>
+
+<p><strong>read 方法：</strong></p>
+<p>通过使用 <code>read4</code> 方法，实现 <code>read</code> 方法。该方法可以从文件中读取 n 个字符并将其存储到缓存数组 <code>buf</code> 中。您 <strong>不能</strong> 直接操作文件。</p>
+<p>返回值为实际读取的字符。</p>
+<p><strong>read 的定义：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">参数:   char[] buf, int n</span><br><span class="line">返回值: int</span><br><span class="line"></span><br><span class="line">注意: buf[] 是目标缓存区不是源缓存区，你需要将结果写入 buf[] 中。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">File file(&quot;abc&quot;);</span><br><span class="line">Solution sol;</span><br><span class="line">// 假定 buf 已经被分配了内存，并且有足够的空间来存储文件中的所有字符。</span><br><span class="line">sol.read(buf, 1); // 当调用了您的 read 方法后，buf 需要包含 &quot;a&quot;。 一共读取 1 个字符，因此返回 1。</span><br><span class="line">sol.read(buf, 2); // 现在 buf 需要包含 &quot;bc&quot;。一共读取 2 个字符，因此返回 2。</span><br><span class="line">sol.read(buf, 1); // 由于已经到达了文件末尾，没有更多的字符可以读取，因此返回 0。</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">File file(&quot;abc&quot;);</span><br><span class="line">Solution sol;</span><br><span class="line">sol.read(buf, 4); // 当调用了您的 read 方法后，buf 需要包含 &quot;abc&quot;。 一共只能读取 3 个字符，因此返回 3。</span><br><span class="line">sol.read(buf, 1); // 由于已经到达了文件末尾，没有更多的字符可以读取，因此返回 0。</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<ol>
+<li>你 <strong>不能</strong> 直接操作该文件，文件只能通过 <code>read4</code> 获取而 <strong>不能</strong> 通过 <code>read</code>。</li>
+<li><code>read</code>  函数可以被调用 <strong>多次</strong>。</li>
+<li>请记得 <strong>重置</strong> 在 Solution 中声明的类变量（静态变量），因为类变量会 <strong>在多个测试用例中保持不变</strong>，影响判题准确。请 <a target="_blank" rel="noopener" href="https://support.leetcode-cn.com/hc/kb/section/1071534/">查阅</a> 这里。</li>
+<li>你可以假定目标缓存数组 <code>buf</code> 保证有足够的空间存下 n 个字符。 </li>
+<li>保证在一个给定测试用例中，<code>read</code> 函数使用的是同一个 <code>buf</code>。</li>
+</ol>
+<h2 id="19-至多包含两个不同字符的最长子串-Hard"><a href="#19-至多包含两个不同字符的最长子串-Hard" class="headerlink" title="19. 至多包含两个不同字符的最长子串(Hard)"></a>19. 至多包含两个不同字符的最长子串(Hard)</h2><p>给定一个字符串 <strong>s</strong> ，找出 <strong>至多</strong> 包含两个不同字符的最长子串 <strong>t 。</strong></p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;eceba&quot;</span><br><span class="line">输出: 3</span><br><span class="line">解释: t 是 &quot;ece&quot;，长度为3。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;ccaabbb&quot;</span><br><span class="line">输出: 5</span><br><span class="line">解释: t 是 &quot;aabbb&quot;，长度为5。</span><br></pre></td></tr></table></figure>
+
+<p>解答：</p>
+<p>思路：</p>
+<p>滑动窗口，已经很熟练了，很简单的一道题</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">lengthOfLongestSubstringTwoDistinct</span>(<span class="params">self, s</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">from</span> collections <span class="keyword">import</span> defaultdict</span><br><span class="line">        lookup = defaultdict(<span class="built_in">int</span>)</span><br><span class="line">        start = end = <span class="number">0</span></span><br><span class="line">        max_len = <span class="number">0</span></span><br><span class="line">        cnt = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> end &lt; <span class="built_in">len</span>(s):</span><br><span class="line">            <span class="keyword">if</span> lookup[s[end]] == <span class="number">0</span>:</span><br><span class="line">                cnt += <span class="number">1</span></span><br><span class="line">            lookup[s[end]] += <span class="number">1</span></span><br><span class="line">            end +=<span class="number">1</span></span><br><span class="line">            <span class="keyword">while</span> cnt &gt; <span class="number">2</span>:</span><br><span class="line">                <span class="keyword">if</span> lookup[s[start]] == <span class="number">1</span>:</span><br><span class="line">                    cnt -= <span class="number">1</span></span><br><span class="line">                lookup[s[start]] -= <span class="number">1</span></span><br><span class="line">                start += <span class="number">1</span></span><br><span class="line">            max_len = <span class="built_in">max</span>(max_len,end-start)</span><br><span class="line">        <span class="keyword">return</span> max_len</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="20-相交链表-Easy"><a href="#20-相交链表-Easy" class="headerlink" title="20. 相交链表(Easy)"></a>20. 相交链表(Easy)</h2><p>编写一个程序，找到两个单链表相交的起始节点。</p>
+<p>如下面的两个链表<strong>：</strong></p>
+<p><a target="_blank" rel="noopener" href="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/14/160_statement.png"><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/14/160_statement.png" alt="img"></a></p>
+<p>在节点 c1 开始相交。</p>
+<p><strong>示例 1：</strong></p>
+<p><a target="_blank" rel="noopener" href="https://assets.leetcode.com/uploads/2018/12/13/160_example_1.png"><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/14/160_example_1.png" alt="img"></a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：intersectVal = 8, listA = [4,1,8,4,5], listB = [5,0,1,8,4,5], skipA = 2, skipB = 3</span><br><span class="line">输出：Reference of the node with value = 8</span><br><span class="line">输入解释：相交节点的值为 8 （注意，如果两个列表相交则不能为 0）。从各自的表头开始算起，链表 A 为 [4,1,8,4,5]，链表 B 为 [5,0,1,8,4,5]。在 A 中，相交节点前有 2 个节点；在 B 中，相交节点前有 3 个节点。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<p><a target="_blank" rel="noopener" href="https://assets.leetcode.com/uploads/2018/12/13/160_example_2.png"><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/14/160_example_2.png" alt="img"></a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：intersectVal = 2, listA = [0,9,1,2,4], listB = [3,2,4], skipA = 3, skipB = 1</span><br><span class="line">输出：Reference of the node with value = 2</span><br><span class="line">输入解释：相交节点的值为 2 （注意，如果两个列表相交则不能为 0）。从各自的表头开始算起，链表 A 为 [0,9,1,2,4]，链表 B 为 [3,2,4]。在 A 中，相交节点前有 3 个节点；在 B 中，相交节点前有 1 个节点。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<p><a target="_blank" rel="noopener" href="https://assets.leetcode.com/uploads/2018/12/13/160_example_3.png"><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/14/160_example_3.png" alt="img"></a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：intersectVal = 0, listA = [2,6,4], listB = [1,5], skipA = 3, skipB = 2</span><br><span class="line">输出：null</span><br><span class="line">输入解释：从各自的表头开始算起，链表 A 为 [2,6,4]，链表 B 为 [1,5]。由于这两个链表不相交，所以 intersectVal 必须为 0，而 skipA 和 skipB 可以是任意值。</span><br><span class="line">解释：这两个链表不相交，因此返回 null。</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<ul>
+<li>如果两个链表没有交点，返回 <code>null</code>.</li>
+<li>在返回结果后，两个链表仍须保持原有的结构。</li>
+<li>可假定整个链表结构中没有循环。</li>
+<li>程序尽量满足 O(<em>n</em>) 时间复杂度，且仅用 O(<em>1</em>) 内存。</li>
+</ul>
+<p>解答：</p>
+<p>思路：双指针加链表拼接</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode(object):</span></span><br><span class="line"><span class="comment">#     def __init__(self, x):</span></span><br><span class="line"><span class="comment">#         self.val = x</span></span><br><span class="line"><span class="comment">#         self.next = None</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getIntersectionNode</span>(<span class="params">self, headA, headB</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type head1, head1: ListNode</span></span><br><span class="line"><span class="string">        :rtype: ListNode</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        ha,hb = headA,headB</span><br><span class="line">        <span class="keyword">while</span> ha != hb:</span><br><span class="line">            ha = ha.<span class="built_in">next</span> <span class="keyword">if</span> ha <span class="keyword">else</span> headB</span><br><span class="line">            hb = hb.<span class="built_in">next</span> <span class="keyword">if</span> hb <span class="keyword">else</span> headA</span><br><span class="line">        <span class="keyword">return</span> ha</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="الصفحة السابقة"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="الصفحة التالية"></i></a>
+  </nav>
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Aurora</span>
+</div>
+  <div class="powered-by">تطبيق الموقع <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

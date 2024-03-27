@@ -1,37 +1,562 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
-{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
 
-{% block page_class %}page-post-detail{% endblock %}
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"8.0.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"بحث...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
+  </script>
+
+  <meta name="description" content="1. 背景FFM（Field-aware Factorization Machine）最初的概念来自Yu-Chin Juan（阮毓钦，毕业于中国台湾大学，现在美国Criteo工作）与其比赛队员，是他们借鉴了来自Michael Jahrer的论文[1]中的field概念提出了FM的升级版模型。通过引入field的概念，FFM把相同性质的特征归于同一个field。 2. FFM原理推导考虑下面的数据集">
+<meta property="og:type" content="article">
+<meta property="og:title" content="FFM模型">
+<meta property="og:url" content="http://yoursite.com/2019/07/02/ffm-review/index.html">
+<meta property="og:site_name" content="晨曦微光">
+<meta property="og:description" content="1. 背景FFM（Field-aware Factorization Machine）最初的概念来自Yu-Chin Juan（阮毓钦，毕业于中国台湾大学，现在美国Criteo工作）与其比赛队员，是他们借鉴了来自Michael Jahrer的论文[1]中的field概念提出了FM的升级版模型。通过引入field的概念，FFM把相同性质的特征归于同一个field。 2. FFM原理推导考虑下面的数据集">
+<meta property="og:locale">
+<meta property="og:image" content="https://www.hrwhisper.me/wp-content/uploads/2018/07/poly2-model-example.png">
+<meta property="og:image" content="https://www.hrwhisper.me/wp-content/uploads/2018/07/fm-model-example.png">
+<meta property="og:image" content="https://www.hrwhisper.me/wp-content/uploads/2018/07/ffm-model-example.png">
+<meta property="og:image" content="https://www.hrwhisper.me/wp-content/uploads/2018/07/ffm-model-training.png">
+<meta property="og:image" content="https://awps-assets.meituan.net/mit-x/blog-images-bundle-2016/0ba057eb.png">
+<meta property="article:published_time" content="2019-07-02T15:35:58.000Z">
+<meta property="article:modified_time" content="2019-07-04T15:00:58.000Z">
+<meta property="article:author" content="Aurora">
+<meta property="article:tag" content="论文">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.hrwhisper.me/wp-content/uploads/2018/07/poly2-model-example.png">
 
 
-{% block content %}
+<link rel="canonical" href="http://yoursite.com/2019/07/02/ffm-review/">
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
 
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>FFM模型 | 晨曦微光</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="تشغيل شريط التصفح">
     </div>
   </div>
 
-{% endblock %}
+  <div class="site-meta">
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">晨曦微光</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          المحتويات
+        </li>
+        <li class="sidebar-nav-overview">
+          عام
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E8%83%8C%E6%99%AF"><span class="nav-number">1.</span> <span class="nav-text">1. 背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-FFM%E5%8E%9F%E7%90%86%E6%8E%A8%E5%AF%BC"><span class="nav-number">2.</span> <span class="nav-text">2. FFM原理推导</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-FFM%E6%A8%A1%E5%9E%8B%E5%AD%A6%E4%B9%A0"><span class="nav-number">3.</span> <span class="nav-text">3. FFM模型学习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-FFM-%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 FFM 数学公式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-FFM-%E6%A8%A1%E5%9E%8B%E5%AD%A6%E4%B9%A0"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 FFM 模型学习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-%E5%AE%9E%E7%8E%B0%E7%9A%84trick"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 实现的trick</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E9%80%82%E7%94%A8%E8%8C%83%E5%9B%B4%E5%92%8C%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7"><span class="nav-number">4.</span> <span class="nav-text">4. 适用范围和使用技巧</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Aurora</p>
+  <div class="site-description" itemprop="description">6.3</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">50</span>
+          <span class="site-state-item-name">المقالات</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">التصنيفات</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">الوسوم</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/02/ffm-review/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Aurora">
+      <meta itemprop="description" content="6.3">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="晨曦微光">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          FFM模型
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">نُشر في</span>
+
+      <time title="أُنشأ: 2019-07-02 23:35:58" itemprop="dateCreated datePublished" datetime="2019-07-02T23:35:58+08:00">2019-07-02</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">عُدل في</span>
+        <time title="عُدل: 2019-07-04 23:00:58" itemprop="dateModified" datetime="2019-07-04T23:00:58+08:00">2019-07-04</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">في</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%A8%A1%E5%9E%8B/" itemprop="url" rel="index"><span itemprop="name">模型</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="1-背景"><a href="#1-背景" class="headerlink" title="1. 背景"></a>1. 背景</h2><p>FFM（Field-aware Factorization Machine）最初的概念来自Yu-Chin Juan（阮毓钦，毕业于中国台湾大学，现在美国Criteo工作）与其比赛队员，是他们借鉴了来自Michael Jahrer的论文[<a target="_blank" rel="noopener" href="https://kaggle2.blob.core.windows.net/competitions/kddcup2012/2748/media/Opera.pdf">1]</a>中的field概念提出了FM的升级版模型。通过引入field的概念，FFM把相同性质的特征归于同一个field。</p>
+<h2 id="2-FFM原理推导"><a href="#2-FFM原理推导" class="headerlink" title="2. FFM原理推导"></a>2. FFM原理推导</h2><p>考虑下面的数据集：</p>
+<table>
+<thead>
+<tr>
+<th align="left">Clicked?</th>
+<th align="left">Publisher(P)</th>
+<th align="left">Advertiser(A)</th>
+<th align="left">Gender(G)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1</td>
+<td align="left">EPSN</td>
+<td align="left">Nike</td>
+<td align="left">Male</td>
+</tr>
+<tr>
+<td align="left">0</td>
+<td align="left">NBC</td>
+<td align="left">Adidas</td>
+<td align="left">Female</td>
+</tr>
+</tbody></table>
+<p>对于第一条数据来说，FM模型的二次项为：<strong>w</strong>𝐸𝑃𝑆𝑁⋅<strong>𝐰</strong>𝑁𝑖𝑘𝑒+<strong>𝐰</strong>𝐸𝑃𝑆𝑁⋅<strong>𝐰</strong>𝑀𝑎𝑙𝑒+<strong>𝐰</strong>𝑁𝑖𝑘𝑒⋅<strong>𝐰</strong>𝑀𝑎𝑙𝑒。（这里只是把上面的v符合改成了w）每个特征只用一个隐向量来学习和其它特征的潜在影响。对于上面的例子中，Nike是广告主，Male是用户的性别，描述（EPSN，Nike）和（EPSN，Male）特征组合，FM模型都用同一个<strong>𝐰</strong>𝐸𝑆𝑃𝑁，而实际上，ESPN作为广告商，其对广告主和用户性别的潜在影响可能是不同的。</p>
+<p>因此，Yu-Chin Juan借鉴Michael Jahrer的论文（Ensemble of collaborative filtering and feature engineered models for click through rate prediction），将field概念引入FM模型。</p>
+<p>field是什么呢？即相同性质的特征放在一个field。比如EPSN、NBC都是属于广告商field的，Nike、Adidas都是属于广告主field，Male、Female都是属于性别field的。简单的说，同一个类别特征进行one-hot编码后生成的数值特征都可以放在同一个field中，比如最开始的例子中Day=26/11/15 Day=19/2/15可以放于同一个field中。如果是数值特征而非类别，可以直接作为一个field。</p>
+<p>引入了field后，对于刚才的例子来说，二次项变为：</p>
+​
+
+$\underbrace{{\bf w}_{EPSN, A} \cdot {\bf w}_{Nike, P}}_{P \times A} + \underbrace{{\bf w}_{EPSN, G} \cdot {\bf w}_{Male,P}}_{P \times G} + \underbrace{{{\bf w}_{Nike, G} \cdot {\bf w}_{Male,A}}}_{A \times G}$
+
+​
+
+<ul>
+<li>对于特征组合（EPSN，Nike）来说，其隐向量采用的是<strong>𝐰</strong>𝐸𝑃𝑆𝑁,𝐴和<strong>𝐰</strong>𝑁𝑖𝑘𝑒,𝑃，对于<strong>𝐰</strong>𝐸𝑃𝑆𝑁,𝐴这是因为Nike属于广告主（Advertiser）的field，而第二项<strong>𝐰</strong>𝑁𝑖𝑘𝑒,𝑃则是EPSN是广告商（Publisher）的field。</li>
+<li>再举个例子，对于特征组合（EPSN，Male）来说，<strong>𝐰</strong>𝐸𝑃𝑆𝑁,𝐺 是因为Male是用户性别(Gender)的field，而第二项<strong>𝐰</strong>𝑀𝑎𝑙𝑒,𝑃是因为EPSN是广告商（Publisher）的field。</li>
+</ul>
+<p>下面的图来自criteo，很好的表示了三个模型的区别</p>
+<blockquote>
+<p>For Poly2, a dedicated weight is learned for each feature pair: </p>
+<p><img src="https://www.hrwhisper.me/wp-content/uploads/2018/07/poly2-model-example.png" alt="img"></p>
+<p>For FMs, each feature has one latent vector, which is used to interact with any other latent vectors:</p>
+<p><img src="https://www.hrwhisper.me/wp-content/uploads/2018/07/fm-model-example.png" alt="img"></p>
+<p>For FFMs, each feature has several latent vectors, one of them is used depending on the field of the other feature:</p>
+<p><img src="https://www.hrwhisper.me/wp-content/uploads/2018/07/ffm-model-example.png" alt="img"></p>
+</blockquote>
+<h2 id="3-FFM模型学习"><a href="#3-FFM模型学习" class="headerlink" title="3. FFM模型学习"></a>3. FFM模型学习</h2><h3 id="3-1-FFM-数学公式"><a href="#3-1-FFM-数学公式" class="headerlink" title="3.1 FFM 数学公式"></a>3.1 FFM 数学公式</h3><p>假设样本的 n 个特征属于 f 个field，那么FFM的二次项有 $nf$个隐向量。而在FM模型中，每一维特征的隐向量只有一个。FM可以看作FFM的特例，是把所有特征都归属到一个field时的FFM模型。根据FFM的field敏感特性，可以导出其模型方程。</p>
+<p>$y(\mathbf{x}) = w_0 + \sum_{i=1}^d w_i x_i + \sum_{i=1}^d \sum_{j=i+1}^d (w_{i, f_j} \cdot w_{j, f_i}) x_i x_j  \tag{3-0}$</p>
+<p>其中，$f_j$是第j个特征所属的field。如果隐向量的长度为k，那么FFM的二次参数有$nfk$个，远多于FM模型的nk个。此外，由于隐向量与field相关，FFM二次项并不能够化简，其复杂度为$O(kn^2)$。</p>
+<h3 id="3-2-FFM-模型学习"><a href="#3-2-FFM-模型学习" class="headerlink" title="3.2 FFM 模型学习"></a>3.2 FFM 模型学习</h3><p>为了方便推导，这里省略FFM的一次项和常数项，公式为：</p>
+<p>$\phi(\mathbf{w}, \mathbf{x}) =\sum_{a=1}^d \sum_{b=a+1}^d ( w_{a, f_b} \cdot w_{b, f_a}) x_a x_b\tag{3-1}$</p>
+<p>FFM模型使用logistic loss作为损失函数，并加上L2正则项：</p>
+<p>$\mathcal{L} = \sum_{i=1}^N\log\left(1 + \exp(-y_i\phi({\bf w}, {\bf x_i}))\right) + \frac{\lambda}{2} |!|{\bf w}|!|^2 \tag{3-2}$</p>
+<p>采用随机梯度下降来（SGD）来优化损失函数，因此，损失函数只采用单个样本的损失：</p>
+<p>$\mathcal{L} =\log\left(1 + \exp(-y_i\phi({\bf w}, {\bf x}))\right) + \frac{\lambda}{2} |!|{\bf w}|!|^2 \tag{3-3}$</p>
+<p>对于每次迭代，选取一条数据(<strong>𝐱</strong>,𝑦)，然后让L对<strong>𝐰</strong>𝑎,𝑓𝑏和<strong>𝐰</strong>𝑏,𝑓𝑎求偏导（注意，采用SGD上面的求和项就去掉了，只采用单个样本的损失），得：</p>
+
+
+$\begin{align}  g_{a,f_b} \equiv \frac{\partial \mathcal{L}}{\partial w_{a,f_b}} = \kappa\cdot w_{b, f_a} x_a x_b + \lambda w_{a,f_b}^2 \tag{3-4} \\  g_{b,f_a} \equiv \frac{\partial \mathcal{L}}{\partial w_{b,f_a}} = \kappa\cdot w_{a, f_b} x_a x_b + \lambda w_{b,f_a}^2 \tag{3-5}\\  其中, \kappa = \frac{-y}{1+\exp(y\phi({\bf w,x}))}  \tag{3-6}\end{align}$
+
+
+
+<p>在具体的实现中，这里有两个trick，</p>
+<p>第一个trick是梯度的分步计算。</p>
+
+
+$\mathcal{L} = \mathcal{L} _{err} + \mathcal{L} _{reg} = \log\left(1 + \exp(-y_i\phi({\bf w}, {\bf x}))\right) + \frac{\lambda}{2} |\!|{\bf w}|\!|^2\\  \frac{\partial\mathcal{L}}{\partial\mathbf{w}} = \frac{\partial\mathcal{L}_{err}}{\partial\phi}\cdot \frac{\partial\phi}{\partial\mathbf{w}} + \frac{\partial\mathcal{L}_{reg}}{\partial\mathbf{w}}\tag{3-7}$
+
+
+
+<p>注意到$\frac{\partial\mathcal{L}_{err}}{\partial\phi}$和参数无关，每次更新模型时，只需要计算一次，之后直接调用结果即可。对于总共有𝑑𝑓𝑘个模型参数的计算来说，使用这种方式能极大提升运算效率。</p>
+<p>第二个trick是FFM的学习率是随迭代次数变化的，具体的是采用<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Stochastic_gradient_descent#AdaGrad">AdaGrad</a>算法，这里进行简单的介绍。</p>
+<p>Adagrad算法能够在训练中自动的调整学习率，<strong>对于稀疏的参数增加学习率，而稠密的参数则降低学习率。因此，Adagrad非常适合处理稀疏数据。</strong></p>
+<p>设𝑔𝑡,𝑗为第t轮第j个参数的梯度，则SGD和采用Adagrad的参数更新公式分别如下：</p>
+
+
+$\begin{align*}  SGD: \ & w_{t+1,j} = w_{t,j} -\eta \cdot g_{t,j} \tag{3-8}\\  Adagrad: \ & w_{t+1,j} = w_{t,j} – \frac{\eta}{\sqrt{G_{t,jj}+ \epsilon}} \cdot g_{t,j}  \tag{3-9}\end{align*}$
+
+
+
+<p>可以看出，Adagrad在学习率𝜂上还除以一项$\sqrt{G_{t,jj}+ \epsilon}$，这是什么意思呢？𝜖为平滑项，防止分母为0，$G_{t,jj} = \sum_{\iota=1}^tg_{\iota, jj}^2$即𝐺𝑡,𝑗𝑗为对角矩阵，每个对角线位置𝑗,𝑗的值为参数𝑤𝑗每一轮的平方和，可以看出，随着迭代的进行，每个参数的历史梯度累加到一起，使得每个参数的学习率逐渐减小。</p>
+<p>因此，用3-4、3-5计算完梯度后，下一步就是更新分母的对角矩阵。</p>
+
+
+$\begin{align}  G_{a,f_b} \leftarrow G_{a,f_b} + (g_{a,f_b})^2 \tag{3-10}\\  G_{b,f_a} \leftarrow G_{b,f_a} + (g_{b,f_a})^2 \tag{3-11}  \end{align}$
+
+
+
+<p>最后，更新模型参数：</p>
+
+
+$\begin{align}  w_{a,f_b} &\leftarrow w_{a,f_b} – \frac{\eta}{\sqrt{G_{a,f_b}+ 1}}g_{a,f_b} \tag{3-12}\\  w_{b,f_a} &\leftarrow w_{b,f_a} – \frac{\eta}{\sqrt{G_{b,f_a}+ 1}}g_{b,f_a} \tag{3-13}  \end{align}$
+
+
+
+<p>这就是论文中算法1描述的过程：</p>
+<p><img src="https://www.hrwhisper.me/wp-content/uploads/2018/07/ffm-model-training.png" alt="img"></p>
+<p><img src="https://awps-assets.meituan.net/mit-x/blog-images-bundle-2016/0ba057eb.png" alt="img"></p>
+<p>参考 ($ Algorithm; 1$ ), 下面简单解释一下FFM的SGD优化过程。 算法的输入 $( tr )、(va)、( pa ) $分别是训练样本集、验证样本集和训练参数设置。</p>
+<ol>
+<li><p>根据样本特征数量$（ tr.n)$、field的个数$( tr.m )$和训练参数$( pa)$，生成初始化模型，即随机生成模型的参数；</p>
+</li>
+<li><p>如果归一化参数 $( pa.norm )$ 为真，计算训练和验证样本的归一化系数，样本 $( i ) $的归一化系数为</p>
+<p>$R[i] = \frac{1}{| \mathbf{X}[i] |}$</p>
+</li>
+<li><p>对每一轮迭代，如果随机更新参数 ( pa.rand ) 为真，随机打乱训练样本的顺序；</p>
+</li>
+<li><p>对每一个训练样本，执行如下操作</p>
+<ul>
+<li>计算每一个样本的FFM项，$\phi $；</li>
+<li>计算每一个样本的训练误差，如算法所示，这里采用的是交叉熵损失函数$\log ( 1 + e\phi )$；</li>
+<li>利用单个样本的损失函数计算梯度$ g_\Phi $，再根据梯度更新模型参数；</li>
+</ul>
+</li>
+<li><p>对每一个验证样本，计算样本的FFM输出，计算验证误差；</p>
+</li>
+<li><p>重复步骤3~5，直到迭代结束或验证误差达到最小。</p>
+</li>
+</ol>
+<h3 id="3-3-实现的trick"><a href="#3-3-实现的trick" class="headerlink" title="3.3 实现的trick"></a>3.3 实现的trick</h3><p>本小节主要摘录美团点评的内容。</p>
+<p>除了上面提到的梯度分步计算和自适应学习率两个trick外，还有：</p>
+<blockquote>
+<ol>
+<li>OpenMP多核并行计算。OpenMP是用于共享内存并行系统的多处理器程序设计的编译方案，便于移植和多核扩展[<a target="_blank" rel="noopener" href="http://openmp.org/wp/openmp-specifications/">1]</a>。FFM的源码采用了OpenMP的API，对参数训练过程SGD进行了多线程扩展，支持多线程编译。因此，OpenMP技术极大地提高了FFM的训练效率和多核CPU的利用率。在训练模型时，输入的训练参数ns_threads指定了线程数量，一般设定为CPU的核心数，便于完全利用CPU资源。</li>
+<li>SSE3指令并行编程。SSE3全称为数据流单指令多数据扩展指令集3，是CPU对数据层并行的关键指令，主要用于多媒体和游戏的应用程序中[<a target="_blank" rel="noopener" href="http://blog.csdn.net/gengshenghong/article/details/7008704">2]</a>。SSE3指令采用128位的寄存器，同时操作4个单精度浮点数或整数。SSE3指令的功能非常类似于向量运算。例如，a和b采用SSE3指令相加（a和b分别包含4个数据），其功能是a种的4个元素与b中4个元素对应相加，得到4个相加后的值。采用SSE3指令后，向量运算的速度更加快捷，这对包含大量向量运算的FFM模型是非常有利的。</li>
+</ol>
+<p>除了上面的技巧之外，FFM的实现中还有很多调优技巧需要探索。例如，代码是按field和特征的编号申请参数空间的，如果选取了非连续或过大的编号，就会造成大量的内存浪费；在每个样本中加入值为1的新特征，相当于引入了因子化的一次项，避免了缺少一次项带来的模型偏差等。</p>
+</blockquote>
+<h2 id="4-适用范围和使用技巧"><a href="#4-适用范围和使用技巧" class="headerlink" title="4. 适用范围和使用技巧"></a>4. 适用范围和使用技巧</h2><p>在FFM原论文中，作者指出，FFM模型对于one-hot后类别特征十分有效，但是如果数据不够稀疏，可能相比其它模型提升没有稀疏的时候那么大，此外，对于数值型的数据效果不是特别的好。</p>
+<p>在Github上有FFM的<a target="_blank" rel="noopener" href="https://github.com/guestwalk/libffm">开源实现</a>，要使用FFM模型，特征需要转化为“<strong>field_id:feature_id:value</strong>”格式，相比LibSVM的格式多了field_id，即特征所属的field的编号，feature_id是特征编号，value为特征的值。</p>
+<p>此外，美团点评的文章中，提到了训练FFM时的一些注意事项：</p>
+<blockquote>
+<p>第一，样本归一化。FFM默认是进行样本数据的归一化的 。若不进行归一化，很容易造成数据inf溢出，进而引起梯度计算的nan错误。因此，样本层面的数据是推荐进行归一化的。</p>
+<p>第二，特征归一化。CTR/CVR模型采用了多种类型的源特征，包括数值型和categorical类型等。但是，categorical类编码后的特征取值只有0或1，较大的数值型特征会造成样本归一化后categorical类生成特征的值非常小，没有区分性。例如，一条用户-商品记录，用户为“男”性，商品的销量是5000个（假设其它特征的值为零），那么归一化后特征“sex=male”（性别为男）的值略小于0.0002，而“volume”（销量）的值近似为1。特征“sex=male”在这个样本中的作用几乎可以忽略不计，这是相当不合理的。因此，将源数值型特征的值归一化到[0,1]是非常必要的。</p>
+<p>第三，省略零值特征。从FFM模型的表达式(3-1)可以看出，零值特征对模型完全没有贡献。包含零值特征的一次项和组合项均为零，对于训练模型参数或者目标值预估是没有作用的。因此，可以省去零值特征，提高FFM模型训练和预测的速度，这也是稀疏样本采用FFM的显著优势。</p>
+</blockquote>
+<p>在DSP的场景中，FFM主要用来预估站内的CTR和CVR，即一个用户对一个商品的潜在点击率和点击后的转化率。</p>
+<p>CTR和CVR预估模型都是在线下训练，然后用于线上预测。两个模型采用的特征大同小异，主要有三类：用户相关的特征、商品相关的特征、以及用户-商品匹配特征。用户相关的特征包括年龄、性别、职业、兴趣、品类偏好、浏览/购买品类等基本信息，以及用户近期点击量、购买量、消费额等统计信息。商品相关的特征包括所属品类、销量、价格、评分、历史CTR/CVR等信息。用户-商品匹配特征主要有浏览/购买品类匹配、浏览/购买商家匹配、兴趣偏好匹配等几个维度。</p>
+<p>为了使用FFM方法，所有的特征必须转换成“field_id:feat_id:value”格式，field_id代表特征所属field的编号，feat_id是特征编号，value是特征的值。数值型的特征比较容易处理，只需分配单独的field编号，如用户评论得分、商品的历史CTR/CVR等。categorical特征需要经过One-Hot编码成数值型，编码产生的所有特征同属于一个field，而特征的值只能是0或1，如用户的性别、年龄段，商品的品类id等。除此之外，还有第三类特征，如用户浏览/购买品类，有多个品类id且用一个数值衡量用户浏览或购买每个品类商品的数量。这类特征按照categorical特征处理，不同的只是特征的值不是0或1，而是代表用户浏览或购买数量的数值。按前述方法得到field_id之后，再对转换后特征顺序编号，得到feat_id，特征的值也可以按照之前的方法获得。</p>
+<p>CTR、CVR预估样本的类别是按不同方式获取的。CTR预估的正样本是站内点击的用户-商品记录，负样本是展现但未点击的记录；CVR预估的正样本是站内支付（发生转化）的用户-商品记录，负样本是点击但未支付的记录。构建出样本数据后，采用FFM训练预估模型，并测试模型的性能。</p>
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left">#(field)</th>
+<th align="left">#(feature)</th>
+<th align="left">AUC</th>
+<th align="left">Logloss</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">站内CTR</td>
+<td align="left">39</td>
+<td align="left">2456</td>
+<td align="left">0.77</td>
+<td align="left">0.38</td>
+</tr>
+<tr>
+<td align="left">站内CVR</td>
+<td align="left">67</td>
+<td align="left">2441</td>
+<td align="left">0.92</td>
+<td align="left">0.13</td>
+</tr>
+</tbody></table>
+<p>由于模型是按天训练的，每天的性能指标可能会有些波动，但变化幅度不是很大。这个表的结果说明，站内CTR/CVR预估模型是非常有效的。</p>
+<p>在训练FFM的过程中，有许多小细节值得特别关注。</p>
+<p>第一，样本归一化。FFM默认是进行样本数据的归一化，即 ( pa.norm ) 为真；若此参数设置为假，很容易造成数据inf溢出，进而引起梯度计算的nan错误。因此，样本层面的数据是推荐进行归一化的。</p>
+<p>第二，特征归一化。CTR/CVR模型采用了多种类型的源特征，包括数值型和categorical类型等。但是，categorical类编码后的特征取值只有0或1，较大的数值型特征会造成样本归一化后categorical类生成特征的值非常小，没有区分性。例如，一条用户-商品记录，用户为“男”性，商品的销量是5000个（假设其它特征的值为零），那么归一化后特征“sex=male”（性别为男）的值略小于0.0002，而“volume”（销量）的值近似为1。特征“sex=male”在这个样本中的作用几乎可以忽略不计，这是相当不合理的。因此，将源数值型特征的值归一化到 ( [0, 1] ) 是非常必要的。</p>
+<p>第三，省略零值特征。从FFM模型的表达式可以看出，零值特征对模型完全没有贡献。包含零值特征的一次项和组合项均为零，对于训练模型参数或者目标值预估是没有作用的。因此，可以省去零值特征，提高FFM模型训练和预测的速度，这也是稀疏样本采用FFM的显著优势。</p>
+<p>本文主要介绍了FFM的思路来源和理论原理，并结合源码说明FFM的实际应用和一些小细节。从理论上分析，FFM的参数因子化方式具有一些显著的优势，特别适合处理样本稀疏性问题，且确保了较好的性能；从应用结果来看，站内CTR/CVR预估采用FFM是非常合理的，各项指标都说明了FFM在点击率预估方面的卓越表现。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%AE%BA%E6%96%87/" rel="tag"># 论文</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/07/02/%E9%97%AE%E9%A2%98%EF%BC%9A/" rel="prev" title="面试常问问题复习(一)">
+                  <i class="fa fa-chevron-left"></i> 面试常问问题复习(一)
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/07/02/1.%20%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E4%B8%AD%E7%9A%84%E8%AF%84%E4%BB%B7%E6%A0%87%E5%87%86%EF%BC%8C%E5%87%86%E7%A1%AE%E5%BA%A6%EF%BC%8CAUC%EF%BC%8C%E5%8F%AC%E5%9B%9E%E7%8E%87%E7%AD%89/" rel="next" title="面试常问问题复习(二)">
+                  面试常问问题复习(二) <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+  
+  
+  
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Aurora</span>
+</div>
+  <div class="powered-by">تطبيق الموقع <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
